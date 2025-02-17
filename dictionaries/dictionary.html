@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>1</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  <!--
+
+  /* RESET
+  =============================================================================*/
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+      abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+      strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, 
+      legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+      embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, 
+      section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* BODY
+  =============================================================================*/
+
+  body {
+    font-family: Arimo, Nunito Sans, arial, clean, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;  /* межстрочное */
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 42em; /* ширина текста */
+    margin: 0 auto;
+  }
+
+  body>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  body>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* BLOCKS
+  =============================================================================*/
+
+  p, blockquote, ul, ol, dl, table, pre {
+    margin: 0.4em 0; /* между абзацами (кроме первого и последнего) */
+  }
+
+  /* HEADERS
+  =============================================================================*/
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+    padding: 0;
+    font-family: Opinion Pro, Neucha;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
+  }
+
+  h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    /*color: #000;*/
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    /*color: #000;*/
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1.1em;
+  }
+
+  h6 {
+    /*color: #777;*/
+    font-size: 1.0em;
+  }
+
+  body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+    margin-top: 10px;
+  }
+
+  /* LINKS
+  =============================================================================*/
+
+  a {
+    color: #4183C4;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* LISTS
+  =============================================================================*/
+
+  ul, ol {
+    padding-left: 30px;
+  }
+
+  ul li > :first-child, 
+  ol li > :first-child, 
+  ul li ul:first-of-type, 
+  ol li ol:first-of-type, 
+  ul li ol:first-of-type, 
+  ol li ul:first-of-type {
+    margin-top: 0px;
+  }
+
+  ul ul, ul ol, ol ol, ol ul {
+    margin-bottom: 0;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px;
+  }
+
+  dl dt:first-child {
+    padding: 0;
+  }
+
+  dl dt>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dt>:last-child {
+    margin-bottom: 0px;
+  }
+
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+  }
+
+  dl dd>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dd>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* CODE
+  =============================================================================*/
+
+  pre, code, tt {
+    font-size: 1rem;
+    font-family: Iosevka, Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code, tt {
+    margin: 0 0px;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+  /*   background-color: #f8f8f8; это `code` */
+    background-color: #EFFFEF;
+    border-radius: 3px;
+  }
+
+  pre>code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: none;
+    background: transparent; 
+  }
+
+  .sourceCode{
+    background-color: #F6FFF7; /* светло-зелен для блоков кода */
+    font-size: 100%;
+  }
+    div.sourceCode{
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 7%);
+    }
+
+  pre {
+  /*   background-color: #f8f8f8; это ``` */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 8px;
+    border-radius: 3px;
+  }
+
+  pre code, pre tt {
+    background-color: transparent; 
+    border: none;
+  }
+
+  kbd {
+      -moz-border-bottom-colors: none;
+      -moz-border-left-colors: none;
+      -moz-border-right-colors: none;
+      -moz-border-top-colors: none;
+      background-color: #DDDDDD;
+      background-image: linear-gradient(#F1F1F1, #DDDDDD);
+      background-repeat: repeat-x;
+      border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+      border-image: none;
+      border-radius: 2px 2px 2px 2px;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Iosevka, Helvetica, Arial, sans-serif;
+      line-height: 10px;
+      padding: 1px 4px;
+      box-shadow: 0 1px 0 rgba(63,63,63,0.25);
+  }
+
+  /* QUOTES
+  =============================================================================*/
+
+  blockquote {
+    border-left: 4px solid #DDD;
+    padding: 0 15px;
+    color: #777;
+  }
+
+  blockquote>:first-child {
+    margin-top: 0px;
+  }
+
+  blockquote>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* HORIZONTAL RULES
+  =============================================================================*/
+
+  hr {
+    clear: both;
+    margin: 15px 0;
+    height: 0px;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    border-bottom: 2px dotted #777;
+    padding: 0;
+  }
+
+  /* TABLES
+  =============================================================================*/
+
+    table {                                     
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+       display: inline-block;
+       width: auto;
+    }
+
+  table th {
+    font-weight: bold;
+  }
+
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px 13px;
+    font-size: 1rem;
+  }
+
+  table tr {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+  }
+
+  /* IMAGES
+  =============================================================================*/
+
+  img {
+    max-width: 100%
+  }
+
+    .footnote-back, .footnote-ref {
+      color: #4493f8 !important; /* blue */
+    }
+    .footnote-ref, .footnote-ref::after {
+      font-size: 0.95em;
+      font-weight: 700;
+      vertical-align: super; 
+    }
+    .footnote-ref::after {
+      content:")";
+    }
+    .footnotes-end-of-document  {
+      font-size: 0.85em;  
+    }
+
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 1.5em;
+      margin: 0 0.8em 0.2em -1.8em;
+      vertical-align: middle;
+    }
+
+    .note, .tip, .warning { 
+      border-left-style: solid;
+      border-left-width: 3px;
+      padding-left: 7px;
+    }
+    div.title {
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    div.title > p::before{
+       content: '#';
+       width: 1em; 
+       height: 1em; 
+       display: inline-block; 
+    }
+
+
+
+    .note > .title {
+       color: #4493f8; /* blue */
+    }   
+    .tip > .title {
+       color: #3fb950; /* green */
+    }
+    .warning > .title {
+       color: #d29922 /* olive */;
+    }
+    .note  {
+       border-color: #4493f8; /* blue */
+    }
+    .tip  {
+       border-color: #3fb950; /* green */ 
+    }
+    .warning {
+       border-color: #d29922 /* olive */; 
+    }
+
+
+  #TOC {
+     font-family: Opinion Pro;
+     font-weight: bold;
+     font-size: 0.9em;
+     padding-left: 1em;
+     padding: .2em 0 .2em 1.0em;
+     background: #f7f7f7;
+     border: dashed 1px rgb(128,128,128); /* grey */
+     box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+  }
+
+    figure {
+      margin: 0.3em 0 0.9em;
+      background-color: #eee;
+  /*  text-align: center; */
+      box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+      border: dashed 1px rgb(128,128,128); /* grey */
+    }
+
+    figcaption {
+      font-family: Iosevka, Bitter;
+      font-style: italic;
+      font-size: 95%;
+      background-color: #eee;
+      color: #000;
+      padding: 0em 1em .2em;
+      margin: 0;
+    }
+
+    figure:hover{
+      background: #fff;
+    }
+
+    figure:hover figcaption {
+      background: #fff;
+    }
+
+
+  -->
+  </style>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/yonce.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/panel.min.js" integrity="sha512-kS6L87i8KUuHFk6QTxAyZSp1xza7zuaDg1Mt9rjQXjRQyraT0oqEeVbC6No/pxNvE1dMAZYBQ5r/8GZQUowhnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.js" integrity="sha512-8Rk4wB3MfgQfuOw95XW/vAU8PSTHWI5HddVRXfg+Ykk8CzsiOZkDpxVSrnYq2u/IqO499ooZ61fFHppuzB2ghA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.css" integrity="sha512-T8xB3MmwpA77VK9lUH3UkdUTnkmpqOxHF8OceOKaHrvpcXMSNX0xtpa9FoLTDAVO1JnB2UiMdVeI2V0HTHjTWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <style>
+          .container {
+              width: 100%;
+              max-width: 800px;
+              margin: 20px auto;
+              font-family: Arial, sans-serif;
+          }
+          
+          .code-block {
+              position: relative;
+              background: white;
+              background: #2c2c2c; /* цвет рамки вокруг кода #263238 material */ 
+              border: 1px solid #ddd; 
+              border-radius: 4px;
+              padding: 10px;  /* толщина рамки вокруг кода */
+              margin-bottom: 0px;
+          }
+          
+          .code-textarea {
+              width: 98%;
+              height: 400px;
+              margin-top: 35px;
+              font-family: Iosevka, monospace;
+              padding: 10px;
+              border: 1px solid #ccc; 
+              border-radius: 4px; 
+              resize: vertical;
+          }
+          
+          .run-button {
+              position: absolute;
+              bottom: 25px;
+              right: 30px;
+              padding: 6px 10px 2px;
+              background: #000;   /* для светлой темы */
+              color: #fff;
+              background: #fff;   /* для темной темы */
+              color: #000;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+          
+          .run-button:hover {
+              opacity: 1.0;
+          }
+          
+          .hide-button {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              padding: 8px 10px;
+              background: white;
+              color: black;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+
+          .hide-button:hover {
+              opacity: 1.0;
+          }
+
+          .output-block {
+              display: none; 
+              background: #fafafa;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              padding: 20px;
+              position: relative;
+          }
+          
+          .code-label,
+          .output-label {
+              position: absolute;
+              color: #999;
+              font-size: 0.8em;
+              border: 1px #DDD solid;
+              background: #F5F5F5;
+              padding: 2px 4px;
+              border-radius: 4px;
+              font-weight: bold;
+              z-index: 10;
+          }
+          .output-label {
+              top: 10px;
+              left: 10px;
+          }
+          .code-label{
+              top: 10px;
+              right: 25px;
+          }
+          
+          .output {
+              margin-top: 25px;
+              font-family: Iosevka, monospace;
+              white-space: pre-wrap;
+          }                       
+
+         .cm-s-default {
+              height: 100px;
+         }
+         .CodeMirror {
+              font-family: Iosevka, monospace; 
+              font-size: 0.95em;
+         }
+      </style>
+
+
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js" id="pyodide" defer></script>
+
+      <script>
+          let editors = [];
+          let pyodideReadyPromise;
+          
+          document.getElementById("pyodide").onload = function() {
+              async function initPyodide() {
+                  const pyodide = await loadPyodide();
+                  await pyodide.loadPackage("micropip");
+                  const micropip = pyodide.pyimport("micropip");
+                  //await micropip.install('scipy')
+                  //let scipy = await pyodide.loadPackage('scipy')
+                  // see https://pyodide.org/en/stable/usage/loading-packages.html
+                  return pyodide;
+              }
+              pyodideReadyPromise = initPyodide();
+
+              // Get all Python code blocks
+              const codeBlocks = document.querySelectorAll("pre code.language-py");
+              
+              codeBlocks.forEach((el, index) => {
+                  const preEl = el.parentNode;
+                  const blockId = index + 1;
+                  const str = el.innerText.trim();
+                  const lines = str.split('\n').length;                
+                  const height = el.getAttribute('height') || (lines * 25 + 4) + 'px'; 
+                  const div = document.createElement("div");
+                  div.innerHTML = `
+                      <div class="container">
+                          <div class="code-block">
+                              <!-- <span class="code-label">Try to edit and run code example</span> -->
+                              <button class="run-button" onclick="runPython(${blockId})">            
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M8 5v14l11-7z"> </path> 
+                                  </svg>
+                              </button>
+                              <textarea id="code${blockId}" class="code-textarea">${str}</textarea>
+                          </div>
+                          <div id="output-block${blockId}" class="output-block">
+                              <span class="output-label">Output:</span>
+                              <div id="output${blockId}" class="output"></div>
+
+                              <button class="hide-button" onclick="hideOutput(${blockId})">
+  				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="undefined"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+  			    </button>
+                          </div>
+                      </div>
+                  `;
+                  
+                  preEl.parentNode.insertBefore(div, preEl);
+                  preEl.parentNode.removeChild(preEl);
+                  
+                  // Initialize CodeMirror for this instance
+                  setTimeout(() => {
+                      const textarea = document.getElementById(`code${blockId}`);
+                      if (textarea) {
+                          editors[blockId] = CodeMirror.fromTextArea(textarea, {
+                              mode: "python",
+                              lineNumbers: true,
+                              theme: "default",
+                              theme: "material",
+                              theme: "mbo", 
+                              theme: "neat",
+                              theme: "yonce",
+                              extraKeys: {
+          			"F7": function(cm) {
+  			          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          			},
+          			"Esc": function(cm) {
+            			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+          			}
+        			    } 
+                          });
+                          editors[blockId].setSize(null, height);
+                      }
+                  }, 0);
+              });
+          };
+
+          async function hideOutput(blockId) {
+              const outputBlock = document.getElementById(`output-block${blockId}`);
+              outputBlock.style.display = 'none';
+          }
+
+          async function runPython(blockId) {
+              let pyodide = await pyodideReadyPromise;
+              try {
+                  const outputBlock = document.getElementById(`output-block${blockId}`);
+                  outputBlock.style.display = 'block';
+
+                  let output = "";
+                  pyodide.globals.set("print", (...args) => {
+                     output += args.join(" ") + "\n";
+                  });
+                  
+                  await pyodide.runPythonAsync(editors[blockId].getValue());
+                  
+                  document.getElementById(`output${blockId}`).innerText = output;
+              } catch(err) {
+                  document.getElementById(`output${blockId}`).innerText = "Error: " + err;
+              }
+          }
+      </script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">1</h1>
+</header>
+<h1 id="python-dictionaries">Python Dictionaries</h1>
+<p>A dictionary in Python is like a real-world dictionary - it's a
+collection of pairs where each word (key) has its corresponding
+definition (value). In programming terms, we call these "key-value
+pairs".</p>
+<p>Here's a simple example of a dictionary containing countries and
+their capitals:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>capitals <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Greece&quot;</span>: <span class="st">&quot;Athens&quot;</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Italy&quot;</span>: <span class="st">&quot;Rome&quot;</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Spain&quot;</span>: <span class="st">&quot;Madrid&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>In this case, the country names are our keys, and the capital cities
+are our values.</p>
+<h2 id="creating-your-first-dictionary">Creating Your First
+Dictionary</h2>
+<p>You can create an empty dictionary in two ways:</p>
+<ul>
+<li>Method 1: Using curly braces</li>
+<li>Method 2: Using the <code>dict()</code> constructor</li>
+</ul>
+<pre><code class="language-py" >
+empty_dict = {}
+empty_dict = dict()
+
+print(empty_dict)
+</code></pre>
+<p>💡 Because <code>dict</code> is the name of a built-in function, you
+should avoid using it as a variable name.</p>
+<p>To create a dictionary with data, we use curly braces and colons to
+connect keys with their values:</p>
+<pre><code class="language-py" >
+capitals = {
+    "Greece": "Athens",
+    "Italy": "Rome",
+    "Spain": "Madrid"
+}
+print(capitals)
+</code></pre>
+<h3 id="using-the-dict-constructor">Using the <code>dict()</code>
+constructor</h3>
+<p>Creating a dictionary using <code>dict()</code> constructor with
+keyword arguments:</p>
+<pre><code class="language-py" >
+# create a new user
+user = dict(name = "John", age = 31)
+print(user)
+
+user2 = dict(user) # a new dictionary-copy will be created
+print(user2)
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>First, we create a new dictionary user with keys "name" and "age"
+assigned the values "John" and 31, respectively.</li>
+<li>The <code>print(user)</code> statement outputs the dictionary:
+<code>{'name': 'John', 'age': 31}</code>.</li>
+<li>Then we create a new dictionary <code>user2</code> that is a copy of
+the existing dictionary user.</li>
+</ul>
+<h3 id="creating-a-dictionary-from-a-list-of-tuples">Creating a
+Dictionary from a List of Tuples</h3>
+<pre><code class="language-py" >
+user3 = dict([("name", "Eric"), ("age", 40)])
+print(user3)
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>This creates a new dictionary <code>user3</code> from a list of
+tuples. Each tuple represents a key-value pair.</li>
+<li>The dictionary becomes {'name': 'Eric', 'age': 40}.</li>
+<li>The <code>print(user3)</code> statement outputs the dictionary.</li>
+</ul>
+<h3
+id="creating-a-dictionary-by-pairing-values-from-two-iterables">Creating
+a Dictionary by Pairing Values from Two Iterables</h3>
+<p>This creates a new dictionary <code>user4</code> by pairing elements
+from two iterables using the <code>zip</code> function.</p>
+<pre><code class="language-py" >
+user4 = dict(zip(['name', 'age'], ["Hanna", 25]))
+print(user4)
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>zip(['name', 'age'], ["Hanna", 25])</code> pairs the first
+elements together and the second elements together, resulting in:
+<code>("name", "Hanna")</code> and <code>("age", 25)</code>.</li>
+<li>The dictionary becomes
+<code>{'name': 'Hanna', 'age': 25}</code>.</li>
+<li>The <code>print(user4)</code> statement outputs the dictionary.</li>
+</ul>
+<h3 id="creating-a-dictionary-using-the-fromkeys-method">Creating a
+Dictionary Using the <code>fromkeys()</code> method</h3>
+<p>The <code>dict.fromkeys()</code> method allows you to create a new
+dictionary with keys from a given iterable and each key set to a
+specified default value. If no default value is provided, the keys are
+initialized with <code>None</code>.</p>
+<pre><code class="language-py" >
+user = dict.fromkeys(['name', 'age'])
+print(user)   # {'name': None, 'age': None}
+
+point = dict.fromkeys(['x', 'y', 'z'], 100) 
+print(point)   # {'x': 100, 'y': 100, 'z': 100}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>We use <code>dict.fromkeys()</code> to create a dictionary with keys
+from the list <code>['name', 'age']</code></li>
+<li>Since no default value is provided, each key is initialized to
+<code>None</code>.</li>
+<li>Then we use <code>dict.fromkeys()</code> to create a dictionary with
+keys from the list <code>['x', 'y', 'z']</code>.</li>
+<li>Each key is initialized to the specified default value 100.</li>
+<li>The <code>print(point)</code> statement outputs the dictionary.</li>
+</ul>
+<p>It is useful when you need a dictionary where all the keys have the
+same values.</p>
+<h2 id="dictionary-length">Dictionary Length</h2>
+<p>Just like with lists and strings, Python makes it super easy to find
+out how many items are in a dictionary. We use the built-in
+<code>len()</code> function:</p>
+<pre><code class="language-py">
+capitals = {
+    "Greece": "Athens",
+    "Italy": "Rome",
+    "Spain": "Madrid"
+}
+number_of_countries = len(capitals)
+print(number_of_countries)  # 3
+</code></pre>
+<p>This gives us the total number of key-value pairs in the dictionary.
+It's useful when you need to check if a dictionary is empty:
+<code>len(capitals) == 0</code>.</p>
+<p>💡 Remember that each key-value pair counts as one item, regardless
+of how complex the values might be.</p>
+<h2 id="the-structure-behind-the-scenes">The Structure Behind the
+Scenes</h2>
+<p>Under the hood, Python dictionaries are implemented using hash
+tables. When you create a key-value pair, Python calculates a hash value
+for the key (like a unique fingerprint). This hash value determines
+where in memory the value will be stored. That's why dictionary keys
+must be immutable (unchangeable) - things like strings, numbers, or
+tuples.</p>
+<p>This hash table implementation is what makes dictionaries so fast for
+lookups. When you access a value using its key, Python:</p>
+<ul>
+<li>Calculates the key's hash value</li>
+<li>Uses that hash to immediately locate the value in memory</li>
+<li>Returns the value to you</li>
+</ul>
+<p>That's why looking up values in a dictionary is incredibly efficient,
+even with thousands of items!</p>
+<h2 id="dictionary-rules-to-remember">🗝️ Dictionary Rules to
+Remember</h2>
+<p>Here are some important points to keep in mind:</p>
+<ul>
+<li>Keys must be unique, duplicates not allowed (you can't have two
+"Greece" keys in the same dictionary)</li>
+<li>Keys must be immutable (strings, numbers, tuples - but not
+lists)</li>
+<li>Values can be any type (numbers, strings, lists, other dictionaries,
+etc.)</li>
+<li>Dictionaries are mutable (you can change them after creation)</li>
+</ul>
+<h3 id="duplicates-not-allowed">Duplicates Not Allowed</h3>
+<p>If you attempt to create a dictionary with duplicate keys, the latter
+key-value pair will override the former one. This is because
+dictionaries are designed to have unique keys, and any subsequent
+assignment to an existing key will update its value.</p>
+<pre><code class="language-py" >
+capitals = {
+    "Greece": "Athens",
+    "Italy": "Rome",
+    "Italy": "Milano",
+    "Spain": "Madrid"
+}
+print(capitals)
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The dictionary <code>capitals</code> is defined with four
+entries.</li>
+<li>The key "Italy" appears twice, first with the value "Rome" and then
+with "Milano".</li>
+<li>When Python processes the dictionary, it will keep the last
+assignment for the duplicate key and ignore any previous assignments for
+that key.</li>
+</ul>
+<p>💡 In Python, dictionaries cannot have two items with the same key.
+If a key is repeated, the last key-value pair will overwrite any
+previous ones.</p>
+<h3 id="dictionary-items---data-types">Dictionary Items - Data
+Types</h3>
+<p>Dictionaries are highly versatile and can store values of any data
+type.</p>
+<pre><code class="language-py" >
+capitals = {
+    "Population": 7.4,
+    "electric": False,
+    "Italy": "Rome",
+    "colors": ["red", "white", "blue"]
+}
+print(capitals)
+</code></pre>
+<p>👣 Explanation:</p>
+<p>In this example, we demonstrate how a single dictionary can hold
+different types of values:</p>
+<ul>
+<li>Numeric Value. The key "Population" is associated with a numeric
+value, a float 7.4.</li>
+<li>Boolean Value. The key "electric" is associated with a boolean value
+False.</li>
+<li>String Value. The key "Italy" is associated with a string
+"Rome".</li>
+<li>List Value. The key "colors" is associated with a list containing
+three strings: "red", "white", and "blue".</li>
+</ul>
+<h3 id="dictionary-keys---data-types">Dictionary Keys - Data Types</h3>
+<p>The fundamental rule is simple: any immutable object can be a
+dictionary key. Here are the common types you can use:</p>
+<pre><code class="language-py">
+mixed_keys = {
+   "string_key": "value1",               # String
+   42: "value2",                         # Integer
+   3.14: "value3",                       # Float
+   True: "value4",                       # Boolean
+   (1, 2): "value5",                     # Tuple
+   frozenset(['red', 'blue']): 'value6', # frozenset
+   "π": "value7",                        # Unicode string
+   None: "value8"                        # None
+}
+print(mixed_keys)
+print(mixed_keys[(1, 2)])      # Using tuple key
+</code></pre>
+<p>Yes, you can absolutely mix different types of keys in the same
+dictionary!</p>
+<p>Python treats keys of different types that look similar as distinct
+keys:</p>
+<pre><code class="language-py" >
+tricky_dict = {
+    1: "integer one",
+    "1": "string one"
+}
+# These are different
+print(tricky_dict[1])      # Access integer key
+print(tricky_dict["1"])    # Access string key
+</code></pre>
+<p>💡 Be careful! True == 1 in Python.</p>
+<p>In Python, True is equivalent to 1 and False is equivalent to 0. This
+behavior can lead to surprising results when working with dictionaries
+because both True and 1 will be treated as the same key.</p>
+<pre><code class="language-py">
+tricky_dict = {
+    1: "integer one",
+    1.0: "float one",
+    True: "boolean true" 
+}
+# But watch out! 
+print(tricky_dict[1])      # Same as tricky_dict[True]
+print(tricky_dict[1.0])    # the same 
+print(tricky_dict[True])   # Returns "boolean true"
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The dictionary <code>tricky_dict</code> is defined with three keys:
+1, 1.0, and True.</li>
+<li>When Python processes this dictionary, each new key-value pair that
+is equivalent to an existing key overwrites the previous value
+associated with that key.</li>
+<li>As a result, the last key-value pair
+<code>True: "boolean true"</code> will overwrite any prior values
+associated with the keys 1 and 1.0.</li>
+</ul>
+<p>🗝️ Best Practices: To avoid confusion, it's best to avoid using True,
+False, integers, and floats that may have equivalent values as
+dictionary keys if possible.</p>
+<h3 id="invalid-key-types">Invalid Key Types</h3>
+<p>Not everything can be a dictionary key.</p>
+<p>In Python, dictionary keys must be immutable and hashable. Immutable
+objects are those that cannot be changed after their creation, and
+hashable objects are those that have a hash value that does not change
+during their lifetime.</p>
+<p>📌 Example:</p>
+<pre><code class="language-py" >
+# Lists cannot be keys (they're mutable)
+invalid_dict = {
+    [1, 2, 3]: "value"  # This raises TypeError
+}
+# Dictionaries cannot be keys
+another_invalid = {
+    {"a": 1}: "value"   # This raises TypeError
+}
+# Sets cannot be keys
+also_invalid = {
+    {1, 2, 3}: "value"  # This raises TypeError
+}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>Lists in Python are mutable, which means their contents can change
+over time. As a result, lists are not hashable, and therefore cannot be
+used as dictionary keys. Attempting to use a list as a dictionary key
+will raise a <code>TypeError</code>.</li>
+<li>Dictionaries in Python are also mutable, as their key-value pairs
+can be changed, added, or removed. Consequently, dictionaries are not
+hashable and cannot be used as keys in another dictionary. Using a
+dictionary as a key will raise a <code>TypeError</code>.</li>
+<li>Sets are mutable collections of unique elements, and their contents
+can change. Since sets are mutable, they are not hashable and cannot be
+used as dictionary keys. Using a set as a key will raise a
+<code>TypeError</code>.</li>
+</ul>
+<p>Always use appropriate data types for dictionary keys to avoid
+runtime errors.</p>
+<h3 id="best-practices-for-choosing-keys">🗝️ Best Practices for Choosing
+Keys</h3>
+<ul>
+<li>Use strings when possible. They're the most common and readable
+choice</li>
+<li>Be consistent. Try to use the same type of keys throughout a
+dictionary</li>
+<li>Document special cases. If you need to use mixed key types, document
+why</li>
+<li>Float Keys. While legal, they can be tricky due to precision
+issues</li>
+<li>Tuple Keys. Make sure all elements in the tuple are immutable:</li>
+</ul>
+<pre><code class="language-py" >
+# This works 
+good_dict = {(1, "a", True): "value"}
+
+# This raises TypeError (list inside tuple is mutable)
+bad_dict = {(1, [2, 3]): "value"}
+</code></pre>
+<p>While Python offers great flexibility with dictionary keys, keeping
+things simple and consistent will make your code more maintainable and
+less prone to errors.</p>
+<h2 id="checking-dictionary-type">Checking Dictionary Type</h2>
+<p>Just like with any Python object, we can use the built-in
+<code>type()</code> function to confirm we're working with a
+dictionary.</p>
+<pre><code class="language-py" >
+capitals = {
+    "Greece": "Athens",
+    "Italy": "Rome",
+    "Spain": "Madrid"
+}
+# Check the type
+print(type(capitals)) 
+
+# You can also use isinstance() for type checking
+is_dictionary = isinstance(capitals, dict)  
+print(is_dictionary)  # Returns True
+</code></pre>
+<p>For dictionaries, the function <code>type()</code> returns
+<code>&lt;class 'dict'&gt;</code>.</p>
+<p>This kind of type checking becomes especially valuable when working
+with dynamic data where the type might vary.</p>
+<h2 id="why-not-always-use-a-dictionary-instead-of-a-list">Why Not
+Always Use a Dictionary Instead of a List?</h2>
+<p>Lists and dictionaries serve different purposes and each has its own
+advantages.</p>
+<ul>
+<li>Lists use less memory than dictionaries since they don't need to
+store key-value pairs and hash tables. For simple sequential data, lists
+are more space-efficient.</li>
+<li>Lists allow duplicate elements, while dictionary keys must be
+unique. If you need to track repeated items, use a list.</li>
+<li>If you primarily access elements in sequence or by numeric index,
+lists are more natural.</li>
+</ul>
+<p>Using a dictionary for everything can slow your code down, make it
+harder to read, and use more resources than necessary.</p>
+<p>🗝️ A good rule of thumb: Use a list when you have a collection of
+similar items in a sequence. Use a dictionary when you need to associate
+values with unique keys or need fast lookups by key.</p>
+<h2 id="how-to-check-if-a-dictionary-is-empty">How to Check if a
+Dictionary is Empty</h2>
+<p>Often, you may need to check if a dictionary is empty before
+performing operations on it.</p>
+<ol type="1">
+<li>Using <code>not</code> with a Dictionary</li>
+</ol>
+<pre><code class="language-py" >
+my_dict = {}
+
+if not my_dict:
+    print("The dictionary is empty")
+else:
+    print("The dictionary is not empty")
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>In Python, empty containers (lists, tuples, sets, dictionaries)
+evaluate to False in a Boolean context.</li>
+<li>If the dictionary is empty, <code>not my_dict</code> returns True,
+and the corresponding block of code executes.</li>
+<li>It is concise, readable, and efficient.</li>
+</ul>
+<ol start="2" type="1">
+<li>Using <code>len()</code> Function</li>
+</ol>
+<pre><code class="language-py" >
+my_dict = {}
+if len(my_dict) == 0:
+   print("The dictionary is empty")
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The <code>len()</code> function returns the number of key-value
+pairs in the dictionary.</li>
+<li>If <code>len(my_dict) == 0</code>, it confirms that the dictionary
+is empty.</li>
+<li>This method is explicit but slightly less Pythonic than using
+<code>not</code>.</li>
+</ul>
+<ol start="3" type="1">
+<li>Comparing with an Empty Dictionary</li>
+</ol>
+<pre><code class="language-py" >
+my_dict = {}
+if my_dict == {}:
+   print("The dictionary is empty")
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>This method explicitly checks if <code>my_dict</code> is equal to
+<code>{}</code>.</li>
+<li>While this approach works, it is not as efficient as using not
+because it performs a comparison operation.</li>
+</ul>
+<h2 id="faqs-on-python-dictionaries">🧐 FAQs on Python Dictionaries</h2>
+<h3 id="what-is-a-dictionary-in-python-and-how-do-i-create-one">What is
+a dictionary in Python and how do I create one?</h3>
+<p>A dictionary is a collection of key-value pairs. You can create one
+using curly braces {} or the <code>dict()</code> constructor.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">&#39;name&#39;</span>: <span class="st">&#39;John&#39;</span>, <span class="st">&#39;age&#39;</span>: <span class="dv">30</span>}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> <span class="bu">dict</span>(name<span class="op">=</span><span class="st">&#39;John&#39;</span>, age<span class="op">=</span><span class="dv">30</span>)</span></code></pre></div>
+<h3 id="what-types-can-i-use-as-dictionary-values">What types can I use
+as dictionary values?</h3>
+<p>Any Python object can be a dictionary value, including:</p>
+<ul>
+<li>Numbers, strings, lists</li>
+<li>Other dictionaries</li>
+<li>Custom objects</li>
+<li>Functions</li>
+<li>None</li>
+</ul>
+<h3 id="what-types-can-i-use-as-dictionary-keys">What types can I use as
+dictionary keys?</h3>
+<p>Only immutable types can be dictionary keys, including:</p>
+<ul>
+<li>Strings</li>
+<li>Numbers (integers, floats)</li>
+<li>Tuples (if they contain only immutable elements)</li>
+<li>Frozensets</li>
+</ul>
+<p>Lists, dictionaries, and sets cannot be used as keys because they are
+mutable.</p>
+<h3 id="can-a-tuple-be-used-as-a-dictionary-key">Can a tuple be used as
+a dictionary key?</h3>
+<p>Yes, a tuple is a hashable value and can be used as a dictionary key.
+The following code example shows a dictionary with keys representing a
+simple x,y grid system.</p>
+<pre><code class="language-py" >
+coordinates = { (0,0) : 100, (1,1) : 200}
+coordinates[(1,0)] = 150
+coordinates[(0,1)] = 125
+
+print(coordinates)
+</code></pre>
+<h3 id="how-does-python-handle-duplicate-keys-in-dictionaries">How does
+Python handle duplicate keys in dictionaries?</h3>
+<p>If you try to add a duplicate key, the new value will overwrite the
+old one. The last assignment wins:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">&#39;a&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;a&#39;</span>: <span class="dv">2</span>}  <span class="co"># Results in {&#39;a&#39;: 2}</span></span></code></pre></div>
+</body>
+</html>
