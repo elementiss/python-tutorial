@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>6</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+  <!--
+
+  /* RESET
+  =============================================================================*/
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+      abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+      strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, 
+      legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+      embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, 
+      section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* BODY
+  =============================================================================*/
+
+  body {
+    font-family: Arimo, Nunito Sans, arial, clean, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;  /* межстрочное */
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 42em; /* ширина текста */
+    margin: 0 auto;
+  }
+
+  body>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  body>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* BLOCKS
+  =============================================================================*/
+
+  p, blockquote, ul, ol, dl, table, pre {
+    margin: 0.4em 0; /* между абзацами (кроме первого и последнего) */
+  }
+
+  /* HEADERS
+  =============================================================================*/
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+    padding: 0;
+    font-family: Opinion Pro, Neucha;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
+  }
+
+  h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    /*color: #000;*/
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    /*color: #000;*/
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1.1em;
+  }
+
+  h6 {
+    /*color: #777;*/
+    font-size: 1.0em;
+  }
+
+  body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+    margin-top: 10px;
+  }
+
+  /* LINKS
+  =============================================================================*/
+
+  a {
+    color: #4183C4;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* LISTS
+  =============================================================================*/
+
+  ul, ol {
+    padding-left: 30px;
+  }
+
+  ul li > :first-child, 
+  ol li > :first-child, 
+  ul li ul:first-of-type, 
+  ol li ol:first-of-type, 
+  ul li ol:first-of-type, 
+  ol li ul:first-of-type {
+    margin-top: 0px;
+  }
+
+  ul ul, ul ol, ol ol, ol ul {
+    margin-bottom: 0;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px;
+  }
+
+  dl dt:first-child {
+    padding: 0;
+  }
+
+  dl dt>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dt>:last-child {
+    margin-bottom: 0px;
+  }
+
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+  }
+
+  dl dd>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dd>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* CODE
+  =============================================================================*/
+
+  pre, code, tt {
+    font-size: 1rem;
+    font-family: Iosevka, Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code, tt {
+    margin: 0 0px;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+  /*   background-color: #f8f8f8; это `code` */
+    background-color: #EFFFEF;
+    border-radius: 3px;
+  }
+
+  pre>code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: none;
+    background: transparent; 
+  }
+
+  .sourceCode{
+    background-color: #F6FFF7; /* светло-зелен для блоков кода */
+    font-size: 100%;
+  }
+    div.sourceCode{
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 7%);
+    }
+
+  pre {
+  /*   background-color: #f8f8f8; это ``` */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 8px;
+    border-radius: 3px;
+  }
+
+  pre code, pre tt {
+    background-color: transparent; 
+    border: none;
+  }
+
+  kbd {
+      -moz-border-bottom-colors: none;
+      -moz-border-left-colors: none;
+      -moz-border-right-colors: none;
+      -moz-border-top-colors: none;
+      background-color: #DDDDDD;
+      background-image: linear-gradient(#F1F1F1, #DDDDDD);
+      background-repeat: repeat-x;
+      border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+      border-image: none;
+      border-radius: 2px 2px 2px 2px;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Iosevka, Helvetica, Arial, sans-serif;
+      line-height: 10px;
+      padding: 1px 4px;
+      box-shadow: 0 1px 0 rgba(63,63,63,0.25);
+  }
+
+  /* QUOTES
+  =============================================================================*/
+
+  blockquote {
+    border-left: 4px solid #DDD;
+    padding: 0 15px;
+    color: #777;
+  }
+
+  blockquote>:first-child {
+    margin-top: 0px;
+  }
+
+  blockquote>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* HORIZONTAL RULES
+  =============================================================================*/
+
+  hr {
+    clear: both;
+    margin: 15px 0;
+    height: 0px;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    border-bottom: 2px dotted #777;
+    padding: 0;
+  }
+
+  /* TABLES
+  =============================================================================*/
+
+    table {                                     
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+       display: inline-block;
+       width: auto;
+    }
+
+  table th {
+    font-weight: bold;
+  }
+
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px 13px;
+    font-size: 1rem;
+  }
+
+  table tr {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+  }
+
+  /* IMAGES
+  =============================================================================*/
+
+  img {
+    max-width: 100%
+  }
+
+    .footnote-back, .footnote-ref {
+      color: #4493f8 !important; /* blue */
+    }
+    .footnote-ref, .footnote-ref::after {
+      font-size: 0.95em;
+      font-weight: 700;
+      vertical-align: super; 
+    }
+    .footnote-ref::after {
+      content:")";
+    }
+    .footnotes-end-of-document  {
+      font-size: 0.85em;  
+    }
+
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 1.5em;
+      margin: 0 0.8em 0.2em -1.8em;
+      vertical-align: middle;
+    }
+
+    .note, .tip, .warning { 
+      border-left-style: solid;
+      border-left-width: 3px;
+      padding-left: 7px;
+    }
+    div.title {
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    div.title > p::before{
+       content: '#';
+       width: 1em; 
+       height: 1em; 
+       display: inline-block; 
+    }
+
+
+
+    .note > .title {
+       color: #4493f8; /* blue */
+    }   
+    .tip > .title {
+       color: #3fb950; /* green */
+    }
+    .warning > .title {
+       color: #d29922 /* olive */;
+    }
+    .note  {
+       border-color: #4493f8; /* blue */
+    }
+    .tip  {
+       border-color: #3fb950; /* green */ 
+    }
+    .warning {
+       border-color: #d29922 /* olive */; 
+    }
+
+
+  #TOC {
+     font-family: Opinion Pro;
+     font-weight: bold;
+     font-size: 0.9em;
+     padding-left: 1em;
+     padding: .2em 0 .2em 1.0em;
+     background: #f7f7f7;
+     border: dashed 1px rgb(128,128,128); /* grey */
+     box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+  }
+
+    figure {
+      margin: 0.3em 0 0.9em;
+      background-color: #eee;
+  /*  text-align: center; */
+      box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+      border: dashed 1px rgb(128,128,128); /* grey */
+    }
+
+    figcaption {
+      font-family: Iosevka, Bitter;
+      font-style: italic;
+      font-size: 95%;
+      background-color: #eee;
+      color: #000;
+      padding: 0em 1em .2em;
+      margin: 0;
+    }
+
+    figure:hover{
+      background: #fff;
+    }
+
+    figure:hover figcaption {
+      background: #fff;
+    }
+
+
+  -->
+  </style>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/yonce.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/panel.min.js" integrity="sha512-kS6L87i8KUuHFk6QTxAyZSp1xza7zuaDg1Mt9rjQXjRQyraT0oqEeVbC6No/pxNvE1dMAZYBQ5r/8GZQUowhnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.js" integrity="sha512-8Rk4wB3MfgQfuOw95XW/vAU8PSTHWI5HddVRXfg+Ykk8CzsiOZkDpxVSrnYq2u/IqO499ooZ61fFHppuzB2ghA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.css" integrity="sha512-T8xB3MmwpA77VK9lUH3UkdUTnkmpqOxHF8OceOKaHrvpcXMSNX0xtpa9FoLTDAVO1JnB2UiMdVeI2V0HTHjTWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <style>
+          .container {
+              width: 100%;
+              max-width: 800px;
+              margin: 20px auto;
+              font-family: Arial, sans-serif;
+          }
+          
+          .code-block {
+              position: relative;
+              background: white;
+              background: #2c2c2c; /* цвет рамки вокруг кода #263238 material */ 
+              border: 1px solid #ddd; 
+              border-radius: 4px;
+              padding: 10px;  /* толщина рамки вокруг кода */
+              margin-bottom: 0px;
+          }
+          
+          .code-textarea {
+              width: 98%;
+              height: 400px;
+              margin-top: 35px;
+              font-family: Iosevka, monospace;
+              padding: 10px;
+              border: 1px solid #ccc; 
+              border-radius: 4px; 
+              resize: vertical;
+          }
+          
+          .run-button {
+              position: absolute;
+              bottom: 25px;
+              right: 30px;
+              padding: 6px 10px 2px;
+              background: #000;   /* для светлой темы */
+              color: #fff;
+              background: #fff;   /* для темной темы */
+              color: #000;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+          
+          .run-button:hover {
+              opacity: 1.0;
+          }
+          
+          .hide-button {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              padding: 8px 10px;
+              background: white;
+              color: black;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+
+          .hide-button:hover {
+              opacity: 1.0;
+          }
+
+          .output-block {
+              display: none; 
+              background: #fafafa;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              padding: 20px;
+              position: relative;
+          }
+          
+          .code-label,
+          .output-label {
+              position: absolute;
+              color: #999;
+              font-size: 0.8em;
+              border: 1px #DDD solid;
+              background: #F5F5F5;
+              padding: 2px 4px;
+              border-radius: 4px;
+              font-weight: bold;
+              z-index: 10;
+          }
+          .output-label {
+              top: 10px;
+              left: 10px;
+          }
+          .code-label{
+              top: 10px;
+              right: 25px;
+          }
+          
+          .output {
+              margin-top: 25px;
+              font-family: Iosevka, monospace;
+              white-space: pre-wrap;
+          }                       
+
+         .cm-s-default {
+              height: 100px;
+         }
+         .CodeMirror {
+              font-family: Iosevka, monospace; 
+              font-size: 0.95em;
+         }
+      </style>
+
+
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js" id="pyodide" defer></script>
+
+      <script>
+          let editors = [];
+          let pyodideReadyPromise;
+          
+          document.getElementById("pyodide").onload = function() {
+              async function initPyodide() {
+                  const pyodide = await loadPyodide();
+                  await pyodide.loadPackage("micropip");
+                  const micropip = pyodide.pyimport("micropip");
+                  //await micropip.install('scipy')
+                  //let scipy = await pyodide.loadPackage('scipy')
+                  // see https://pyodide.org/en/stable/usage/loading-packages.html
+                  return pyodide;
+              }
+              pyodideReadyPromise = initPyodide();
+
+              // Get all Python code blocks
+              const codeBlocks = document.querySelectorAll("pre code.language-py");
+              
+              codeBlocks.forEach((el, index) => {
+                  const preEl = el.parentNode;
+                  const blockId = index + 1;
+                  const str = el.innerText.trim();
+                  const lines = str.split('\n').length;                
+                  const height = el.getAttribute('height') || (lines * 25 + 4) + 'px'; 
+                  const div = document.createElement("div");
+                  div.innerHTML = `
+                      <div class="container">
+                          <div class="code-block">
+                              <!-- <span class="code-label">Try to edit and run code example</span> -->
+                              <button class="run-button" onclick="runPython(${blockId})">            
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M8 5v14l11-7z"> </path> 
+                                  </svg>
+                              </button>
+                              <textarea id="code${blockId}" class="code-textarea">${str}</textarea>
+                          </div>
+                          <div id="output-block${blockId}" class="output-block">
+                              <span class="output-label">Output:</span>
+                              <div id="output${blockId}" class="output"></div>
+
+                              <button class="hide-button" onclick="hideOutput(${blockId})">
+  				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="undefined"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+  			    </button>
+                          </div>
+                      </div>
+                  `;
+                  
+                  preEl.parentNode.insertBefore(div, preEl);
+                  preEl.parentNode.removeChild(preEl);
+                  
+                  // Initialize CodeMirror for this instance
+                  setTimeout(() => {
+                      const textarea = document.getElementById(`code${blockId}`);
+                      if (textarea) {
+                          editors[blockId] = CodeMirror.fromTextArea(textarea, {
+                              mode: "python",
+                              lineNumbers: true,
+                              theme: "default",
+                              theme: "material",
+                              theme: "mbo", 
+                              theme: "neat",
+                              theme: "yonce",
+                              extraKeys: {
+          			"F7": function(cm) {
+  			          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          			},
+          			"Esc": function(cm) {
+            			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+          			}
+        			    } 
+                          });
+                          editors[blockId].setSize(null, height);
+                      }
+                  }, 0);
+              });
+          };
+
+          async function hideOutput(blockId) {
+              const outputBlock = document.getElementById(`output-block${blockId}`);
+              outputBlock.style.display = 'none';
+          }
+
+          async function runPython(blockId) {
+              let pyodide = await pyodideReadyPromise;
+              try {
+                  const outputBlock = document.getElementById(`output-block${blockId}`);
+                  outputBlock.style.display = 'block';
+
+                  let output = "";
+                  pyodide.globals.set("print", (...args) => {
+                     output += args.join(" ") + "\n";
+                  });
+                  
+                  await pyodide.runPythonAsync(editors[blockId].getValue());
+                  
+                  document.getElementById(`output${blockId}`).innerText = output;
+              } catch(err) {
+                  document.getElementById(`output${blockId}`).innerText = "Error: " + err;
+              }
+          }
+      </script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">6</h1>
+</header>
+<h1 id="python---dictionary-copying-shallow-and-deep-copy">Python -
+Dictionary Copying: Shallow and Deep Copy</h1>
+<p>For effective data management, it is important to know how to copy
+dictionaries properly. This concept can be illustrated with a simple
+dictionary of European capitals.</p>
+<h2 id="shallow-copy">Shallow Copy</h2>
+<p>The simplest way to copy a dictionary is using what we call a
+"shallow copy". You can create a shallow copy in two ways. The first
+method uses the <code>dict.copy()</code> method:</p>
+<pre><code class="language-py">
+capitals = {
+    "Greece": "Athens",
+    "Italy": "Rome",
+    "Spain": "Madrid"
+}
+new_capitals = capitals.copy()
+print(new_capitals)
+print(capitals)
+</code></pre>
+<p>Shallow copies create a new dictionary, but they don't create copies
+of the nested objects if your dictionary contains any. In our simple
+capitals example, this isn't a problem because we only have strings,
+which are immutable.</p>
+<p>Now, consider a more complex scenario involving nested
+dictionaries:</p>
+<pre><code class="language-py" >
+country_info = {
+    "Greece": {
+        "capital": "Athens",
+        "population": 10.7
+    }
+}
+print(country_info)
+</code></pre>
+<p>In such cases, a shallow copy might not be sufficient, and this is
+where deep copying comes into play.</p>
+<h2 id="deep-copy">Deep Copy</h2>
+<p>To create a deep copy, we need to import Python's <code>copy</code>
+module and use its <code>deepcopy</code> function:</p>
+<pre><code class="language-py">
+import copy
+country_info = {
+    "Greece": {
+        "capital": "Athens",
+        "population": 10.7
+    }
+}
+new_country_info = copy.deepcopy(country_info)
+print(new_country_info)
+</code></pre>
+<p>The deep copy creates a completely independent copy of the original
+dictionary, including all nested objects. This means you can modify any
+level of the new dictionary without affecting the original one.</p>
+<p>To illustrate the difference, we will observe what happens when when
+we modify our dictionaries:</p>
+<pre><code class="language-py">
+# With shallow copy
+capitals = {"Greece": "Athens", "Italy": "Rome"}
+new_capitals = capitals.copy()
+new_capitals["Greece"] = "Thessaloniki"
+print(capitals)      
+# Still shows {"Greece": "Athens", "Italy": "Rome"}
+print(new_capitals)  
+# Shows {"Greece": "Thessaloniki", "Italy": "Rome"}
+</code></pre>
+<p>Remember that shallow copies are usually sufficient for simple
+dictionaries with immutable values like strings and numbers. However,
+when working with nested data structures, consider using deep copy to
+ensure complete independence between the original and copied data.</p>
+<pre><code class="language-py" >
+import copy
+# Dictionary with nested structure
+countries = {
+    "Greece": {
+        "cities": ["Athens", "Thessaloniki"]
+    },
+    "Italy": {
+        "cities": ["Rome", "Milan"]
+    }
+}
+# Creating shallow and deep copies
+shallow_copy = countries.copy()
+deep_copy = copy.deepcopy(countries)
+
+# Let's modify the nested list in the shallow copy
+shallow_copy["Greece"]["cities"].append("Patras")
+
+print("Original dict:", countries["Greece"]["cities"])
+# Output: ['Athens', 'Thessaloniki', 'Patras']
+
+print("Shallow copy:", shallow_copy["Greece"]["cities"])
+# Output: ['Athens', 'Thessaloniki', 'Patras']
+
+print("Deep copy:", deep_copy["Greece"]["cities"])
+# Output: ['Athens', 'Thessaloniki']
+</code></pre>
+<p>In this example, when we modify the nested list in the shallow copy,
+the change is also reflected in the original dictionary because both
+dictionaries reference the same nested list. However, the deep copy
+remains unchanged because it created independent copies of all nested
+objects.</p>
+<p>The choice between shallow and deep copying often depends on your
+specific needs: shallow copies are more memory-efficient and faster,
+while deep copies provide complete data independence but consume more
+memory and processing power.</p>
+<h2 id="use-of-the-assignment-operator-reference-copy">Use of the
+Assignment Operator: Reference Copy</h2>
+<p>We will examine what happens when the assignment operator (=) is used
+with dictionaries:</p>
+<pre><code class="language-py">
+capitals = {
+    "Greece": "Athens",
+    "Italy": "Rome"
+}
+# Using assignment operator
+new_capitals = capitals
+
+# Modifying the new dictionary
+new_capitals["Greece"] = "Thessaloniki"
+
+print("Original dictionary:", capitals)
+# Output: {'Greece': 'Thessaloniki', 'Italy': 'Rome'}
+
+print("New dictionary:", new_capitals)
+# Output: {'Greece': 'Thessaloniki', 'Italy': 'Rome'}
+
+# Checking if they reference the same object
+print(id(capitals) == id(new_capitals))  # Output: True
+</code></pre>
+<p>When using the assignment operator (=), Python doesn't create a new
+dictionary. Instead, it creates a new reference to the same dictionary
+object in memory. This means both variables (<code>capitals</code> and
+<code>new_capitals</code>) point to exactly the same dictionary. Any
+changes made using either variable will affect the dictionary that both
+variables reference. This is often called a "reference copy" or
+"aliasing" rather than an actual copy of the data. This behavior can
+lead to unexpected results if you're not aware of it, which is why
+proper copying methods (shallow or deep) should be used when you need an
+independent copy of a dictionary.</p>
+<h2
+id="comparative-table-of-different-dictionary-copying-methods">Comparative
+Table of Different Dictionary Copying Methods</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Reference Copy</th>
+<th>Shallow Copy</th>
+<th>Deep Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Syntax</td>
+<td><code>dict2 = dict1</code></td>
+<td><code>dict2 = dict1.copy()</code> or
+<code>dict2 = dict(dict1)</code></td>
+<td><code>import copy</code>
+<code>dict2 = copy.deepcopy(dict1)</code></td>
+</tr>
+<tr>
+<td>Definition</td>
+<td>Creates a new reference to the same object</td>
+<td>Creates a new dictionary with references to the same nested
+objects</td>
+<td>Creates a completely new dictionary with new copies of all nested
+objects</td>
+</tr>
+<tr>
+<td>Nested Objects</td>
+<td>Changes affect both dictionaries</td>
+<td>Changes to nested objects affect both dictionaries</td>
+<td>Changes to nested objects are completely independent</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Fastest</td>
+<td>Moderate speed</td>
+<td>Slowest</td>
+</tr>
+<tr>
+<td>Use Case</td>
+<td>When you need just another reference to the same dictionary</td>
+<td>When dictionary contains only immutable objects (strings, numbers,
+tuples)</td>
+<td>When dictionary contains mutable objects (lists, dictionaries) and
+you need full independence</td>
+</tr>
+<tr>
+<td>Changes to Original</td>
+<td>Affects both dictionaries</td>
+<td>Affects only top-level elements</td>
+<td>Doesn't affect original dictionary at all</td>
+</tr>
+<tr>
+<td>Memory Usage</td>
+<td>Lowest (single object)</td>
+<td>Medium (new dictionary, same nested objects)</td>
+<td>Highest (complete copy of all objects)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="faqs-on-dictionary-copying-in-python">🧐 FAQS on Dictionary
+Copying in Python</h2>
+<h3
+id="what-is-the-difference-between-a-shallow-copy-and-a-deep-copy-of-a-dictionary-in-python">What
+is the difference between a shallow copy and a deep copy of a dictionary
+in Python?</h3>
+<p>A shallow copy (created with <code>dict.copy()</code> or via the
+<code>dict()</code> constructor) duplicates only the top-level structure
+of the dictionary. However, any nested objects, such as lists or other
+dictionaries, remain references to the same original objects.</p>
+<p>A deep copy (created with <code>copy.deepcopy()</code>) recreates all
+nested objects, ensuring that no references point back to the original
+dictionary’s contents.</p>
+<h3
+id="can-i-perform-a-shallow-copy-using-list-slicing-on-a-dictionary">Can
+I perform a shallow copy using list slicing on a dictionary?</h3>
+<p>No. Python’s slicing syntax (e.g., <code>some_list[:]</code>) applies
+to sequence types like lists, tuples, or strings, not dictionaries. For
+shallow dictionary copying, you can use <code>dict.copy()</code>, the
+<code>dict()</code> constructor, or other methods like
+<code>{k: v for k, v in original_dict.items()}</code>.</p>
+<h3
+id="will-using-the-assignment-operator-create-a-copy-of-my-dictionary">Will
+using the assignment operator (=) create a copy of my dictionary?</h3>
+<p>No. Using the assignment operator on a dictionary only creates a new
+reference to the same dictionary object in memory. Any changes made
+through one reference will be visible in the other. If you actually need
+a copy, you must use an explicit copy method (<code>dict.copy()</code>
+or <code>copy.deepcopy()</code>, depending on your needs).</p>
+<h3
+id="what-is-the-most-efficient-way-to-copy-a-dictionary-in-python">What
+is the most efficient way to copy a dictionary in Python?</h3>
+<p>For a shallow copy, <code>dict.copy()</code> is the most efficient
+method. For a deep copy, use <code>copy.deepcopy()</code>, but be aware
+that it is slower due to the recursive copying of nested objects.</p>
+</body>
+</html>
