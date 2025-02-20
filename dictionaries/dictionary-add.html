@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>3</title>
+  <title>2</title>
   <style>
     html {
       color: #1a1a1a;
@@ -896,28 +896,19 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">3</h1>
+<h1 class="title">2</h1>
 </header>
-<h1 id="python---access-dictionary-items">Python - Access Dictionary
-Items</h1>
-<p>Accessing dictionary items is one of the most common operations
-you'll perform with dictionaries. Python offers multiple ways to
-retrieve dictionary items efficiently, whether you need a single value,
-all keys, all values, or even keys and values together.</p>
-<p>There are several ways to access dictionary contents.</p>
-<ul>
-<li>Using square brackets []</li>
-<li>The <code>get()</code> method</li>
-<li>Iterating through the dictionary using loops</li>
-<li>Specific methods like <code>keys()</code>, <code>values()</code>,
-and <code>items()</code></li>
-</ul>
-<h2 id="using-square-brackets">Using Square Brackets []</h2>
-<p>The most straightforward way to retrieve values associated with
-specific keys is using square brackets with the key.</p>
+<h1 id="python---adding-items-to-dictionaries">Python - Adding Items to
+Dictionaries</h1>
+<p>This article will guide you through the various methods and best
+practices for adding items to dictionaries in Python.</p>
+<h2 id="the-simple-way-using-square-brackets">The Simple Way: Using
+Square Brackets</h2>
+<p>The easiest way to add a new item to your dictionary is to use square
+brackets with the new key, like this:</p>
 <p>✳️ Syntax:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dictionary[key]</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dictionary[key] <span class="op">=</span> value</span></code></pre></div>
 <p>📌 Example:</p>
 <pre><code class="language-py" >
 capitals = {
@@ -925,227 +916,20 @@ capitals = {
     "Italy": "Rome",
     "Spain": "Madrid"
 }
-greek_capital = capitals["Greece"]  
-print(greek_capital)  # Returns "Athens"
+capitals["France"] = "Paris"
+print(capitals)
 </code></pre>
-<p>Here, <code>capitals["Greece"]</code> fetches the value "Athens",
-because dictionaries store data in key-value pairs.</p>
-<p>💡 For lists and tuples, the index of the element is specified in
-brackets, and for dictionaries — the key.</p>
-<p>If the key doesn't exist, this method raises a
-<code>KeyError</code>:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-french_capital = capitals["France"] # Raises KeyError
-</code></pre>
-<p>To avoid this, use <code>get()</code>. Next, we will take a closer
-look at this method.</p>
-<h2 id="checking-if-a-key-exists">Checking if a Key Exists</h2>
-<p>Before accessing a key, you might want to check if it exists using
-the <strong>in</strong> operator.</p>
+<p>Your dictionary now knows that Paris is the capital of France. It's
+that simple! This method is perfect when you want to add just one item
+and you're sure you want to add it.</p>
+<h2 id="using-the-update-method-adding-multiple-items-at-once">Using the
+update() Method: Adding Multiple Items at Once</h2>
+<p>Sometimes you might want to add several items at once. Perhaps you
+just learned about more European capitals and want to add them all. The
+<code>update()</code> method comes to the rescue.</p>
 <p>✳️ Syntax:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> key <span class="kw">in</span> dictionary:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> key <span class="kw">not</span> <span class="kw">in</span> dictionary:</span></code></pre></div>
-<p>It returns <code>True</code> if the key is found and
-<code>False</code> if it’s not.</p>
-<p>📌 Example 1:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-# Check if the key exists
-if "Greece" in capitals:
-    print("We know the capital of Greece!")
-
-# Check if the key doesn't exist
-if "France" not in capitals:
-    print("We don't have data about France")
-</code></pre>
-<p>👣 Step-by-Step Explanation:</p>
-<ul>
-<li>Here, we check if the key "Greece" exists in the capitals
-dictionary.</li>
-<li>Since "Greece" is a key in the dictionary, the condition is True, so
-the program prints: "We know the capital of Greece!"</li>
-<li>Since "France" isn’t in capitals, the condition is True, and the
-program prints: "We don't have data about France"</li>
-</ul>
-<p>📌 Example 2:</p>
-<pre><code class="language-py">
-file_types = {
-    ".txt": "Text File",
-    ".pdf": "PDF Document",
-    ".jpg": "JPEG Image",
-}
-
-print(".pdf" in file_types)       # Output: True
-print(".mp3" in file_types)       # Output: False
-print(".mp3" not in file_types)   # Output: True
-</code></pre>
-<p>👣 Here's what's happening:</p>
-<ul>
-<li>First, a dictionary <code>file_types</code> is created that maps
-file extensions to their descriptions</li>
-<li><code>".pdf" in file_types</code> returns True because ".pdf" exists
-as a key in the dictionary</li>
-<li><code>".mp3" in file_types</code> returns False because ".mp3" is
-not a key in the dictionary</li>
-<li><code>".mp3" not in file_types</code> returns True because ".mp3"
-indeed is not present in the dictionary</li>
-</ul>
-<p>In a similar way, we can check whether a certain value exists in the
-dictionary:</p>
-<p>📌 Example 3:</p>
-<pre><code class="language-py">
-file_types = {
-    ".txt": "Text File",
-    ".pdf": "PDF Document",
-    ".jpg": "JPEG Image",
-}
-
-print("Text File" in file_types.values())   # Output: True
-</code></pre>
-<p>👣 Explanation:</p>
-<ul>
-<li><code>file_types.values()</code> returns a view of all the values in
-the <code>file_types</code> dictionary, which in this case is ["Text
-File", "PDF Document", "JPEG Image"].</li>
-<li>The <code>in</code> operator checks if "Text File" is in the list of
-values returned by <code>file_types.values()</code>.</li>
-</ul>
-<h2 id="using-the-get-method">Using the get() Method</h2>
-<p>The safer and more flexible way to access dictionary values is using
-the <code>get()</code> method.</p>
-<ul>
-<li>If the key exists, it returns the corresponding value.</li>
-<li>If the key doesn’t exist, it returns <code>None</code> instead of an
-error, or a default value if provided.</li>
-</ul>
-<p>✳️ Syntax:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dictionary.get(key, default_value)</span></code></pre></div>
-<p>📌 Example:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-greek_capital = capitals.get("Greece")
-print(greek_capital)
-# With a default value if the key doesn't exist
-french_capital = capitals.get("France", "Not found")  
-print(french_capital)         # Returns "Not found"
-french_capital = capitals.get("France")  
-print(french_capital is None) # Returns True
-</code></pre>
-<p>The <code>get()</code> method has two advantages:</p>
-<ul>
-<li>It never raises a <code>KeyError</code>: accessing a missing key
-does not crash the program</li>
-<li>You can specify a default value to return if the key isn't
-found</li>
-</ul>
-<p>Tip: Use default values when dealing with optional dictionary
-keys!</p>
-<h3 id="get-in-real-world-scenarios">get() in Real-World Scenarios</h3>
-<p>📌 <strong>Example 1:</strong> Checking User Preferences. Imagine you
-are building an application where users can customize their settings.
-These settings are stored in a dictionary, but not all users configure
-every option.</p>
-<p>For example, the settings dictionary might look like this:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>settings <span class="op">=</span> {<span class="st">&quot;theme&quot;</span>: <span class="st">&quot;dark&quot;</span>, <span class="st">&quot;notifications&quot;</span>: <span class="va">True</span>}</span></code></pre></div>
-<p>However, some settings might be missing. If we try to access a
-missing key with <code>settings[key]</code>, Python will throw a
-<code>KeyError</code>.</p>
-<p>We need a safe way to access settings while providing sensible
-default values when a setting is missing.</p>
-<pre><code class="language-py" >
-settings = {"theme": "dark", "notifications": True}
-
-user_theme = settings.get("theme", "light")  
-auto_save = settings.get("auto_save", False)  
-
-print(user_theme)  # Output: dark
-print(auto_save)   # Output: False
-</code></pre>
-<p>👣 Step-by-Step Breakdown</p>
-<ul>
-<li>The dictionary contains the "theme" key, so
-<code>get("theme")</code> returns "dark".</li>
-<li>Even though we provided a default value ("light"), it isn’t used
-because "theme" already exists.</li>
-<li>Result: <code>user_theme = "dark"</code></li>
-<li>The dictionary does not contain the key "auto_save".</li>
-<li>Instead of throwing an error, <code>get("auto_save", False)</code>
-returns the default value (False).</li>
-<li>Result: <code>auto_save = False</code></li>
-</ul>
-<p>Without <code>get()</code>, we’d have to write:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;auto_save&quot;</span> <span class="kw">in</span> settings:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    auto_save <span class="op">=</span> settings[<span class="st">&quot;auto_save&quot;</span>]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    auto_save <span class="op">=</span> <span class="va">False</span></span></code></pre></div>
-<p>Using <code>get()</code> prevents errors and makes the code more
-robust.</p>
-<p>📌 <strong>Example 2:</strong> Counting Words in a Text. We have a
-string of words, and we want to count how many times each word
-appears.</p>
-<p>The goal is to store this information in a dictionary where:</p>
-<ul>
-<li>The keys are the words.</li>
-<li>The values are the counts (how many times each word appears).</li>
-</ul>
-<pre><code class="language-py" >
-text = "apple banana apple orange banana apple"
-word_count = {}
-
-for word in text.split():
-    word_count[word] = word_count.get(word, 0) + 1  
-    # Default count is 0
-
-print(word_count)  
-# Output: {'apple': 3, 'banana': 2, 'orange': 1}
-</code></pre>
-<p>👣 Step-by-Step Breakdown</p>
-<ul>
-<li>Initialize an empty dictionary <code>word_count = {}</code>. This
-dictionary will store our words and their respective counts.</li>
-<li>Loop through each word in the text. <code>text.split()</code>
-converts the sentence into a list of words. We loop through this list,
-processing each word one by one.</li>
-<li>Use <code>get()</code> to update the count.</li>
-<li><code>word_count.get(word, 0)</code>: this is the key part!
-<ul>
-<li>If <code>word</code> exists in <code>word_count</code>, it returns
-its current count.</li>
-<li>If <code>word</code> doesn’t exist, it returns 0 (default
-value).</li>
-</ul></li>
-<li><code>+ 1</code>: We increase the count by 1.</li>
-<li>Then we update the dictionary with the new count.</li>
-</ul>
-<p>Without <code>get()</code>, we’d have to manually check if the key
-exists before incrementing.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> word <span class="kw">in</span> word_count:</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    word_count[word] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    word_count[word] <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
-<p>The <code>get()</code> method makes this cleaner and more efficient
-by combining both steps into one line.</p>
-<h2 id="error-handling">Error Handling</h2>
-<p>A try-except block is another way to handle missing keys and
-potential errors.</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dictionary.update([other])</span></code></pre></div>
 <p>📌 Example:</p>
 <pre><code class="language-py" >
 capitals = {
@@ -1153,259 +937,208 @@ capitals = {
     "Italy": "Rome",
     "Spain": "Madrid"
 }
-try:
-    capital = capitals["France"]
-except KeyError:
-    print("Data for France not found")
-
-# Or using a more elegant approach with get()
-capital = capitals.get("France", "Unknown")
-print(capital)
+capitals.update({
+    "Germany": "Berlin",
+    "Portugal": "Lisbon"
+})
+print(capitals)
 </code></pre>
-<p>👣 Step-by-Step Explanation</p>
+<p>Here we are updating a dictionary using the <code>update()</code>
+method and passing another dictionary to it as parameters.</p>
+<p>The <code>update()</code> method takes either a dictionary or an
+iterable object of key/value pairs (generally tuples) as parameters. It
+doesn’t return any value but updates the dictionary with elements from a
+dictionary object or an iterable object of key/value pairs.</p>
+<p>In the next example, instead of using another dictionary, we passed
+an iterable value to the <code>update()</code> function.</p>
+<pre><code class="language-py" >
+# Dictionary with single item
+capitals = {"Italy": "Rome"}
+
+# An iterable of key/value pairs
+capitals.update([("Spain", "Madrid"), ("Greece", "Athens")])
+
+# Update with keyword arguments
+capitals.update(Germany="Berlin", Portugal="Lisbon")
+print(capitals)
+</code></pre>
+<p>👣 Step-by-Step Breakdown</p>
 <ul>
-<li>try block: Python attempts to execute
-<code>capitals["France"]</code>.</li>
-<li>If the key is missing, a <code>KeyError</code> occurs.</li>
-<li><code>except KeyError</code>: This catches the error and executes
-the <code>print()</code> statement instead of crashing the program.</li>
+<li>We start with a dictionary capitals that contains a single key-value
+pair: "Italy": "Rome"</li>
+<li>Then we pass a list of tuples:
+<code>[("Spain", "Madrid"), ("Greece", "Athens")]</code>. Each tuple
+contains a key and its corresponding value.</li>
+<li>After this line, we add the keys "Germany" and "Portugal" with their
+respective values "Berlin" and "Lisbon"</li>
+<li>This prints the final contents of the capitals dictionary:
+<code>print(capitals)</code></li>
 </ul>
-<p>This approach is useful when you need to take specific action in case
-of missing data such as logging.</p>
-<p>Both the <code>get()</code> and try-except methods ensure your
-program doesn’t crash due to missing dictionary keys.</p>
-<h2 id="when-to-use-get-vs.-square-brackets">When to Use get() vs.
-Square Brackets []</h2>
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr>
-<th>Method</th>
-<th>Behavior if Key Exists</th>
-<th>Behavior if Key is Missing</th>
-<th>Use Case</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>dictionary[key]</code></td>
-<td>✅ Returns value</td>
-<td>❌ Raises <code>KeyError</code></td>
-<td>When you're sure the key exists</td>
-</tr>
-<tr>
-<td><code>dictionary.get(key)</code></td>
-<td>✅ Returns value</td>
-<td>✅ Returns <code>None</code> or a default</td>
-<td>When keys might be missing</td>
-</tr>
-</tbody>
-</table>
-<h2 id="when-to-use-try-except-vs.-get">When to Use try-except vs.
-get()</h2>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 15%" />
-<col style="width: 26%" />
-<col style="width: 26%" />
-<col style="width: 31%" />
-</colgroup>
-<thead>
-<tr>
-<th>Method</th>
-<th>Pros</th>
-<th>Cons</th>
-<th>Use Case</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>try-except</code></td>
-<td>Can execute extra logic when a key is missing</td>
-<td>Requires more lines of code</td>
-<td>When you need custom error handling, logging, or additional
-actions</td>
-</tr>
-<tr>
-<td><code>get()</code></td>
-<td>Cleaner, shorter, avoids exceptions</td>
-<td>Can’t execute extra logic on missing keys</td>
-<td>When you want a default value instead of an error</td>
-</tr>
-</tbody>
-</table>
-<h2 id="accessing-all-keys">Accessing All Keys</h2>
-<p>You can get a view of all keys using the <code>keys()</code>
-method:</p>
+<p>So, the <code>update()</code> method is a convenient way to expand
+dictionaries, whether by adding data from another iterable or using
+keyword arguments.</p>
+<h2 id="what-happens-with-duplicate-countries">What Happens with
+Duplicate Countries?</h2>
+<p>Here's something interesting: if you try to add a capital for a
+country that's already in your dictionary, Python will simply update the
+existing entry. For example:</p>
 <pre><code class="language-py">
 capitals = {
     "Greece": "Athens",
     "Italy": "Rome",
     "Spain": "Madrid"
 }
-all_countries = capitals.keys()
-# Returns dict_keys(['Greece', 'Italy', 'Spain'])
-print(all_countries)
-
-# Convert to a list if needed
-countries_list = list(capitals.keys())  
-# Returns ['Greece', 'Italy', 'Spain']
-print(countries_list)
+capitals["Italy"] = "Milano"
+print(capitals)
 </code></pre>
-<p>The <code>keys()</code> method returns a special
-<code>dict_keys</code> object, which acts like a set and provides a
-dynamic view of the dictionary's keys. If the dictionary changes, the
-view updates automatically.</p>
-<p>While <code>dict_keys</code> behaves like a set, you can easily
-convert it to a list using <code>list(capitals.keys())</code> if you
-need indexing or list-specific operations.</p>
-<h2 id="accessing-all-values">Accessing All Values</h2>
-<p>Similarly, you can get all values in the dictionary using the
-<code>values()</code> method:</p>
+<p>Python doesn't create a duplicate entry; it just updates the existing
+one. This is useful when you need to correct information, but be careful
+not to accidentally overwrite something you want to keep!</p>
+<h2 id="a-practical-example">A Practical Example</h2>
+<p>Let's put it all together with a real example:</p>
 <pre><code class="language-py" >
 capitals = {
     "Greece": "Athens",
     "Italy": "Rome",
     "Spain": "Madrid"
 }
-all_capitals = capitals.values()  
-# Returns dict_values(['Athens', 'Rome', 'Madrid'])
-
-# Convert to a list if needed
-capitals_list = list(capitals.values())  
-# Returns ['Athens', 'Rome', 'Madrid']
-print(capitals_list)
-</code></pre>
-<p>The <code>values()</code> method returns a <code>dict_values</code>
-object, which provides a dynamic view of all values in the dictionary.
-If the dictionary is updated, this view reflects the changes
-automatically.</p>
-<p>Although <code>dict_values</code> is not a list, you can convert it
-to one using <code>list(capitals.values())</code> if you need to access
-values by index or perform list-specific operations.</p>
-<p>This method is useful when you need to loop through all values, check
-if a certain value exists using in, or process the stored data without
-worrying about keys.</p>
-<h2 id="accessing-key-value-pairs">Accessing Key-Value Pairs</h2>
-<p>To get both keys and values together, use the <code>items()</code>
-method:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-all_pairs = capitals.items()  
-# Returns dict_items([('Greece', 'Athens'), 
-#   ('Italy', 'Rome'), ('Spain', 'Madrid')])
-
-# Useful in for loops
+# Adding a single country
+capitals["France"] = "Paris"
+# Adding multiple countries at once
+capitals.update({
+    "Germany": "Berlin",
+    "Portugal": "Lisbon"
+})
+# Printing the final collection
+print("Our European capitals collection:")
 for country, capital in capitals.items():
     print(f"The capital of {country} is {capital}")
 </code></pre>
-<p>The <code>items()</code> method returns a <code>dict_items</code>
-object, which provides a dynamic view of key-value pairs as tuples. If
-the dictionary is modified, this view updates automatically.</p>
-<p>This method is especially useful in for loops, allowing you to
-iterate over both keys and values simultaneously without needing to
-access them separately.</p>
-<p>If you need to store or manipulate key-value pairs as a list, you can
-convert <code>dict_items</code> into a list using
-<code>list(capitals.items())</code>, which returns a list of tuples.</p>
-<p>We will talk more about <code>keys()</code>, <code>values()</code>,
-<code>items()</code> methods when we consider iterating over the
-dictionary.</p>
-<h2 id="practical-tips">🗝️ Practical Tips</h2>
-<ul>
-<li>Use <code>get()</code> when you're not sure if a key exists</li>
-<li>Use square brackets when you're certain the key exists</li>
-<li>Always check for key existence in critical operations</li>
-<li>Remember that dictionary views <code>keys()</code>,
-<code>values()</code>, <code>items()</code> are dynamic and reflect
-dictionary changes</li>
-</ul>
-<p>📌 Example combining multiple concepts:</p>
-<pre><code class="language-py" >
+<p>This code shows how your dictionary grows step by step, just like
+your knowledge of European geography might grow over time.</p>
+<h2 id="using-the-operator">Using the |= Operator</h2>
+<p>There's a cool new way to add items to your dictionary using the
+<code>|=</code> operator. Think of it as mixing two dictionaries
+together, like combining two collections of postcards. Here's how it
+works:</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dictionary <span class="op">|=</span> other</span></code></pre></div>
+<p>📌 Example:</p>
+<pre><code class="language-py">
 capitals = {
     "Greece": "Athens",
     "Italy": "Rome",
     "Spain": "Madrid"
 }
-def get_capital(country, capitals_dict):
-    if not isinstance(capitals_dict, dict):
-       raise TypeError("Expected a dictionary")
-        
-    return capitals_dict.get(country, 
-      f"No data available for {country}")
-# Usage
-print(get_capital("Greece", capitals))  # Returns "Athens"
-print(get_capital("France", capitals))  
-# Returns "No data available for France"
+capitals |= {
+    "France": "Paris",
+    "Switzerland": "Bern"
+}
+print(capitals)
 </code></pre>
-<p>👣 Explanation:</p>
+<p>The <code>|=</code> operator is actually a shorter way of writing
+<code>.update()</code>. It's particularly nice because it makes your
+code look cleaner and more mathematical. You can think of it as saying
+"combine these dictionaries and update the original one."</p>
+<p>It follows the same pattern as other Python operators like
+<code>+=</code> for numbers. Just as <code>number += 5</code> adds 5 to
+your number, <code>capitals |= new_capitals</code> adds new items to
+your dictionary.</p>
+<p>One thing to note: just like with other methods, if there are any
+matching keys, the new values will replace the old ones:</p>
+<pre><code class="language-py">
+capitals = {
+    "Greece": "Athens",
+    "Italy": "Rome",
+    "Spain": "Madrid"
+}
+capitals |= {"Spain": "Barcelona"}
+# Madrid will be replaced with Barcelona
+print(capitals)
+</code></pre>
+<p>This modern syntax is becoming increasingly popular among Python
+developers because it's both elegant and easy to read.</p>
+<h2 id="using-the-setdefault-method">Using the setdefault() Method</h2>
+<p>The <code>setdefault()</code> method is like a careful librarian who
+checks if a book exists before adding it to the shelf. This method is
+special because it only adds a new item if the key doesn't already exist
+in the dictionary.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dictionary.setdefault(key, default_value)</span></code></pre></div>
+<p>📌 Example:</p>
+<pre><code class="language-py">
+capitals = {
+    "Greece": "Athens",
+    "Italy": "Rome",
+    "Spain": "Madrid"
+}
+# Adding a new capital using setdefault()
+capitals.setdefault("France", "Paris")
+# This won't change Rome to Milano
+capitals.setdefault("Italy", "Milano")
+print(capitals)
+</code></pre>
+<p>In this case, "Rome" stays as Italy's capital because
+<code>setdefault()</code> sees that "Italy" already exists and leaves it
+alone. This makes <code>setdefault()</code> particularly useful when you
+want to add new items safely without risking overwriting existing
+data.</p>
+<p>The method returns the value associated with the key, so you can also
+use it this way:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>capital <span class="op">=</span> capitals.setdefault(<span class="st">&quot;Germany&quot;</span>, <span class="st">&quot;Berlin&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(capital)  <span class="co"># Prints: Berlin</span></span></code></pre></div>
+<p>Think of <code>setdefault()</code> as a polite way of adding items -
+it first asks "Is this already here?" before making any changes. This
+makes it perfect for situations where you want to be extra careful about
+preserving existing data while adding new items.</p>
+<h2 id="are-dictionaries-ordered-or-unordered">Are Dictionaries Ordered
+or Unordered?</h2>
+<p>Before Python 3.7, dictionaries were completely unordered. You
+couldn't rely on the items staying in the same order when iterating
+through them or printing the dictionary. The same dictionary might show
+items in different orders each time you ran your program!</p>
+<p>However, since Python 3.7, dictionaries are ordered by insertion.
+This means they remember the order in which you add items.</p>
+<p>📌 Example:</p>
+<pre><code class="language-py">
+# Creating a dictionary
+capitals = {}
+capitals["Greece"] = "Athens"
+capitals["Italy"] = "Rome"
+capitals["Spain"] = "Madrid"
+
+for country in capitals:
+    print(country)
+</code></pre>
+<p>This will print: Greece, Italy, Spain in this exact order.</p>
+<h2 id="quick-tips-to-remember">Quick Tips to Remember</h2>
 <ul>
-<li>The <code>capitals</code> dictionary is like a mini database that
-stores countries as keys and their capitals as values.</li>
-<li>The <code>get_capital</code> function is a little tool we created to
-make it easy to look up a capital city for a given country. You give it
-two things:
-<ul>
-<li>The name of the country you’re looking for (like "Greece").</li>
-<li>The dictionary where you're storing your data (like
-<code>capitals</code>).</li>
-</ul></li>
-<li>The function will either return the capital of the country or tell
-you if there’s no data available for that country.</li>
-<li>Before doing anything, the function checks if the second argument
-<code>capitals_dict</code> is actually a dictionary.</li>
-<li>If it’s not, the function raises an error.</li>
-<li>The <code>get()</code> method is a safe way to look up a value in a
-dictionary. If the country is in the dictionary, it gives you the
-capital. If it’s not, instead of crashing, it returns a default
-message.</li>
+<li>Square brackets [] are perfect for adding one item</li>
+<li><code>update()</code> is your friend when adding multiple items</li>
+<li><code>setdefault()</code> adds a new item only if it doesn't
+exist</li>
+<li>You can't have duplicate keys</li>
+<li>Adding an existing key updates its value instead of creating a
+duplicate</li>
 </ul>
-<p>Instead of writing the same logic every time you want to look up a
-capital, you can just reuse this function.</p>
-<h2 id="faqs-on-access-dictionary-items">🧐 FAQs on Access Dictionary
-Items</h2>
-<h3 id="how-do-i-access-a-value-in-a-dictionary-by-key">How do I access
-a value in a dictionary by key?</h3>
-<p>You can access a dictionary value using square brackets
-<code>[]</code> or the <code>get()</code> method.</p>
+<p>Happy dictionary building!</p>
+<h2 id="faqs-on-adding-items-to-python-dictionaries">FAQs on Adding
+Items to Python Dictionaries</h2>
 <h3
-id="what-is-the-difference-between-using-dictkey-and-dict.getkey">What
-is the difference between using dict[key] and dict.get(key)?</h3>
-<p><code>dict[key]</code> will raise a <code>KeyError</code> when the
-key is missing, while <code>dict.get(key)</code> provides a safer
-alternative by returning <code>None</code> (or a custom default value)
-if the key does not exist.</p>
+id="what-happens-if-i-add-a-key-that-already-exists-in-the-dictionary">What
+happens if I add a key that already exists in the dictionary?</h3>
+<p>If you add a key that already exists, the new value will overwrite
+the old value.</p>
 <h3
-id="how-do-i-check-if-a-key-exists-in-a-dictionary-before-accessing-its-value">How
-do I check if a key exists in a dictionary before accessing its
-value?</h3>
-<p>You can use the <strong>in</strong> keyword. For example,
-<code>'my_key' in my_dict</code> returns True if <code>my_key</code> is
-present as a key in the dictionary, making it safe to proceed with
-access.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;my_key&quot;</span> <span class="kw">in</span> my_dict:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Key exists!&quot;</span>)</span></code></pre></div>
-<h3 id="can-i-access-multiple-dictionary-items-simultaneously">Can I
-access multiple dictionary items simultaneously?</h3>
-<p>You cannot directly access multiple keys with a single bracket-based
-expression. However, you could iterate over a list of keys and use
-either bracket notation or <code>dict.get()</code> for each, or use
-dictionary comprehension to build a subset of key-value pairs.</p>
-<h3 id="is-dictionary-key-lookup-fast-in-python">Is dictionary key
-lookup fast in Python?</h3>
-<p>Yes, dictionary key lookup is very fast because dictionaries in
-Python use a hash table under the hood, making key access approximately
-O(1) in average cases. In the worst case (with a large number of hash
-collisions), the complexity can degrade to O(n).</p>
+id="is-it-possible-to-add-items-to-a-dictionary-while-iterating-through-it">Is
+it possible to add items to a dictionary while iterating through
+it?</h3>
+<p>While it's technically possible, it's not recommended as it can lead
+to unexpected behavior and may raise a RuntimeError. It's better to
+create a new dictionary or collect changes in a separate data structure
+before updating.</p>
 </body>
 </html>

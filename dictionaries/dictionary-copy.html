@@ -635,7 +635,25 @@
           .run-button:hover {
               opacity: 1.0;
           }
-          
+  	.run-button:disabled {
+              animation: pulse 1.0s infinite;
+          }                     
+
+  @keyframes pulse {
+      0% {
+          transform: scale(1);
+          opacity: 1;
+      }
+      50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+      }
+      100% {
+          transform: scale(1);
+          opacity: 1;
+      }
+  }
+                 
           .hide-button {
               position: absolute;
               top: 10px;
@@ -732,7 +750,7 @@
                       <div class="container">
                           <div class="code-block">
                               <!-- <span class="code-label">Try to edit and run code example</span> -->
-                              <button class="run-button" onclick="runPython(${blockId})">            
+                              <button class="run-button" onclick="runPython(${blockId})" id="button${blockId}">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                       <path d="M8 5v14l11-7z"> </path> 
                                   </svg>
@@ -759,7 +777,7 @@
                       if (textarea) {
                           editors[blockId] = CodeMirror.fromTextArea(textarea, {
                               mode: "python",
-                              lineNumbers: true,
+                            //  lineNumbers: true,
                               theme: "default",
                               theme: "material",
                               theme: "mbo", 
@@ -788,18 +806,25 @@
           async function runPython(blockId) {
               let pyodide = await pyodideReadyPromise;
               try {
+                  const outputDiv = document.getElementById(`output${blockId}`);
                   const outputBlock = document.getElementById(`output-block${blockId}`);
+                  const runButton = document.getElementById(`button${blockId}`);
+                  
                   outputBlock.style.display = 'block';
 
                   let output = "";
                   pyodide.globals.set("print", (...args) => {
                      output += args.join(" ") + "\n";
                   });
+
+                  runButton.disabled = true;
                   
                   await pyodide.runPythonAsync(editors[blockId].getValue());
                   
-                  document.getElementById(`output${blockId}`).innerText = output;
+                  runButton.disabled = false;
+                  outputDiv.innerText = output;
               } catch(err) {
+                  document.getElementById(`button${blockId}`).disabled = false;
                   document.getElementById(`output${blockId}`).innerText = "Error: " + err;
               }
           }
@@ -845,7 +870,9 @@ print(country_info)
 </code></pre>
 <p>In such cases, a shallow copy might not be sufficient, and this is
 where deep copying comes into play.</p>
-<h2 id="deep-copy">Deep Copy</h2>
+<h2 id="deep-copy-the-complete-clone">Deep Copy: The Complete Clone</h2>
+<p>When you need a true, independent copy of your dictionary - inner
+contents and all - deep copy comes to the rescue.</p>
 <p>To create a deep copy, we need to import Python's <code>copy</code>
 module and use its <code>deepcopy</code> function:</p>
 <pre><code class="language-py">
@@ -910,10 +937,10 @@ the change is also reflected in the original dictionary because both
 dictionaries reference the same nested list. However, the deep copy
 remains unchanged because it created independent copies of all nested
 objects.</p>
-<p>The choice between shallow and deep copying often depends on your
-specific needs: shallow copies are more memory-efficient and faster,
-while deep copies provide complete data independence but consume more
-memory and processing power.</p>
+<p>The decision to use shallow or deep copying typically hinges on your
+particular requirements: shallow copies are faster and use less memory,
+whereas deep copies ensure full data independence at the cost of higher
+memory usage and processing resources.</p>
 <h2 id="use-of-the-assignment-operator-reference-copy">Use of the
 Assignment Operator: Reference Copy</h2>
 <p>We will examine what happens when the assignment operator (=) is used
@@ -943,11 +970,12 @@ dictionary. Instead, it creates a new reference to the same dictionary
 object in memory. This means both variables (<code>capitals</code> and
 <code>new_capitals</code>) point to exactly the same dictionary. Any
 changes made using either variable will affect the dictionary that both
-variables reference. This is often called a "reference copy" or
-"aliasing" rather than an actual copy of the data. This behavior can
-lead to unexpected results if you're not aware of it, which is why
-proper copying methods (shallow or deep) should be used when you need an
-independent copy of a dictionary.</p>
+variables reference.</p>
+<p>This is usually referred to as a "reference copy" or "aliasing," not
+a true copy of the data. If you’re not careful, this can lead to some
+surprising outcomes. That’s why it’s important to use proper copying
+methods (shallow or deep) when you need a completely independent version
+of a dictionary.</p>
 <h2
 id="comparative-table-of-different-dictionary-copying-methods">Comparative
 Table of Different Dictionary Copying Methods</h2>
@@ -1017,8 +1045,19 @@ you need full independence</td>
 </tr>
 </tbody>
 </table>
-<h2 id="faqs-on-dictionary-copying-in-python">🧐 FAQS on Dictionary
-Copying in Python</h2>
+<h2 id="faqs-on-dictionary-copying-in-python">FAQS on Dictionary Copying
+in Python</h2>
+<h3 id="how-do-i-make-a-shallow-copy-of-a-dictionary">How do I make a
+shallow copy of a dictionary?</h3>
+<p>You've got three cool ways to make a shallow copy:</p>
+<ul>
+<li>Using the <code>dict.copy()</code> method:
+<code>new_dict = old_dict.copy()</code></li>
+<li>Using <code>dict()</code> constructor:
+<code>new_dict = dict(old_dict)</code></li>
+</ul>
+<p>They do the same thing, so pick whatever feels more natural to
+you!</p>
 <h3
 id="what-is-the-difference-between-a-shallow-copy-and-a-deep-copy-of-a-dictionary-in-python">What
 is the difference between a shallow copy and a deep copy of a dictionary
@@ -1044,8 +1083,8 @@ using the assignment operator (=) create a copy of my dictionary?</h3>
 <p>No. Using the assignment operator on a dictionary only creates a new
 reference to the same dictionary object in memory. Any changes made
 through one reference will be visible in the other. If you actually need
-a copy, you must use an explicit copy method (<code>dict.copy()</code>
-or <code>copy.deepcopy()</code>, depending on your needs).</p>
+a copy, you must use an explicit copy method, such as
+<code>dict.copy()</code> or <code>copy.deepcopy()</code>.</p>
 <h3
 id="what-is-the-most-efficient-way-to-copy-a-dictionary-in-python">What
 is the most efficient way to copy a dictionary in Python?</h3>

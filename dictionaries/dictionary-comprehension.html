@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>3</title>
+  <title>7</title>
   <style>
     html {
       color: #1a1a1a;
@@ -896,516 +896,491 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">3</h1>
+<h1 class="title">7</h1>
 </header>
-<h1 id="python---access-dictionary-items">Python - Access Dictionary
-Items</h1>
-<p>Accessing dictionary items is one of the most common operations
-you'll perform with dictionaries. Python offers multiple ways to
-retrieve dictionary items efficiently, whether you need a single value,
-all keys, all values, or even keys and values together.</p>
-<p>There are several ways to access dictionary contents.</p>
-<ul>
-<li>Using square brackets []</li>
-<li>The <code>get()</code> method</li>
-<li>Iterating through the dictionary using loops</li>
-<li>Specific methods like <code>keys()</code>, <code>values()</code>,
-and <code>items()</code></li>
-</ul>
-<h2 id="using-square-brackets">Using Square Brackets []</h2>
-<p>The most straightforward way to retrieve values associated with
-specific keys is using square brackets with the key.</p>
+<h1 id="python---dictionary-comprehension">Python - Dictionary
+Comprehension</h1>
+<p>Dictionary comprehension is a powerful and elegant way to create
+dictionaries in Python. Let's explore this concise syntax that can
+replace multiple lines of traditional dictionary creation code.</p>
+<h2 id="basic-dictionary-comprehension">Basic Dictionary
+Comprehension</h2>
+<p>The simplest form follows this pattern:</p>
 <p>✳️ Syntax:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dictionary[key]</span></code></pre></div>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>{key: value <span class="cf">for</span> item <span class="kw">in</span> iterable}</span></code></pre></div>
 <p>📌 Example:</p>
-<pre><code class="language-py" >
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-greek_capital = capitals["Greece"]  
-print(greek_capital)  # Returns "Athens"
-</code></pre>
-<p>Here, <code>capitals["Greece"]</code> fetches the value "Athens",
-because dictionaries store data in key-value pairs.</p>
-<p>💡 For lists and tuples, the index of the element is specified in
-brackets, and for dictionaries — the key.</p>
-<p>If the key doesn't exist, this method raises a
-<code>KeyError</code>:</p>
 <pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-french_capital = capitals["France"] # Raises KeyError
-</code></pre>
-<p>To avoid this, use <code>get()</code>. Next, we will take a closer
-look at this method.</p>
-<h2 id="checking-if-a-key-exists">Checking if a Key Exists</h2>
-<p>Before accessing a key, you might want to check if it exists using
-the <strong>in</strong> operator.</p>
-<p>✳️ Syntax:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> key <span class="kw">in</span> dictionary:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> key <span class="kw">not</span> <span class="kw">in</span> dictionary:</span></code></pre></div>
-<p>It returns <code>True</code> if the key is found and
-<code>False</code> if it’s not.</p>
-<p>📌 Example 1:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-# Check if the key exists
-if "Greece" in capitals:
-    print("We know the capital of Greece!")
+# Create a dictionary of squares
+squares = {x: x**2 for x in range(5)}
+print(squares)  # Output: {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 
-# Check if the key doesn't exist
-if "France" not in capitals:
-    print("We don't have data about France")
+# Create a dictionary of cubes
+cubes = {x: x**3 for x in range(4)}
+print(cubes)    # Output: {0: 0, 1: 1, 2: 8, 3: 27}
+</code></pre>
+<p>Here's how to create the same dictionary using a traditional for loop
+instead of dictionary comprehension:</p>
+<pre><code class="language-py">
+squares = {}
+for x in range(5):
+    squares[x] = x**2
+print(squares)
+</code></pre>
+<p>Both versions create the same dictionary:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>{<span class="dv">0</span>: <span class="dv">0</span>, <span class="dv">1</span>: <span class="dv">1</span>, <span class="dv">2</span>: <span class="dv">4</span>, <span class="dv">3</span>: <span class="dv">9</span>, <span class="dv">4</span>: <span class="dv">16</span>}</span></code></pre></div>
+<p>👣 Explanation:</p>
+<p>The process in the traditional loop is more explicit:</p>
+<ul>
+<li>First, we create an empty dictionary</li>
+<li>Then we iterate through numbers 0 to 4</li>
+<li>For each number, we create a new key-value pair where:
+<ul>
+<li>The key is the number (x)</li>
+<li>The value is the square of that number (x**2)</li>
+</ul></li>
+</ul>
+<p>While the dictionary comprehension is more concise, both methods
+produce exactly the same result. The choice between them often comes
+down to readability and personal/team preference.</p>
+<h2 id="adding-conditions">Adding Conditions</h2>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{key: value <span class="cf">for</span> item <span class="kw">in</span> iterable <span class="cf">if</span> condition}</span></code></pre></div>
+<p>📌 Example:</p>
+<p>In this code snippet, we are creating a dictionary of only even
+numbers and their squares.</p>
+<pre><code class="language-py">
+# Only even numbers and their squares
+even_squares = {x: x**2 for x in range(8) if x % 2 == 0}
+print(even_squares)  # Output: {0: 0, 2: 4, 4: 16, 6: 36}
+
+# Numbers divisible by 3 and their squares
+div_by_3 = {x: x**2 for x in range(8) if x % 3 == 0}
+print(div_by_3)     # Output: {0: 0, 3: 9, 6: 36}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>This <code>range(8)</code> function generates a sequence of numbers
+from 0 to 7 (since the stop value is exclusive): [0, 1, 2, 3, 4, 5, 6,
+7].</li>
+<li>The comprehension iterates over each number <code>x</code> in the
+range of 0 to 7.</li>
+<li>The condition <code>x % 2 == 0</code> filters out only the even
+numbers. The modulo operator <code>%</code> returns the remainder of
+dividing x by 2. If the remainder is 0, then x is even. The
+comprehension filters this to only even numbers: [0, 2, 4, 6]</li>
+<li>For each even number <code>x</code>, the dictionary stores
+<code>x</code> as the key and <code>x**2</code> (square of
+<code>x</code>) as the value.</li>
+</ul>
+<h2 id="more-complex-expressions">More Complex Expressions</h2>
+<p>You can use more complex expressions for both keys and values.</p>
+<p>📌 Example 1: Create a dictionary with string manipulation. In this
+code snippet, we are creating a dictionary that maps each character in
+the word "PYTHON" to its position (index) in the word using a dictionary
+comprehension.</p>
+<pre><code class="language-py">
+word = "PYTHON"
+letter_pos = {char: index for index, char in enumerate(word)}
+print(letter_pos)  
+# Output: {'P': 0, 'Y': 1, 'T': 2, 'H': 3, 'O': 4, 'N': 5}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>We start with the string word containing "PYTHON".</li>
+<li>The <code>enumerate</code> function returns an iterator of tuples,
+where each tuple contains an index and the corresponding character from
+the string. For the string "PYTHON", <code>enumerate(word)</code> will
+produce:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>[(<span class="dv">0</span>, <span class="st">&#39;P&#39;</span>), (<span class="dv">1</span>, <span class="st">&#39;Y&#39;</span>), (<span class="dv">2</span>, <span class="st">&#39;T&#39;</span>), (<span class="dv">3</span>, <span class="st">&#39;H&#39;</span>), (<span class="dv">4</span>, <span class="st">&#39;O&#39;</span>), (<span class="dv">5</span>, <span class="st">&#39;N&#39;</span>)]</span></code></pre></div>
+<ul>
+<li>The comprehension iterates over each tuple
+<code>(index, char)</code> produced by
+<code>enumerate(word)</code>.</li>
+<li>For each tuple <code>(index, char)</code>, the dictionary stores
+<code>char</code> (the character) as the key and <code>index</code> (its
+position in the string) as the value.</li>
+</ul>
+<p>📌 Example 2: Mathematical expressions. We are creating a dictionary
+that maps each number in a given range to the sine of that number using
+the <code>math.sin</code> function and a dictionary comprehension.</p>
+<pre><code class="language-py">
+import math
+trig = {x: math.sin(x) for x in range(3)}
+print(trig)  
+# {0: 0.0, 1: 0.8414709848078965, 2: 0.9092974268256817}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>We start by importing the <code>math</code> module, which gives us
+access to mathematical functions, including <code>math.sin</code>.</li>
+<li>The <code>range(3)</code> function generates a sequence of numbers
+from 0 to 2 (since the stop value is exclusive): [0, 1, 2].</li>
+<li>The comprehension iterates over each number <code>x</code> in the
+range of 0 to 2.</li>
+<li>For each number <code>x</code>, the dictionary stores <code>x</code>
+as the key and <code>math.sin(x)</code> (the sine of <code>x</code>) as
+the value.</li>
+<li>The <code>print</code> statement then outputs the dictionary to the
+console.</li>
+</ul>
+<h2 id="practical-examples">Practical Examples</h2>
+<p>📌 Example 1. Creating a character frequency dictionary. In this code
+snippet, we are creating a dictionary that maps each character in a
+given string to the number of times it appears in that string using a
+dictionary comprehension.</p>
+<pre><code class="language-py">
+text = "hello"
+char_freq = {char: text.count(char) for char in text}
+print(char_freq)
+# Output: {'h': 1, 'e': 1, 'l': 2, 'o': 1}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>We start with the string text containing "hello".</li>
+<li>The comprehension iterates over each character in the string
+text.</li>
+<li>For each character char, the dictionary stores <code>char</code> as
+the key and <code>text.count(char)</code> (the number of times
+<code>char</code> appears in text) as the value.</li>
+</ul>
+<p>📌 Example 2. Converting temperature from Celsius to Fahrenheit:</p>
+<pre><code class="language-py" >
+celsius = {0, 10, 20, 30, 40}
+fahrenheit = {c: (c * 9/5) + 32 for c in celsius}
+print(fahrenheit)  
+# Output: {0: 32.0, 10: 50.0, 20: 68.0, 30: 86.0, 40: 104.0}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>We start with a set celsius containing the temperatures: 0, 10, 20,
+30, and 40 degrees Celsius.</li>
+<li>The comprehension iterates over each temperature <code>c</code> in
+the set celsius.</li>
+<li>For each temperature <code>c</code>, the dictionary stores
+<code>c</code> as the key and <code>(c * 9/5) + 32</code> (the
+equivalent temperature in Fahrenheit) as the value. This formula
+converts a temperature from Celsius to Fahrenheit.</li>
+</ul>
+<p>📌 Example 3. Creating a dictionary from two lists. In this code
+snippet, we are creating a dictionary that maps country names to their
+capitals using a dictionary comprehension and the <code>zip</code>
+function.</p>
+<pre><code class="language-py" >
+countries = ['Greece', 'Spain', 'Italy']
+capitals = ['Athens', 'Madrid', 'Rome']
+country_caps = {country: capital 
+   for country, capital in zip(countries, capitals)}
+print(country_caps)  
+# Output: 
+# {'Greece': 'Athens', 'Spain': 'Madrid', 'Italy': 'Rome'}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>We start with two lists: countries containing the names of countries
+and capitals containing the corresponding capitals.</li>
+<li>The <code>zip</code> function pairs each element from the countries
+list with the corresponding element from the capitals list. For the
+given lists, it produces:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>[(<span class="st">&#39;Greece&#39;</span>, <span class="st">&#39;Athens&#39;</span>), (<span class="st">&#39;Spain&#39;</span>, <span class="st">&#39;Madrid&#39;</span>), (<span class="st">&#39;Italy&#39;</span>, <span class="st">&#39;Rome&#39;</span>)]</span></code></pre></div>
+<ul>
+<li>The comprehension iterates over each tuple
+<code>(country, capital)</code> provided by the <code>zip</code>
+function.</li>
+<li>For each tuple <code>(country, capital)</code>, the dictionary
+stores <code>country</code> as the key and <code>capital</code> as the
+value.</li>
+</ul>
+<p>But this can be written significantly shorter with
+<code>dict()</code> constructor:</p>
+<pre><code class="language-py" >
+countries = ['Greece', 'Spain', 'Italy']
+capitals = ['Athens', 'Madrid', 'Rome']
+
+zipped = dict(zip(countries, capitals))
+print(zipped)
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The <code>dict</code> constructor takes the iterable of tuples
+produced by <code>zip</code> and converts it into a dictionary. Each
+tuple <code>(country, capital)</code> becomes a key-value pair in the
+dictionary.</li>
+</ul>
+<p>This method combines the <code>zip</code> function and
+<code>dict</code> constructor to create the dictionary in a single line.
+Both methods have similar performance.</p>
+<ul>
+<li>Use <code>dict(zip(...))</code> when you need a quick,
+straightforward dictionary creation from two lists.</li>
+<li>Use dictionary comprehension when you want to include additional
+conditions or transformations.</li>
+</ul>
+<h2 id="nested-dictionary-comprehension">Nested dictionary
+comprehension</h2>
+<p>You can generate nested dictionaries:</p>
+<pre><code class="language-py" >
+nested = {x: {y: x*y for y in range(1, 4)} 
+                     for x in range(1, 3)}  
+print(nested)  
+# Output: {1: {1: 1, 2: 2, 3: 3}, 2: {1: 2, 2: 4, 3: 6}}
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>This comprehension has two parts:
+<ul>
+<li>Outer comprehension: <code>for x in range(1, 3)</code> → generates
+keys 1, 2</li>
+<li>Inner comprehension: <code>for y in range(1, 4)</code> → generates
+values 1, 2, 3</li>
+</ul></li>
+</ul>
+<p>Written as traditional nested loops, it would look like this:</p>
+<pre><code class="language-py" >
+nested = {}
+for x in range(1, 3):
+    nested[x] = {}
+    for y in range(1, 4):
+        nested[x][y] = x * y
+print(nested)  
+</code></pre>
+<p>The dictionary comprehension is more concise and often more readable
+once you're familiar with the syntax. It creates the same nested
+structure in a single line of code, where each outer key <code>x</code>
+maps to another dictionary containing the products of <code>x</code>
+with each <code>y</code> value.</p>
+<h2 id="performance-considerations">Performance Considerations</h2>
+<p>Dictionary comprehension is not just elegant - it's also
+efficient:</p>
+<ul>
+<li>It's generally faster than creating a dictionary using a for
+loop</li>
+<li>It creates the dictionary in a single pass</li>
+<li>It's memory efficient as it doesn't create an intermediate list</li>
+</ul>
+<p>In the following code we are creating a dictionary of squares for a
+large number of elements (<code>times</code> = 1,500,000). We compare
+two methods to create the dictionary: a traditional loop and a
+dictionary comprehension. We measure and compare the time taken by each
+method to highlight the performance differences.</p>
+<pre><code class="language-py" >
+import time
+times = 1500000
+
+# Equivalent traditional loop (less efficient)
+start_time = time.perf_counter()
+squares_loop = {}
+for x in range(times):
+    squares_loop[x] = x**2
+end_time = time.perf_counter()
+loop_time = end_time - start_time
+
+# Dictionary comprehension (efficient)
+start_time = time.perf_counter()
+squares_comp = {x: x**2 for x in range(times)}
+end_time = time.perf_counter()
+comp_time = end_time - start_time
+
+print(f"Dictionary comprehension time: {comp_time:.6f} seconds")
+print(f"Traditional loop time: {loop_time:.6f} seconds")
+print(f"Dictionary comprehension is {loop_time/comp_time:.1f}x faster")
 </code></pre>
 <p>👣 Step-by-Step Explanation:</p>
 <ul>
-<li>Here, we check if the key "Greece" exists in the capitals
-dictionary.</li>
-<li>Since "Greece" is a key in the dictionary, the condition is True, so
-the program prints: "We know the capital of Greece!"</li>
-<li>Since "France" isn’t in capitals, the condition is True, and the
-program prints: "We don't have data about France"</li>
-</ul>
-<p>📌 Example 2:</p>
-<pre><code class="language-py">
-file_types = {
-    ".txt": "Text File",
-    ".pdf": "PDF Document",
-    ".jpg": "JPEG Image",
-}
-
-print(".pdf" in file_types)       # Output: True
-print(".mp3" in file_types)       # Output: False
-print(".mp3" not in file_types)   # Output: True
-</code></pre>
-<p>👣 Here's what's happening:</p>
+<li>The <code>time</code> module provides functions to measure the
+execution time of code.</li>
+<li>Then we set the number of iterations: <code>times = 1500000</code>
+to specify how many elements we want in our dictionary.</li>
+<li>Traditional Loop Method
 <ul>
-<li>First, a dictionary <code>file_types</code> is created that maps
-file extensions to their descriptions</li>
-<li><code>".pdf" in file_types</code> returns True because ".pdf" exists
-as a key in the dictionary</li>
-<li><code>".mp3" in file_types</code> returns False because ".mp3" is
-not a key in the dictionary</li>
-<li><code>".mp3" not in file_types</code> returns True because ".mp3"
-indeed is not present in the dictionary</li>
-</ul>
-<p>In a similar way, we can check whether a certain value exists in the
-dictionary:</p>
-<p>📌 Example 3:</p>
-<pre><code class="language-py">
-file_types = {
-    ".txt": "Text File",
-    ".pdf": "PDF Document",
-    ".jpg": "JPEG Image",
-}
-
-print("Text File" in file_types.values())   # Output: True
-</code></pre>
-<p>👣 Explanation:</p>
-<ul>
-<li><code>file_types.values()</code> returns a view of all the values in
-the <code>file_types</code> dictionary, which in this case is ["Text
-File", "PDF Document", "JPEG Image"].</li>
-<li>The <code>in</code> operator checks if "Text File" is in the list of
-values returned by <code>file_types.values()</code>.</li>
-</ul>
-<h2 id="using-the-get-method">Using the get() Method</h2>
-<p>The safer and more flexible way to access dictionary values is using
-the <code>get()</code> method.</p>
-<ul>
-<li>If the key exists, it returns the corresponding value.</li>
-<li>If the key doesn’t exist, it returns <code>None</code> instead of an
-error, or a default value if provided.</li>
-</ul>
-<p>✳️ Syntax:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dictionary.get(key, default_value)</span></code></pre></div>
-<p>📌 Example:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-greek_capital = capitals.get("Greece")
-print(greek_capital)
-# With a default value if the key doesn't exist
-french_capital = capitals.get("France", "Not found")  
-print(french_capital)         # Returns "Not found"
-french_capital = capitals.get("France")  
-print(french_capital is None) # Returns True
-</code></pre>
-<p>The <code>get()</code> method has two advantages:</p>
-<ul>
-<li>It never raises a <code>KeyError</code>: accessing a missing key
-does not crash the program</li>
-<li>You can specify a default value to return if the key isn't
-found</li>
-</ul>
-<p>Tip: Use default values when dealing with optional dictionary
-keys!</p>
-<h3 id="get-in-real-world-scenarios">get() in Real-World Scenarios</h3>
-<p>📌 <strong>Example 1:</strong> Checking User Preferences. Imagine you
-are building an application where users can customize their settings.
-These settings are stored in a dictionary, but not all users configure
-every option.</p>
-<p>For example, the settings dictionary might look like this:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>settings <span class="op">=</span> {<span class="st">&quot;theme&quot;</span>: <span class="st">&quot;dark&quot;</span>, <span class="st">&quot;notifications&quot;</span>: <span class="va">True</span>}</span></code></pre></div>
-<p>However, some settings might be missing. If we try to access a
-missing key with <code>settings[key]</code>, Python will throw a
-<code>KeyError</code>.</p>
-<p>We need a safe way to access settings while providing sensible
-default values when a setting is missing.</p>
-<pre><code class="language-py" >
-settings = {"theme": "dark", "notifications": True}
-
-user_theme = settings.get("theme", "light")  
-auto_save = settings.get("auto_save", False)  
-
-print(user_theme)  # Output: dark
-print(auto_save)   # Output: False
-</code></pre>
-<p>👣 Step-by-Step Breakdown</p>
-<ul>
-<li>The dictionary contains the "theme" key, so
-<code>get("theme")</code> returns "dark".</li>
-<li>Even though we provided a default value ("light"), it isn’t used
-because "theme" already exists.</li>
-<li>Result: <code>user_theme = "dark"</code></li>
-<li>The dictionary does not contain the key "auto_save".</li>
-<li>Instead of throwing an error, <code>get("auto_save", False)</code>
-returns the default value (False).</li>
-<li>Result: <code>auto_save = False</code></li>
-</ul>
-<p>Without <code>get()</code>, we’d have to write:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;auto_save&quot;</span> <span class="kw">in</span> settings:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    auto_save <span class="op">=</span> settings[<span class="st">&quot;auto_save&quot;</span>]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    auto_save <span class="op">=</span> <span class="va">False</span></span></code></pre></div>
-<p>Using <code>get()</code> prevents errors and makes the code more
-robust.</p>
-<p>📌 <strong>Example 2:</strong> Counting Words in a Text. We have a
-string of words, and we want to count how many times each word
-appears.</p>
-<p>The goal is to store this information in a dictionary where:</p>
-<ul>
-<li>The keys are the words.</li>
-<li>The values are the counts (how many times each word appears).</li>
-</ul>
-<pre><code class="language-py" >
-text = "apple banana apple orange banana apple"
-word_count = {}
-
-for word in text.split():
-    word_count[word] = word_count.get(word, 0) + 1  
-    # Default count is 0
-
-print(word_count)  
-# Output: {'apple': 3, 'banana': 2, 'orange': 1}
-</code></pre>
-<p>👣 Step-by-Step Breakdown</p>
-<ul>
-<li>Initialize an empty dictionary <code>word_count = {}</code>. This
-dictionary will store our words and their respective counts.</li>
-<li>Loop through each word in the text. <code>text.split()</code>
-converts the sentence into a list of words. We loop through this list,
-processing each word one by one.</li>
-<li>Use <code>get()</code> to update the count.</li>
-<li><code>word_count.get(word, 0)</code>: this is the key part!
-<ul>
-<li>If <code>word</code> exists in <code>word_count</code>, it returns
-its current count.</li>
-<li>If <code>word</code> doesn’t exist, it returns 0 (default
-value).</li>
+<li>The <code>time.perf_counter()</code> function gives the current
+value of a high-resolution performance counter, which we store in
+<code>start_time</code>.</li>
+<li>Then we initialize an empty dictionary
+<code>squares_loop</code>.</li>
+<li>We iterate over the range of times (from 0 to 1,499,999).</li>
+<li>For each <code>x</code>, we add an entry to
+<code>squares_loop</code> where the key is <code>x</code> and the value
+is <code>x**2</code>.</li>
+<li>We get the ending time with
+<code>end_time = time.perf_counter()</code>.</li>
+<li>We calculate the total time taken by the loop method as
+<code>loop_time = end_time - start_time</code></li>
 </ul></li>
-<li><code>+ 1</code>: We increase the count by 1.</li>
-<li>Then we update the dictionary with the new count.</li>
-</ul>
-<p>Without <code>get()</code>, we’d have to manually check if the key
-exists before incrementing.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> word <span class="kw">in</span> word_count:</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    word_count[word] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    word_count[word] <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
-<p>The <code>get()</code> method makes this cleaner and more efficient
-by combining both steps into one line.</p>
-<h2 id="error-handling">Error Handling</h2>
-<p>A try-except block is another way to handle missing keys and
-potential errors.</p>
-<p>📌 Example:</p>
-<pre><code class="language-py" >
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-try:
-    capital = capitals["France"]
-except KeyError:
-    print("Data for France not found")
-
-# Or using a more elegant approach with get()
-capital = capitals.get("France", "Unknown")
-print(capital)
-</code></pre>
-<p>👣 Step-by-Step Explanation</p>
+<li>Dictionary Comprehension Method
 <ul>
-<li>try block: Python attempts to execute
-<code>capitals["France"]</code>.</li>
-<li>If the key is missing, a <code>KeyError</code> occurs.</li>
-<li><code>except KeyError</code>: This catches the error and executes
-the <code>print()</code> statement instead of crashing the program.</li>
+<li>We reset the start time value before starting the dictionary
+comprehension measurement.</li>
+<li>Using a dictionary comprehension, we create
+<code>squares_comp</code> in a single line. It efficiently iterates over
+the range of times and computes the squares.</li>
+<li>We get the ending time</li>
+<li>We calculate the total time taken by the dictionary comprehension
+method</li>
+</ul></li>
+<li>We print the time taken by both methods</li>
+<li>We also print a comparative statement showing how many times faster
+the dictionary comprehension is compared to the traditional loop.</li>
 </ul>
-<p>This approach is useful when you need to take specific action in case
-of missing data such as logging.</p>
-<p>Both the <code>get()</code> and try-except methods ensure your
-program doesn’t crash due to missing dictionary keys.</p>
-<h2 id="when-to-use-get-vs.-square-brackets">When to Use get() vs.
-Square Brackets []</h2>
+<p>Dictionary comprehensions take advantage of internal optimizations,
+resulting in faster execution times.</p>
+<p>Note that actual times will vary depending on:</p>
+<ul>
+<li>Your computer's specifications</li>
+<li>Python version</li>
+<li>System load</li>
+<li>Size of the dictionary being created</li>
+</ul>
+<p>However, remember that readability should usually be your first
+priority - choose the method that makes your code clearer and easier to
+maintain!</p>
+<h2 id="comparative-table-for-comprehensions-and-loops">Comparative
+Table for Comprehensions and Loops</h2>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr>
-<th>Method</th>
-<th>Behavior if Key Exists</th>
-<th>Behavior if Key is Missing</th>
-<th>Use Case</th>
+<th>Aspect</th>
+<th>Comprehensions</th>
+<th>Equivalent Loops</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>dictionary[key]</code></td>
-<td>✅ Returns value</td>
-<td>❌ Raises <code>KeyError</code></td>
-<td>When you're sure the key exists</td>
+<td>Simplicity and Readability</td>
+<td>Compact and often more readable for simple transformations</td>
+<td>More verbose, but sometimes clearer for complex logic</td>
 </tr>
 <tr>
-<td><code>dictionary.get(key)</code></td>
-<td>✅ Returns value</td>
-<td>✅ Returns <code>None</code> or a default</td>
-<td>When keys might be missing</td>
+<td>Performance</td>
+<td>Generally faster due to internal optimizations</td>
+<td>Slightly slower due to additional overhead of loop constructs</td>
+</tr>
+<tr>
+<td>Expressiveness</td>
+<td>Highly expressive, allows concise representation of simple filtering
+and mapping operations</td>
+<td>More flexible for scenarios that require complex logic, multiple
+statements, or intermediate steps</td>
+</tr>
+<tr>
+<td>Use Cases</td>
+<td>Ideal for simple transformations, filtering, and mapping where
+readability and conciseness are prioritized</td>
+<td>Preferable when handling complex logic, multiple operations, or when
+readability of the loop structure is crucial</td>
+</tr>
+<tr>
+<td>Side Effects</td>
+<td>Not ideal for operations with side effects, such as printing or
+modifying external variables</td>
+<td>Suitable for operations with side effects, as multiple statements
+can be executed within the loop</td>
+</tr>
+<tr>
+<td>Nested Loops</td>
+<td>Supports nested comprehensions but can become complex and hard to
+read</td>
+<td>Easier to manage and understand nested loops due to explicit
+structure</td>
 </tr>
 </tbody>
 </table>
-<h2 id="when-to-use-try-except-vs.-get">When to Use try-except vs.
-get()</h2>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 15%" />
-<col style="width: 26%" />
-<col style="width: 26%" />
-<col style="width: 31%" />
-</colgroup>
-<thead>
-<tr>
-<th>Method</th>
-<th>Pros</th>
-<th>Cons</th>
-<th>Use Case</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>try-except</code></td>
-<td>Can execute extra logic when a key is missing</td>
-<td>Requires more lines of code</td>
-<td>When you need custom error handling, logging, or additional
-actions</td>
-</tr>
-<tr>
-<td><code>get()</code></td>
-<td>Cleaner, shorter, avoids exceptions</td>
-<td>Can’t execute extra logic on missing keys</td>
-<td>When you want a default value instead of an error</td>
-</tr>
-</tbody>
-</table>
-<h2 id="accessing-all-keys">Accessing All Keys</h2>
-<p>You can get a view of all keys using the <code>keys()</code>
-method:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-all_countries = capitals.keys()
-# Returns dict_keys(['Greece', 'Italy', 'Spain'])
-print(all_countries)
-
-# Convert to a list if needed
-countries_list = list(capitals.keys())  
-# Returns ['Greece', 'Italy', 'Spain']
-print(countries_list)
-</code></pre>
-<p>The <code>keys()</code> method returns a special
-<code>dict_keys</code> object, which acts like a set and provides a
-dynamic view of the dictionary's keys. If the dictionary changes, the
-view updates automatically.</p>
-<p>While <code>dict_keys</code> behaves like a set, you can easily
-convert it to a list using <code>list(capitals.keys())</code> if you
-need indexing or list-specific operations.</p>
-<h2 id="accessing-all-values">Accessing All Values</h2>
-<p>Similarly, you can get all values in the dictionary using the
-<code>values()</code> method:</p>
+<h2
+id="example.-check-if-two-strings-are-anagrams-of-each-other">Example.
+Check if two Strings are Anagrams of each other</h2>
+<p>An anagram is a word or phrase formed by rearranging the letters of
+another word. Write a program that determines whether two words are
+anagrams or not. For example, night and thing.</p>
 <pre><code class="language-py" >
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-all_capitals = capitals.values()  
-# Returns dict_values(['Athens', 'Rome', 'Madrid'])
-
-# Convert to a list if needed
-capitals_list = list(capitals.values())  
-# Returns ['Athens', 'Rome', 'Madrid']
-print(capitals_list)
+word1 = "night" 
+word2 = "thing"
+c = {k: word1.count(k) for k in word1}
+d = {k: word2.count(k) for k in word2}
+print ('Yes' if c == d else 'No')
 </code></pre>
-<p>The <code>values()</code> method returns a <code>dict_values</code>
-object, which provides a dynamic view of all values in the dictionary.
-If the dictionary is updated, this view reflects the changes
-automatically.</p>
-<p>Although <code>dict_values</code> is not a list, you can convert it
-to one using <code>list(capitals.values())</code> if you need to access
-values by index or perform list-specific operations.</p>
-<p>This method is useful when you need to loop through all values, check
-if a certain value exists using in, or process the stored data without
-worrying about keys.</p>
-<h2 id="accessing-key-value-pairs">Accessing Key-Value Pairs</h2>
-<p>To get both keys and values together, use the <code>items()</code>
-method:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-all_pairs = capitals.items()  
-# Returns dict_items([('Greece', 'Athens'), 
-#   ('Italy', 'Rome'), ('Spain', 'Madrid')])
-
-# Useful in for loops
-for country, capital in capitals.items():
-    print(f"The capital of {country} is {capital}")
-</code></pre>
-<p>The <code>items()</code> method returns a <code>dict_items</code>
-object, which provides a dynamic view of key-value pairs as tuples. If
-the dictionary is modified, this view updates automatically.</p>
-<p>This method is especially useful in for loops, allowing you to
-iterate over both keys and values simultaneously without needing to
-access them separately.</p>
-<p>If you need to store or manipulate key-value pairs as a list, you can
-convert <code>dict_items</code> into a list using
-<code>list(capitals.items())</code>, which returns a list of tuples.</p>
-<p>We will talk more about <code>keys()</code>, <code>values()</code>,
-<code>items()</code> methods when we consider iterating over the
-dictionary.</p>
-<h2 id="practical-tips">🗝️ Practical Tips</h2>
+<p>👣 Step-by-Step Breakdown</p>
 <ul>
-<li>Use <code>get()</code> when you're not sure if a key exists</li>
-<li>Use square brackets when you're certain the key exists</li>
-<li>Always check for key existence in critical operations</li>
-<li>Remember that dictionary views <code>keys()</code>,
-<code>values()</code>, <code>items()</code> are dynamic and reflect
-dictionary changes</li>
-</ul>
-<p>📌 Example combining multiple concepts:</p>
-<pre><code class="language-py" >
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-def get_capital(country, capitals_dict):
-    if not isinstance(capitals_dict, dict):
-       raise TypeError("Expected a dictionary")
-        
-    return capitals_dict.get(country, 
-      f"No data available for {country}")
-# Usage
-print(get_capital("Greece", capitals))  # Returns "Athens"
-print(get_capital("France", capitals))  
-# Returns "No data available for France"
-</code></pre>
-<p>👣 Explanation:</p>
+<li>Define the words</li>
+<li>Count letter frequencies in each word
 <ul>
-<li>The <code>capitals</code> dictionary is like a mini database that
-stores countries as keys and their capitals as values.</li>
-<li>The <code>get_capital</code> function is a little tool we created to
-make it easy to look up a capital city for a given country. You give it
-two things:
-<ul>
-<li>The name of the country you’re looking for (like "Greece").</li>
-<li>The dictionary where you're storing your data (like
-<code>capitals</code>).</li>
+<li>We create two dictionaries (<code>c</code> and <code>d</code>) to
+store letter counts.</li>
+<li>The dictionary comprehension counts how many times each letter
+appears in <code>word1</code> and <code>word2</code></li>
 </ul></li>
-<li>The function will either return the capital of the country or tell
-you if there’s no data available for that country.</li>
-<li>Before doing anything, the function checks if the second argument
-<code>capitals_dict</code> is actually a dictionary.</li>
-<li>If it’s not, the function raises an error.</li>
-<li>The <code>get()</code> method is a safe way to look up a value in a
-dictionary. If the country is in the dictionary, it gives you the
-capital. If it’s not, instead of crashing, it returns a default
-message.</li>
+<li>After execution:</li>
 </ul>
-<p>Instead of writing the same logic every time you want to look up a
-capital, you can just reuse this function.</p>
-<h2 id="faqs-on-access-dictionary-items">🧐 FAQs on Access Dictionary
-Items</h2>
-<h3 id="how-do-i-access-a-value-in-a-dictionary-by-key">How do I access
-a value in a dictionary by key?</h3>
-<p>You can access a dictionary value using square brackets
-<code>[]</code> or the <code>get()</code> method.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> {<span class="st">&#39;n&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;i&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;g&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;h&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;t&#39;</span>: <span class="dv">1</span>}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">&#39;t&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;h&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;i&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;n&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;g&#39;</span>: <span class="dv">1</span>}</span></code></pre></div>
+<ul>
+<li>Both dictionaries store the same letter counts, meaning the words
+have the same letters in the same frequency.</li>
+<li>Compare the dictionaries. If both dictionaries are equal, it means
+the words are anagrams, so we print "Yes". Otherwise, we print
+"No".</li>
+</ul>
+<p>A more efficient way to count letter frequencies is by using
+<code>Counter</code> from the collections module:</p>
+<pre><code class="language-py" >
+from collections import Counter
+
+word1 = "night"
+word2 = "thing"
+
+print('Yes' if Counter(word1) == Counter(word2) else 'No')
+</code></pre>
+<p><code>Counter(word1)</code> automatically creates a dictionary of
+letter frequencies.</p>
+<p>The comparison remains the same but is now more efficient and
+readable.</p>
+<h2 id="faqs-on-dictionary-comprehension">FAQs on Dictionary
+Comprehension</h2>
+<h3 id="what-is-a-dictionary-comprehension-in-python">What is a
+dictionary comprehension in Python?</h3>
+<p>A dictionary comprehension is a concise way to create dictionaries in
+Python by specifying key-value pairs inside curly braces {} using a
+single line of code. It follows the pattern
+<code>{key: value for item in iterable}</code> and is often used as a
+shorthand for creating dictionaries more efficiently.</p>
 <h3
-id="what-is-the-difference-between-using-dictkey-and-dict.getkey">What
-is the difference between using dict[key] and dict.get(key)?</h3>
-<p><code>dict[key]</code> will raise a <code>KeyError</code> when the
-key is missing, while <code>dict.get(key)</code> provides a safer
-alternative by returning <code>None</code> (or a custom default value)
-if the key does not exist.</p>
+id="how-is-dictionary-comprehension-different-from-list-comprehension">How
+is dictionary comprehension different from list comprehension?</h3>
+<p>While list comprehension uses square brackets [] and creates a list,
+dictionary comprehension uses curly braces {} and requires both a key
+and value expression separated by a colon. Dictionary comprehension
+creates key-value pairs instead of single values.</p>
+<h3 id="what-are-some-use-cases-for-dictionary-comprehensions">What are
+some use cases for dictionary comprehensions?</h3>
+<ul>
+<li>Filtering key-value pairs based on conditions</li>
+<li>Inverting a dictionary so that values become keys and vice
+versa</li>
+<li>Creating dictionaries from other iterables (e.g., lists or
+tuples)</li>
+<li>Transforming one dictionary into another (e.g., modifying keys or
+values)</li>
+</ul>
 <h3
-id="how-do-i-check-if-a-key-exists-in-a-dictionary-before-accessing-its-value">How
-do I check if a key exists in a dictionary before accessing its
-value?</h3>
-<p>You can use the <strong>in</strong> keyword. For example,
-<code>'my_key' in my_dict</code> returns True if <code>my_key</code> is
-present as a key in the dictionary, making it safe to proceed with
-access.</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;my_key&quot;</span> <span class="kw">in</span> my_dict:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Key exists!&quot;</span>)</span></code></pre></div>
-<h3 id="can-i-access-multiple-dictionary-items-simultaneously">Can I
-access multiple dictionary items simultaneously?</h3>
-<p>You cannot directly access multiple keys with a single bracket-based
-expression. However, you could iterate over a list of keys and use
-either bracket notation or <code>dict.get()</code> for each, or use
-dictionary comprehension to build a subset of key-value pairs.</p>
-<h3 id="is-dictionary-key-lookup-fast-in-python">Is dictionary key
-lookup fast in Python?</h3>
-<p>Yes, dictionary key lookup is very fast because dictionaries in
-Python use a hash table under the hood, making key access approximately
-O(1) in average cases. In the worst case (with a large number of hash
-collisions), the complexity can degrade to O(n).</p>
+id="how-do-i-swap-keys-and-values-in-a-dictionary-using-comprehension">How
+do I swap keys and values in a dictionary using comprehension?</h3>
+<p>You can invert a dictionary like this:</p>
+<pre><code class="language-py" >
+data = {"a": 1, "b": 2, "c": 3}  
+inverted = {value: key for key, value in data.items()}  
+print(inverted)  
+# Output: {1: 'a', 2: 'b', 3: 'c'}  
+</code></pre>
 </body>
 </html>

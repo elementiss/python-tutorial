@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>3</title>
+  <title>5</title>
   <style>
     html {
       color: #1a1a1a;
@@ -896,286 +896,263 @@
 </head>
 <body>
 <header id="title-block-header">
-<h1 class="title">3</h1>
+<h1 class="title">5</h1>
 </header>
-<h1 id="python---access-dictionary-items">Python - Access Dictionary
-Items</h1>
-<p>Accessing dictionary items is one of the most common operations
-you'll perform with dictionaries. Python offers multiple ways to
-retrieve dictionary items efficiently, whether you need a single value,
-all keys, all values, or even keys and values together.</p>
-<p>There are several ways to access dictionary contents.</p>
-<ul>
-<li>Using square brackets []</li>
-<li>The <code>get()</code> method</li>
-<li>Iterating through the dictionary using loops</li>
-<li>Specific methods like <code>keys()</code>, <code>values()</code>,
-and <code>items()</code></li>
-</ul>
-<h2 id="using-square-brackets">Using Square Brackets []</h2>
-<p>The most straightforward way to retrieve values associated with
-specific keys is using square brackets with the key.</p>
-<p>✳️ Syntax:</p>
+<h1 id="dictionary-comparison-in-python">Dictionary Comparison in
+Python</h1>
+<p>When you start working with Python dictionaries, one common task
+you'll encounter is comparing two dictionaries to understand their
+differences.</p>
+<p>While comparing simple data types like integers or strings is
+straightforward, dictionary comparison presents unique challenges due to
+their complex nature and nested structures. This article explores
+various methods and best practices for comparing dictionaries in Python,
+from basic equality checks to deep comparison.</p>
+<h2 id="practical-example">Practical Example</h2>
+<p>Picture yourself building a student management system where you need
+to track changes in student records. Each student's information is
+stored in a dictionary, and you want to know exactly what changed
+between two versions of their data.</p>
+<p>Our comparison function works like a detective investigating the
+differences between two dictionaries. It examines both dictionaries
+thoroughly and creates a detailed report of what it finds. Think of it
+as comparing two versions of the same document - you want to know what
+was added, what was removed, and what was modified.</p>
+<p>The function starts by looking at the most basic question: are these
+dictionaries exactly the same? It uses Python's built-in equality
+operator (==) to check this. However, it doesn't stop there. Just like a
+thorough detective, it digs deeper to find specific differences that
+might be important to know about.</p>
+<pre><code class="language-py" height="330px">
+from typing import Dict, Any
+from collections import Counter
+
+def compare_dictionaries(dict1: Dict[Any, Any], dict2: Dict[Any, Any]) -> Dict[str, Any]:
+    """
+    Compares two dictionaries and returns detailed analysis of their differences.
+    
+    Args:
+        dict1: First dictionary to compare
+        dict2: Second dictionary to compare
+        
+    Returns:
+        Dictionary containing comparison results
+    """
+    results = {
+        "are_identical": dict1 == dict2,
+        "same_keys": set(dict1.keys()) == set(dict2.keys()),
+        "only_in_dict1": set(dict1.keys()) - set(dict2.keys()),
+        "only_in_dict2": set(dict2.keys()) - set(dict1.keys()),
+        "common_keys": set(dict1.keys()) & set(dict2.keys()),
+        "value_differences": {},
+        "common_key_values": {}
+    }
+    
+    # Compare values for common keys
+    for key in results["common_keys"]:
+        if dict1[key] != dict2[key]:
+            results["value_differences"][key] = {
+                "dict1_value": dict1[key],
+                "dict2_value": dict2[key]
+            }
+        else:
+            results["common_key_values"][key] = dict1[key]
+    
+    return results
+
+# Example usage with different scenarios
+# Scenario 1: Similar dictionaries with some differences
+student1 = {
+    "name": "Alice",
+    "age": 20,
+    "grades": {"math": 95, "physics": 88},
+    "active": True
+}
+
+student2 = {
+    "name": "Alice",
+    "age": 21,  # Different age
+    "grades": {"math": 95, "physics": 88},
+    "status": "enrolled"  # Different key
+}
+
+# Scenario 2: Nested dictionaries
+product1 = {
+    "id": "P123",
+    "details": {
+        "color": "blue",
+        "size": "M",
+        "stock": 50
+    }
+}
+
+product2 = {
+    "id": "P123",
+    "details": {
+        "color": "red",
+        "size": "M",
+        "stock": 50
+    }
+}
+
+# Compare and print results
+student_comparison = compare_dictionaries(student1, student2)
+print("\nStudent Dictionaries Comparison:")
+print(f"Are identical: {student_comparison['are_identical']}")
+print(f"Keys only in student1: {student_comparison['only_in_dict1']}")
+print(f"Keys only in student2: {student_comparison['only_in_dict2']}")
+print("Value differences:", student_comparison['value_differences'])
+
+# Compare nested dictionaries
+product_comparison = compare_dictionaries(product1, product2)
+print("\nProduct Dictionaries Comparison:")
+print(f"Are identical: {product_comparison['are_identical']}")
+print("Value differences:", product_comparison['value_differences'])
+</code></pre>
+<p>Next, it looks at the keys in both dictionaries. Using Python's
+powerful set operations, it identifies which keys are unique to each
+dictionary and which keys they share in common. This is similar to
+comparing two lists of items and finding out what appears in both lists
+and what's unique to each list. For example, if one student record has
+an 'active' status and another has 'enrolled' status, our function will
+tell us about these different fields.</p>
+<p>For the keys that exist in both dictionaries, the function goes one
+step further. It compares the values associated with these common keys.
+If it finds any differences, it records both values so you can see
+exactly what changed. This is particularly useful when tracking changes
+in grades, contact information, or any other student data that might be
+updated over time.</p>
+<p>The beauty of this code lies in its versatility. While our example
+uses student records, the same function could be used to compare product
+inventories, game states, configuration files, or any other data stored
+in dictionary format. The function doesn't care what kind of data it's
+comparing – it simply reports the differences it finds.</p>
+<p>Remember, while this code might look complex at first glance, it's
+really just doing what we often do mentally when comparing two things:
+checking what's the same, what's different, and keeping track of those
+differences in a organized way.</p>
+<h2 id="using-operator">Using == operator</h2>
+<p>The simplest way to compare dictionaries is using the equality
+operators:</p>
+<pre><code class="language-py">
+dict1 = {'a': 1, 'b': 2}
+dict2 = {'a': 1, 'b': 2}
+print(dict1 == dict2)  # True
+</code></pre>
+<p>This operator checks if both dictionaries have the same keys and
+values.</p>
+<h2 id="using-loop">Using Loop</h2>
+<p>We can use a simple loop to check each key and value. Here's how:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dictionary[key]</span></code></pre></div>
-<p>📌 Example:</p>
-<pre><code class="language-py" >
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-greek_capital = capitals["Greece"]  
-print(greek_capital)  # Returns "Athens"
-</code></pre>
-<p>Here, <code>capitals["Greece"]</code> fetches the value "Athens",
-because dictionaries store data in key-value pairs.</p>
-<p>💡 For lists and tuples, the index of the element is specified in
-brackets, and for dictionaries — the key.</p>
-<p>If the key doesn't exist, this method raises a
-<code>KeyError</code>:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-french_capital = capitals["France"] # Raises KeyError
-</code></pre>
-<p>To avoid this, use <code>get()</code>. Next, we will take a closer
-look at this method.</p>
-<h2 id="checking-if-a-key-exists">Checking if a Key Exists</h2>
-<p>Before accessing a key, you might want to check if it exists using
-the <strong>in</strong> operator.</p>
-<p>✳️ Syntax:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compare_dicts(dict1, dict2):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># First, check if they have the same number of items</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(dict1) <span class="op">!=</span> <span class="bu">len</span>(dict2):</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Now check each key and value</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key <span class="kw">in</span> dict1:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check if the key exists in both dictionaries</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> key <span class="kw">not</span> <span class="kw">in</span> dict2:</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check if the values are the same</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> dict1[key] <span class="op">!=</span> dict2[key]:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">True</span></span></code></pre></div>
+<p>Here are some fun examples to understand how it works:</p>
 <div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> key <span class="kw">in</span> dictionary:</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> key <span class="kw">not</span> <span class="kw">in</span> dictionary:</span></code></pre></div>
-<p>It returns <code>True</code> if the key is found and
-<code>False</code> if it’s not.</p>
-<p>📌 Example 1:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_pets <span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;dog&quot;</span>: <span class="st">&quot;Rex&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;cat&quot;</span>: <span class="st">&quot;Whiskers&quot;</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;fish&quot;</span>: <span class="st">&quot;Nemo&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>friends_pets <span class="op">=</span> {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;dog&quot;</span>: <span class="st">&quot;Rex&quot;</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;cat&quot;</span>: <span class="st">&quot;Whiskers&quot;</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;fish&quot;</span>: <span class="st">&quot;Nemo&quot;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>different_pets <span class="op">=</span> {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;dog&quot;</span>: <span class="st">&quot;Max&quot;</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;cat&quot;</span>: <span class="st">&quot;Whiskers&quot;</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;fish&quot;</span>: <span class="st">&quot;Goldie&quot;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compare_dicts(my_pets, friends_pets))    <span class="co"># True</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(compare_dicts(my_pets, different_pets))  <span class="co"># False</span></span></code></pre></div>
+<p>Explanation:</p>
+<ul>
+<li><code>my_pets == friends_pets</code> evaluates to True because both
+have identical key-value pairs.</li>
+<li><code>my_pets == different_pets</code> evaluates to False because
+the values for key 'dog' differ.</li>
+</ul>
+<p>Although Python provides built-in comparison operator, implementing
+dictionary comparison with loops gives you granular control over the
+process.</p>
+<h2 id="using-the-deepdiff-library">Using the DeepDiff Library</h2>
+<p>DeepDiff is specifically designed to handle deep comparisons of
+complex data structures, including lists and sets.</p>
+<p>While the regular dictionary comparison we learned earlier is great
+for simple cases, DeepDiff is your go-to tool when things get
+complex.</p>
+<p>Let's see it in action with a simple example:</p>
 <pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-# Check if the key exists
-if "Greece" in capitals:
-    print("We know the capital of Greece!")
+import micropip
+await micropip.install('deepdiff')
 
-# Check if the key doesn't exist
-if "France" not in capitals:
-    print("We don't have data about France")
-</code></pre>
-<p>👣 Step-by-Step Explanation:</p>
-<ul>
-<li>Here, we check if the key "Greece" exists in the capitals
-dictionary.</li>
-<li>Since "Greece" is a key in the dictionary, the condition is True, so
-the program prints: "We know the capital of Greece!"</li>
-<li>Since "France" isn’t in capitals, the condition is True, and the
-program prints: "We don't have data about France"</li>
-</ul>
-<p>📌 Example 2:</p>
-<pre><code class="language-py">
-file_types = {
-    ".txt": "Text File",
-    ".pdf": "PDF Document",
-    ".jpg": "JPEG Image",
-}
+from deepdiff import DeepDiff
 
-print(".pdf" in file_types)       # Output: True
-print(".mp3" in file_types)       # Output: False
-print(".mp3" not in file_types)   # Output: True
-</code></pre>
-<p>👣 Here's what's happening:</p>
-<ul>
-<li>First, a dictionary <code>file_types</code> is created that maps
-file extensions to their descriptions</li>
-<li><code>".pdf" in file_types</code> returns True because ".pdf" exists
-as a key in the dictionary</li>
-<li><code>".mp3" in file_types</code> returns False because ".mp3" is
-not a key in the dictionary</li>
-<li><code>".mp3" not in file_types</code> returns True because ".mp3"
-indeed is not present in the dictionary</li>
-</ul>
-<p>In a similar way, we can check whether a certain value exists in the
-dictionary:</p>
-<p>📌 Example 3:</p>
-<pre><code class="language-py">
-file_types = {
-    ".txt": "Text File",
-    ".pdf": "PDF Document",
-    ".jpg": "JPEG Image",
+product1 = {
+    "id": "P123",
+    "details": {
+        "color": "blue",
+        "size": "M",
+        "stock": 50
+    }
 }
-
-print("Text File" in file_types.values())   # Output: True
+product2 = {
+    "id": "P123",
+    "details": {
+        "color": "red",
+        "size": "M",
+        "stock": 50
+    }
+}
+diff = DeepDiff(product1, product2)
+print(diff)
 </code></pre>
-<p>👣 Explanation:</p>
+<p>Here are some cool tricks it can do:</p>
 <ul>
-<li><code>file_types.values()</code> returns a view of all the values in
-the <code>file_types</code> dictionary, which in this case is ["Text
-File", "PDF Document", "JPEG Image"].</li>
-<li>The <code>in</code> operator checks if "Text File" is in the list of
-values returned by <code>file_types.values()</code>.</li>
+<li>Values that changed: "Hey, this price went from $10 to $15!"</li>
+<li>Items that were added or removed: "This product got a new 'discount'
+field!"</li>
+<li>Dictionary keys that changed: "The 'name' field was renamed to
+'title'!"</li>
+<li>Type changes: "This was a number, now it's text!"</li>
 </ul>
-<h2 id="using-the-get-method">Using the get() Method</h2>
-<p>The safer and more flexible way to access dictionary values is using
-the <code>get()</code> method.</p>
-<ul>
-<li>If the key exists, it returns the corresponding value.</li>
-<li>If the key doesn’t exist, it returns <code>None</code> instead of an
-error, or a default value if provided.</li>
-</ul>
-<p>✳️ Syntax:</p>
+<p>You can also customize how DeepDiff works. Here are some handy
+options:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dictionary.get(key, default_value)</span></code></pre></div>
-<p>📌 Example:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-greek_capital = capitals.get("Greece")
-print(greek_capital)
-# With a default value if the key doesn't exist
-french_capital = capitals.get("France", "Not found")  
-print(french_capital)         # Returns "Not found"
-french_capital = capitals.get("France")  
-print(french_capital is None) # Returns True
-</code></pre>
-<p>The <code>get()</code> method has two advantages:</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ignore specific keys</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>diff <span class="op">=</span> DeepDiff(product1, product2, exclude_paths<span class="op">=</span>[<span class="st">&quot;root[&#39;details&#39;][&#39;color&#39;]&quot;</span>])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the results in tree view</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>diff <span class="op">=</span> DeepDiff(product1, product2, view<span class="op">=</span><span class="st">&#39;tree&#39;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Ignore order in lists</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>diff <span class="op">=</span> DeepDiff(product1, product2, ignore_order<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<p>DeepDiff is your best friend when you need to:</p>
 <ul>
-<li>It never raises a <code>KeyError</code>: accessing a missing key
-does not crash the program</li>
-<li>You can specify a default value to return if the key isn't
-found</li>
+<li>Tracking changes in configuration files</li>
+<li>Watch how your data changes over time</li>
+<li>Compare what your API sent vs what you expected</li>
+<li>Quality assurance testing</li>
+<li>Data validation processes</li>
 </ul>
-<p>Tip: Use default values when dealing with optional dictionary
-keys!</p>
-<h3 id="get-in-real-world-scenarios">get() in Real-World Scenarios</h3>
-<p>📌 <strong>Example 1:</strong> Checking User Preferences. Imagine you
-are building an application where users can customize their settings.
-These settings are stored in a dictionary, but not all users configure
-every option.</p>
-<p>For example, the settings dictionary might look like this:</p>
-<div class="sourceCode" id="cb4"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>settings <span class="op">=</span> {<span class="st">&quot;theme&quot;</span>: <span class="st">&quot;dark&quot;</span>, <span class="st">&quot;notifications&quot;</span>: <span class="va">True</span>}</span></code></pre></div>
-<p>However, some settings might be missing. If we try to access a
-missing key with <code>settings[key]</code>, Python will throw a
-<code>KeyError</code>.</p>
-<p>We need a safe way to access settings while providing sensible
-default values when a setting is missing.</p>
-<pre><code class="language-py" >
-settings = {"theme": "dark", "notifications": True}
-
-user_theme = settings.get("theme", "light")  
-auto_save = settings.get("auto_save", False)  
-
-print(user_theme)  # Output: dark
-print(auto_save)   # Output: False
-</code></pre>
-<p>👣 Step-by-Step Breakdown</p>
-<ul>
-<li>The dictionary contains the "theme" key, so
-<code>get("theme")</code> returns "dark".</li>
-<li>Even though we provided a default value ("light"), it isn’t used
-because "theme" already exists.</li>
-<li>Result: <code>user_theme = "dark"</code></li>
-<li>The dictionary does not contain the key "auto_save".</li>
-<li>Instead of throwing an error, <code>get("auto_save", False)</code>
-returns the default value (False).</li>
-<li>Result: <code>auto_save = False</code></li>
-</ul>
-<p>Without <code>get()</code>, we’d have to write:</p>
-<div class="sourceCode" id="cb5"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;auto_save&quot;</span> <span class="kw">in</span> settings:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    auto_save <span class="op">=</span> settings[<span class="st">&quot;auto_save&quot;</span>]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    auto_save <span class="op">=</span> <span class="va">False</span></span></code></pre></div>
-<p>Using <code>get()</code> prevents errors and makes the code more
-robust.</p>
-<p>📌 <strong>Example 2:</strong> Counting Words in a Text. We have a
-string of words, and we want to count how many times each word
-appears.</p>
-<p>The goal is to store this information in a dictionary where:</p>
-<ul>
-<li>The keys are the words.</li>
-<li>The values are the counts (how many times each word appears).</li>
-</ul>
-<pre><code class="language-py" >
-text = "apple banana apple orange banana apple"
-word_count = {}
-
-for word in text.split():
-    word_count[word] = word_count.get(word, 0) + 1  
-    # Default count is 0
-
-print(word_count)  
-# Output: {'apple': 3, 'banana': 2, 'orange': 1}
-</code></pre>
-<p>👣 Step-by-Step Breakdown</p>
-<ul>
-<li>Initialize an empty dictionary <code>word_count = {}</code>. This
-dictionary will store our words and their respective counts.</li>
-<li>Loop through each word in the text. <code>text.split()</code>
-converts the sentence into a list of words. We loop through this list,
-processing each word one by one.</li>
-<li>Use <code>get()</code> to update the count.</li>
-<li><code>word_count.get(word, 0)</code>: this is the key part!
-<ul>
-<li>If <code>word</code> exists in <code>word_count</code>, it returns
-its current count.</li>
-<li>If <code>word</code> doesn’t exist, it returns 0 (default
-value).</li>
-</ul></li>
-<li><code>+ 1</code>: We increase the count by 1.</li>
-<li>Then we update the dictionary with the new count.</li>
-</ul>
-<p>Without <code>get()</code>, we’d have to manually check if the key
-exists before incrementing.</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> word <span class="kw">in</span> word_count:</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    word_count[word] <span class="op">+=</span> <span class="dv">1</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    word_count[word] <span class="op">=</span> <span class="dv">1</span></span></code></pre></div>
-<p>The <code>get()</code> method makes this cleaner and more efficient
-by combining both steps into one line.</p>
-<h2 id="error-handling">Error Handling</h2>
-<p>A try-except block is another way to handle missing keys and
-potential errors.</p>
-<p>📌 Example:</p>
-<pre><code class="language-py" >
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-try:
-    capital = capitals["France"]
-except KeyError:
-    print("Data for France not found")
-
-# Or using a more elegant approach with get()
-capital = capitals.get("France", "Unknown")
-print(capital)
-</code></pre>
-<p>👣 Step-by-Step Explanation</p>
-<ul>
-<li>try block: Python attempts to execute
-<code>capitals["France"]</code>.</li>
-<li>If the key is missing, a <code>KeyError</code> occurs.</li>
-<li><code>except KeyError</code>: This catches the error and executes
-the <code>print()</code> statement instead of crashing the program.</li>
-</ul>
-<p>This approach is useful when you need to take specific action in case
-of missing data such as logging.</p>
-<p>Both the <code>get()</code> and try-except methods ensure your
-program doesn’t crash due to missing dictionary keys.</p>
-<h2 id="when-to-use-get-vs.-square-brackets">When to Use get() vs.
-Square Brackets []</h2>
+<p>Want to learn all the amazing things DeepDiff can do? Check out the
+<a href="https://zepworks.com/deepdiff/current/index.html">DeepDiff
+documentation</a></p>
+<h2 id="comparison-methods-for-python-dictionaries">Comparison Methods
+for Python Dictionaries</h2>
 <table>
 <colgroup>
 <col style="width: 25%" />
@@ -1185,227 +1162,154 @@ Square Brackets []</h2>
 </colgroup>
 <thead>
 <tr>
-<th>Method</th>
-<th>Behavior if Key Exists</th>
-<th>Behavior if Key is Missing</th>
-<th>Use Case</th>
+<th>Feature</th>
+<th>== Operator</th>
+<th>Using Loop</th>
+<th>DeepDiff</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>dictionary[key]</code></td>
-<td>✅ Returns value</td>
-<td>❌ Raises <code>KeyError</code></td>
-<td>When you're sure the key exists</td>
+<td>Syntax</td>
+<td><code>dict1 == dict2</code></td>
+<td>requires writing loop logic</td>
+<td><code>DeepDiff(dict1, dict2)</code></td>
 </tr>
 <tr>
-<td><code>dictionary.get(key)</code></td>
-<td>✅ Returns value</td>
-<td>✅ Returns <code>None</code> or a default</td>
-<td>When keys might be missing</td>
+<td>Speed</td>
+<td>Fast</td>
+<td>Moderate</td>
+<td>Slower (especially for large dictionaries)</td>
+</tr>
+<tr>
+<td>Nested Dictionary Support</td>
+<td>Basic</td>
+<td>Can be customized</td>
+<td>Excellent built-in support</td>
+</tr>
+<tr>
+<td>Customization</td>
+<td>None</td>
+<td>High (can add custom logic, partial checks)</td>
+<td>Moderate (has configuration options: ignore keys, types, precision,
+etc.)</td>
+</tr>
+<tr>
+<td>Learning Curve</td>
+<td>Very Easy</td>
+<td>Easy</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td>External Dependencies</td>
+<td>Built-in</td>
+<td>Built-in</td>
+<td>Requires <code>deepdiff</code> package</td>
+</tr>
+<tr>
+<td>Detailed Differences</td>
+<td>Only True/False result</td>
+<td>Can be customized to show differences</td>
+<td>Detailed report of all differences</td>
+</tr>
+<tr>
+<td>Handling of Floating-Point Precision</td>
+<td>No</td>
+<td>Yes (custom logic)</td>
+<td>Yes (configurable precision tolerance)</td>
+</tr>
+<tr>
+<td>Output Format</td>
+<td>Boolean</td>
+<td>Customizable</td>
+<td>Structured difference report</td>
+</tr>
+<tr>
+<td>Best For</td>
+<td>Quick equality checks</td>
+<td>Learning and custom logic</td>
+<td>Production and complex data</td>
 </tr>
 </tbody>
 </table>
-<h2 id="when-to-use-try-except-vs.-get">When to Use try-except vs.
-get()</h2>
-<table style="width:100%;">
-<colgroup>
-<col style="width: 15%" />
-<col style="width: 26%" />
-<col style="width: 26%" />
-<col style="width: 31%" />
-</colgroup>
-<thead>
-<tr>
-<th>Method</th>
-<th>Pros</th>
-<th>Cons</th>
-<th>Use Case</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>try-except</code></td>
-<td>Can execute extra logic when a key is missing</td>
-<td>Requires more lines of code</td>
-<td>When you need custom error handling, logging, or additional
-actions</td>
-</tr>
-<tr>
-<td><code>get()</code></td>
-<td>Cleaner, shorter, avoids exceptions</td>
-<td>Can’t execute extra logic on missing keys</td>
-<td>When you want a default value instead of an error</td>
-</tr>
-</tbody>
-</table>
-<h2 id="accessing-all-keys">Accessing All Keys</h2>
-<p>You can get a view of all keys using the <code>keys()</code>
-method:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-all_countries = capitals.keys()
-# Returns dict_keys(['Greece', 'Italy', 'Spain'])
-print(all_countries)
-
-# Convert to a list if needed
-countries_list = list(capitals.keys())  
-# Returns ['Greece', 'Italy', 'Spain']
-print(countries_list)
-</code></pre>
-<p>The <code>keys()</code> method returns a special
-<code>dict_keys</code> object, which acts like a set and provides a
-dynamic view of the dictionary's keys. If the dictionary changes, the
-view updates automatically.</p>
-<p>While <code>dict_keys</code> behaves like a set, you can easily
-convert it to a list using <code>list(capitals.keys())</code> if you
-need indexing or list-specific operations.</p>
-<h2 id="accessing-all-values">Accessing All Values</h2>
-<p>Similarly, you can get all values in the dictionary using the
-<code>values()</code> method:</p>
-<pre><code class="language-py" >
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-all_capitals = capitals.values()  
-# Returns dict_values(['Athens', 'Rome', 'Madrid'])
-
-# Convert to a list if needed
-capitals_list = list(capitals.values())  
-# Returns ['Athens', 'Rome', 'Madrid']
-print(capitals_list)
-</code></pre>
-<p>The <code>values()</code> method returns a <code>dict_values</code>
-object, which provides a dynamic view of all values in the dictionary.
-If the dictionary is updated, this view reflects the changes
-automatically.</p>
-<p>Although <code>dict_values</code> is not a list, you can convert it
-to one using <code>list(capitals.values())</code> if you need to access
-values by index or perform list-specific operations.</p>
-<p>This method is useful when you need to loop through all values, check
-if a certain value exists using in, or process the stored data without
-worrying about keys.</p>
-<h2 id="accessing-key-value-pairs">Accessing Key-Value Pairs</h2>
-<p>To get both keys and values together, use the <code>items()</code>
-method:</p>
-<pre><code class="language-py">
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-all_pairs = capitals.items()  
-# Returns dict_items([('Greece', 'Athens'), 
-#   ('Italy', 'Rome'), ('Spain', 'Madrid')])
-
-# Useful in for loops
-for country, capital in capitals.items():
-    print(f"The capital of {country} is {capital}")
-</code></pre>
-<p>The <code>items()</code> method returns a <code>dict_items</code>
-object, which provides a dynamic view of key-value pairs as tuples. If
-the dictionary is modified, this view updates automatically.</p>
-<p>This method is especially useful in for loops, allowing you to
-iterate over both keys and values simultaneously without needing to
-access them separately.</p>
-<p>If you need to store or manipulate key-value pairs as a list, you can
-convert <code>dict_items</code> into a list using
-<code>list(capitals.items())</code>, which returns a list of tuples.</p>
-<p>We will talk more about <code>keys()</code>, <code>values()</code>,
-<code>items()</code> methods when we consider iterating over the
-dictionary.</p>
-<h2 id="practical-tips">🗝️ Practical Tips</h2>
-<ul>
-<li>Use <code>get()</code> when you're not sure if a key exists</li>
-<li>Use square brackets when you're certain the key exists</li>
-<li>Always check for key existence in critical operations</li>
-<li>Remember that dictionary views <code>keys()</code>,
-<code>values()</code>, <code>items()</code> are dynamic and reflect
-dictionary changes</li>
-</ul>
-<p>📌 Example combining multiple concepts:</p>
-<pre><code class="language-py" >
-capitals = {
-    "Greece": "Athens",
-    "Italy": "Rome",
-    "Spain": "Madrid"
-}
-def get_capital(country, capitals_dict):
-    if not isinstance(capitals_dict, dict):
-       raise TypeError("Expected a dictionary")
-        
-    return capitals_dict.get(country, 
-      f"No data available for {country}")
-# Usage
-print(get_capital("Greece", capitals))  # Returns "Athens"
-print(get_capital("France", capitals))  
-# Returns "No data available for France"
-</code></pre>
-<p>👣 Explanation:</p>
-<ul>
-<li>The <code>capitals</code> dictionary is like a mini database that
-stores countries as keys and their capitals as values.</li>
-<li>The <code>get_capital</code> function is a little tool we created to
-make it easy to look up a capital city for a given country. You give it
-two things:
-<ul>
-<li>The name of the country you’re looking for (like "Greece").</li>
-<li>The dictionary where you're storing your data (like
-<code>capitals</code>).</li>
-</ul></li>
-<li>The function will either return the capital of the country or tell
-you if there’s no data available for that country.</li>
-<li>Before doing anything, the function checks if the second argument
-<code>capitals_dict</code> is actually a dictionary.</li>
-<li>If it’s not, the function raises an error.</li>
-<li>The <code>get()</code> method is a safe way to look up a value in a
-dictionary. If the country is in the dictionary, it gives you the
-capital. If it’s not, instead of crashing, it returns a default
-message.</li>
-</ul>
-<p>Instead of writing the same logic every time you want to look up a
-capital, you can just reuse this function.</p>
-<h2 id="faqs-on-access-dictionary-items">🧐 FAQs on Access Dictionary
-Items</h2>
-<h3 id="how-do-i-access-a-value-in-a-dictionary-by-key">How do I access
-a value in a dictionary by key?</h3>
-<p>You can access a dictionary value using square brackets
-<code>[]</code> or the <code>get()</code> method.</p>
+<h2 id="faqs-on-dictionary-comparison-in-python">FAQs on Dictionary
+Comparison in Python</h2>
+<h3 id="how-do-i-compare-two-dictionaries-for-equality">How do I compare
+two dictionaries for equality?</h3>
+<p>You can use the == operator to check if two dictionaries have the
+same keys and values:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dict1 <span class="op">==</span> dict2</span></code></pre></div>
+<h3 id="how-does-python-check-if-two-dictionaries-are-equal">How does
+Python check if two dictionaries are equal?</h3>
+<p>Python compares the key-value pairs of each dictionary. Two
+dictionaries are considered equal if they have the same keys, and each
+key is associated with the same value in both. The order of key
+insertion does not affect this comparison.</p>
+<h3 id="how-can-i-check-if-one-dictionary-is-a-subset-of-another">How
+can I check if one dictionary is a subset of another?</h3>
+<p>Use dictionary comprehension with the &lt;= operator:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>is_subset <span class="op">=</span> dict1.items() <span class="op">&lt;=</span> dict2.items() </span></code></pre></div>
+<h3 id="how-can-i-compare-only-the-keys-of-two-dictionaries">How can I
+compare only the keys of two dictionaries?</h3>
+<p>You can compare the sets of keys directly, such as</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>(dict1.keys()) <span class="op">==</span> <span class="bu">set</span>(dict2.keys())</span></code></pre></div>
+<p>This approach checks if both dictionaries contain exactly the same
+keys.</p>
 <h3
-id="what-is-the-difference-between-using-dictkey-and-dict.getkey">What
-is the difference between using dict[key] and dict.get(key)?</h3>
-<p><code>dict[key]</code> will raise a <code>KeyError</code> when the
-key is missing, while <code>dict.get(key)</code> provides a safer
-alternative by returning <code>None</code> (or a custom default value)
-if the key does not exist.</p>
-<h3
-id="how-do-i-check-if-a-key-exists-in-a-dictionary-before-accessing-its-value">How
-do I check if a key exists in a dictionary before accessing its
-value?</h3>
-<p>You can use the <strong>in</strong> keyword. For example,
-<code>'my_key' in my_dict</code> returns True if <code>my_key</code> is
-present as a key in the dictionary, making it safe to proceed with
-access.</p>
+id="what-is-the-difference-between-and-is-when-comparing-dictionaries">What
+is the difference between == and is when comparing dictionaries?</h3>
+<p>The == operator checks if two dictionaries have the same content,
+while <strong>is</strong> checks if they are the same object in
+memory:</p>
 <div class="sourceCode" id="cb7"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;my_key&quot;</span> <span class="kw">in</span> my_dict:</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Key exists!&quot;</span>)</span></code></pre></div>
-<h3 id="can-i-access-multiple-dictionary-items-simultaneously">Can I
-access multiple dictionary items simultaneously?</h3>
-<p>You cannot directly access multiple keys with a single bracket-based
-expression. However, you could iterate over a list of keys and use
-either bracket notation or <code>dict.get()</code> for each, or use
-dictionary comprehension to build a subset of key-value pairs.</p>
-<h3 id="is-dictionary-key-lookup-fast-in-python">Is dictionary key
-lookup fast in Python?</h3>
-<p>Yes, dictionary key lookup is very fast because dictionaries in
-Python use a hash table under the hood, making key access approximately
-O(1) in average cases. In the worst case (with a large number of hash
-collisions), the complexity can degrade to O(n).</p>
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dict1 <span class="op">==</span> dict2  <span class="co"># Compares values</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dict1 <span class="kw">is</span> dict2  <span class="co"># Compares memory addresses</span></span></code></pre></div>
+<h3 id="how-do-i-find-the-differences-between-two-dictionaries">How do I
+find the differences between two dictionaries?</h3>
+<p>You can use set operations on <code>items()</code>:</p>
+<pre><code class="language-py">
+product1 = {
+    "id": "P123",
+    "color": "blue",
+    "size": "M",
+    "stock": 50
+}
+product2 = {
+    "id": "P123",
+    "color": "red",
+    "size": "M",
+    "stock": 25
+}
+diff = product1.items() ^ product2.items()
+print(diff)
+</code></pre>
+<p>This approach will not work for nested dictionaries, as in Python
+dictionaries are mutable and, therefore, cannot be elements of a set. To
+correctly compare nested dictionaries, you need to use recursion or
+special libraries such as deepdiff.</p>
+<h3 id="can-i-compare-dictionaries-based-on-specific-keys-only">Can I
+compare dictionaries based on specific keys only?</h3>
+<p>Yes, you can filter the dictionaries before comparison:</p>
+<pre><code class="language-py">
+dict1 = {
+    "id": "P123",
+    "color": "blue",
+    "size": "M",
+    "stock": 50
+}
+dict2 = {
+    "id": "P123",
+    "color": "red",
+    "size": "M",
+    "stock": 25
+}
+keys_to_compare = {"id", "size"}
+filtered1 = {k: dict1[k] for k in keys_to_compare if k in dict1}
+filtered2 = {k: dict2[k] for k in keys_to_compare if k in dict2}
+print(filtered1 == filtered2)
+</code></pre>
 </body>
 </html>

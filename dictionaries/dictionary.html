@@ -699,7 +699,25 @@
           .run-button:hover {
               opacity: 1.0;
           }
-          
+  	.run-button:disabled {
+              animation: pulse 1.0s infinite;
+          }                     
+
+  @keyframes pulse {
+      0% {
+          transform: scale(1);
+          opacity: 1;
+      }
+      50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+      }
+      100% {
+          transform: scale(1);
+          opacity: 1;
+      }
+  }
+                 
           .hide-button {
               position: absolute;
               top: 10px;
@@ -796,7 +814,7 @@
                       <div class="container">
                           <div class="code-block">
                               <!-- <span class="code-label">Try to edit and run code example</span> -->
-                              <button class="run-button" onclick="runPython(${blockId})">            
+                              <button class="run-button" onclick="runPython(${blockId})" id="button${blockId}">
                                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                       <path d="M8 5v14l11-7z"> </path> 
                                   </svg>
@@ -823,7 +841,7 @@
                       if (textarea) {
                           editors[blockId] = CodeMirror.fromTextArea(textarea, {
                               mode: "python",
-                              lineNumbers: true,
+                            //  lineNumbers: true,
                               theme: "default",
                               theme: "material",
                               theme: "mbo", 
@@ -852,18 +870,25 @@
           async function runPython(blockId) {
               let pyodide = await pyodideReadyPromise;
               try {
+                  const outputDiv = document.getElementById(`output${blockId}`);
                   const outputBlock = document.getElementById(`output-block${blockId}`);
+                  const runButton = document.getElementById(`button${blockId}`);
+                  
                   outputBlock.style.display = 'block';
 
                   let output = "";
                   pyodide.globals.set("print", (...args) => {
                      output += args.join(" ") + "\n";
                   });
+
+                  runButton.disabled = true;
                   
                   await pyodide.runPythonAsync(editors[blockId].getValue());
                   
-                  document.getElementById(`output${blockId}`).innerText = output;
+                  runButton.disabled = false;
+                  outputDiv.innerText = output;
               } catch(err) {
+                  document.getElementById(`button${blockId}`).disabled = false;
                   document.getElementById(`output${blockId}`).innerText = "Error: " + err;
               }
           }
@@ -934,6 +959,7 @@ assigned the values "John" and 31, respectively.</li>
 <li>Then we create a new dictionary <code>user2</code> that is a copy of
 the existing dictionary user.</li>
 </ul>
+<p>This method works when the keys are simple strings.</p>
 <h3 id="creating-a-dictionary-from-a-list-of-tuples">Creating a
 Dictionary from a List of Tuples</h3>
 <pre><code class="language-py" >
@@ -975,7 +1001,7 @@ initialized with <code>None</code>.</p>
 user = dict.fromkeys(['name', 'age'])
 print(user)   # {'name': None, 'age': None}
 
-point = dict.fromkeys(['x', 'y', 'z'], 100) 
+point = dict.fromkeys(['x', 'y', 'z'], 100)
 print(point)   # {'x': 100, 'y': 100, 'z': 100}
 </code></pre>
 <p>👣 Explanation:</p>
@@ -1026,8 +1052,7 @@ lookups. When you access a value using its key, Python:</p>
 </ul>
 <p>That's why looking up values in a dictionary is incredibly efficient,
 even with thousands of items!</p>
-<h2 id="dictionary-rules-to-remember">🗝️ Dictionary Rules to
-Remember</h2>
+<h2 id="dictionary-rules-to-remember">Dictionary Rules to Remember</h2>
 <p>Here are some important points to keep in mind:</p>
 <ul>
 <li>Keys must be unique, duplicates not allowed (you can't have two
@@ -1129,11 +1154,11 @@ because both True and 1 will be treated as the same key.</p>
 tricky_dict = {
     1: "integer one",
     1.0: "float one",
-    True: "boolean true" 
+    True: "boolean true"
 }
-# But watch out! 
+# But watch out!
 print(tricky_dict[1])      # Same as tricky_dict[True]
-print(tricky_dict[1.0])    # the same 
+print(tricky_dict[1.0])    # the same
 print(tricky_dict[True])   # Returns "boolean true"
 </code></pre>
 <p>👣 Explanation:</p>
@@ -1147,9 +1172,9 @@ associated with that key.</li>
 <code>True: "boolean true"</code> will overwrite any prior values
 associated with the keys 1 and 1.0.</li>
 </ul>
-<p>🗝️ Best Practices: To avoid confusion, it's best to avoid using True,
-False, integers, and floats that may have equivalent values as
-dictionary keys if possible.</p>
+<p>🗝️ To avoid confusion, it's best to avoid using True, False,
+integers, and floats that may have equivalent values as dictionary keys
+if possible.</p>
 <h3 id="invalid-key-types">Invalid Key Types</h3>
 <p>Not everything can be a dictionary key.</p>
 <p>In Python, dictionary keys must be immutable and hashable. Immutable
@@ -1202,7 +1227,7 @@ issues</li>
 <li>Tuple Keys. Make sure all elements in the tuple are immutable:</li>
 </ul>
 <pre><code class="language-py" >
-# This works 
+# This works
 good_dict = {(1, "a", True): "value"}
 
 # This raises TypeError (list inside tuple is mutable)
@@ -1222,16 +1247,87 @@ capitals = {
     "Spain": "Madrid"
 }
 # Check the type
-print(type(capitals)) 
+print(type(capitals))
 
 # You can also use isinstance() for type checking
-is_dictionary = isinstance(capitals, dict)  
+is_dictionary = isinstance(capitals, dict)
 print(is_dictionary)  # Returns True
 </code></pre>
 <p>For dictionaries, the function <code>type()</code> returns
 <code>&lt;class 'dict'&gt;</code>.</p>
 <p>This kind of type checking becomes especially valuable when working
 with dynamic data where the type might vary.</p>
+<h2 id="converting-a-dictionary-to-a-string">Converting a Dictionary to
+a String</h2>
+<p>Sometimes, you need to convert a dictionary into a string — maybe to
+print it in a readable format, save it to a file, or send it over a
+network.</p>
+<h3 id="using-str-for-a-quick-conversion">Using str() for a Quick
+Conversion</h3>
+<p>If you just need a simple string representation, you can use Python’s
+built-in <code>str()</code> function:</p>
+<pre><code class="language-py" >
+my_dict = {"name": "Alice", "age": 30, "city": "New York"}
+print(str(my_dict))
+</code></pre>
+<p>This works, but the output isn’t always the cleanest, especially if
+the dictionary is large or nested. This format isn’t structured in a way
+that makes it easy to parse later.</p>
+<h3 id="pretty-printing-with-pprint">Pretty Printing with pprint</h3>
+<p>If you want a cleaner, more readable output (especially for nested
+dictionaries), the <code>pprint</code> module is a better option:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pprint</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pprint.pprint(my_dict)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pprint.pprint(my_dict, sort_dict<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pprint.pp(my_dict)</span></code></pre></div>
+<p>By default, <code>pprint</code> sorts the dictionary by keys before
+formatting. To print the dictionary in the order of key insertion, use
+the <code>sort_dicts</code> boolean parameter or the <code>pp()</code>
+method.</p>
+<p>Interested in more? Check out additional details about this library
+here: <a href="https://docs.python.org/3/library/pprint.html">pprint -
+Data pretty printer</a></p>
+<h3 id="converting-to-json-with-json.dumps">Converting to JSON with
+json.dumps()</h3>
+<p>If you’re working with APIs, storing data, or need structured output,
+<code>json.dumps()</code> is a great choice:</p>
+<pre><code class="language-py" >
+import json
+
+my_dict = {"name": "Alice", "age": 30, "city": "New York"}
+
+json_string = json.dumps(my_dict, indent=4)
+print(json_string)
+</code></pre>
+<p>This method ensures the dictionary is formatted in valid JSON, making
+it ideal for saving or sharing data.</p>
+<h3 id="joining-key-value-pairs-as-a-custom-string">Joining Key-Value
+Pairs as a Custom String</h3>
+<p>This approach is useful when you need a human-friendly, inline
+representation.</p>
+<pre><code class="language-py" >
+my_dict = {"name": "Alice", "age": 30, "city": "New York"}
+
+custom_string = ", ".join(f"{key}: {value}" for key, value in my_dict.items())
+
+print(custom_string)
+</code></pre>
+<h3 id="using-repr">Using repr()</h3>
+<p><code>repr()</code> returns a string representation of an object that
+can be used to recreate it in code. This is useful for debugging and
+logging, but not ideal for human-readable output.</p>
+<pre><code class="language-py" >
+my_dict = {"name": "Alice", "age": 30, "city": "New York"}
+print(repr(my_dict))
+</code></pre>
+<p>At first glance, it looks similar to <code>str()</code>, but
+<code>repr()</code> ensures the output is a valid Python expression that
+represents the object as closely as possible. This means that passing
+the result of <code>repr()</code> into <code>eval()</code> can
+reconstruct the original object.</p>
+<p>Each method serves a purpose, so pick the one that fits your use case
+best!</p>
 <h2 id="why-not-always-use-a-dictionary-instead-of-a-list">Why Not
 Always Use a Dictionary Instead of a List?</h2>
 <p>Lists and dictionaries serve different purposes and each has its own
@@ -1254,9 +1350,7 @@ values with unique keys or need fast lookups by key.</p>
 Dictionary is Empty</h2>
 <p>Often, you may need to check if a dictionary is empty before
 performing operations on it.</p>
-<ol type="1">
-<li>Using <code>not</code> with a Dictionary</li>
-</ol>
+<p>📌 1. Using <code>not</code> with a Dictionary</p>
 <pre><code class="language-py" >
 my_dict = {}
 
@@ -1273,9 +1367,7 @@ evaluate to False in a Boolean context.</li>
 and the corresponding block of code executes.</li>
 <li>It is concise, readable, and efficient.</li>
 </ul>
-<ol start="2" type="1">
-<li>Using <code>len()</code> Function</li>
-</ol>
+<p>📌 2. Using <code>len()</code> Function</p>
 <pre><code class="language-py" >
 my_dict = {}
 if len(my_dict) == 0:
@@ -1290,9 +1382,7 @@ is empty.</li>
 <li>This method is explicit but slightly less Pythonic than using
 <code>not</code>.</li>
 </ul>
-<ol start="3" type="1">
-<li>Comparing with an Empty Dictionary</li>
-</ol>
+<p>📌 3. Comparing with an Empty Dictionary</p>
 <pre><code class="language-py" >
 my_dict = {}
 if my_dict == {}:
@@ -1310,9 +1400,12 @@ because it performs a comparison operation.</li>
 a dictionary in Python and how do I create one?</h3>
 <p>A dictionary is a collection of key-value pairs. You can create one
 using curly braces {} or the <code>dict()</code> constructor.</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">&#39;name&#39;</span>: <span class="st">&#39;John&#39;</span>, <span class="st">&#39;age&#39;</span>: <span class="dv">30</span>}</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> <span class="bu">dict</span>(name<span class="op">=</span><span class="st">&#39;John&#39;</span>, age<span class="op">=</span><span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>user1 <span class="op">=</span> {<span class="st">&#39;name&#39;</span>: <span class="st">&#39;John&#39;</span>, <span class="st">&#39;age&#39;</span>: <span class="dv">30</span>}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>user2 <span class="op">=</span> <span class="bu">dict</span>(name<span class="op">=</span><span class="st">&#39;John&#39;</span>, age<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>user3 <span class="op">=</span> <span class="bu">dict</span>([(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;John&quot;</span>), (<span class="st">&quot;age&quot;</span>, <span class="dv">30</span>)])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>user4 <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>([<span class="st">&#39;name&#39;</span>, <span class="st">&#39;age&#39;</span>], [<span class="st">&quot;John&quot;</span>, <span class="dv">30</span>]))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>user5 <span class="op">=</span> <span class="bu">dict</span>.fromkeys([<span class="st">&#39;name&#39;</span>, <span class="st">&#39;age&#39;</span>])</span></code></pre></div>
 <h3 id="what-types-can-i-use-as-dictionary-values">What types can I use
 as dictionary values?</h3>
 <p>Any Python object can be a dictionary value, including:</p>
@@ -1350,7 +1443,84 @@ print(coordinates)
 Python handle duplicate keys in dictionaries?</h3>
 <p>If you try to add a duplicate key, the new value will overwrite the
 old one. The last assignment wins:</p>
-<div class="sourceCode" id="cb3"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">&#39;a&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;a&#39;</span>: <span class="dv">2</span>}  <span class="co"># Results in {&#39;a&#39;: 2}</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>my_dict <span class="op">=</span> {<span class="st">&#39;a&#39;</span>: <span class="dv">1</span>, <span class="st">&#39;a&#39;</span>: <span class="dv">2</span>}  <span class="co"># Results in {&#39;a&#39;: 2}</span></span></code></pre></div>
+<h3 id="how-to-sum-the-values-of-a-dictionary">How to sum the values of
+a dictionary</h3>
+<p>You can achieve this using a variety of methods.</p>
+<p>Method 1: Using <code>sum()</code> with the <code>values()</code>
+method</p>
+<pre><code class="language-py" >
+my_dict = {'a': 10, 'b': 20, 'c': 30}
+
+total = sum(my_dict.values())
+print(f"Total sum of values: {total}")
+</code></pre>
+<p>Method 2: Using a loop</p>
+<pre><code class="language-py" >
+my_dict = {'a': 10, 'b': 20, 'c': 30}
+
+total = 0
+for value in my_dict.values():
+    total += value
+
+print(f"Total sum of values using loop: {total}")
+</code></pre>
+<p>Method 3: Using list comprehension</p>
+<pre><code class="language-py" >
+my_dict = {'a': 10, 'b': 20, 'c': 30}
+
+total = sum(my_dict[i] for i in my_dict)
+print(f"Total sum of values using list comprehension: {total}")
+</code></pre>
+<p>Method 3a: Using list comprehension for nested dictionaries</p>
+<pre><code class="language-py" >
+nested_dict = {  
+    'group1': {'item1': 10, 'item2': 20},  
+    'group2': {'item3': 30, 'item4': 40}  
+}
+
+total = sum(sum(v for v in inner_dict.values()) 
+                  for inner_dict in nested_dict.values())
+print(f"Total sum of nested values: {total}")
+</code></pre>
+<p>Method 4: Using the Lambda Function</p>
+<pre><code class="language-py" >
+import functools
+my_dict = {'a': 10, 'b': 20, 'c': 30}
+
+total = functools.reduce(lambda x, y: x+y, my_dict.values(), 0)
+
+print(f"Total sum of values using the lambda function: {total}")
+</code></pre>
+<p>Method 5: Using <code>operator.add</code> With Reduce</p>
+<pre><code class="language-py" >
+from functools import reduce
+from operator import add
+my_dict = {'a': 10, 'b': 20, 'c': 30}
+
+total = reduce(add, my_dict.values())
+print(f"Total sum of values using the lambda function: {total}")
+</code></pre>
+<p>Method 6: Using Pandas</p>
+<pre><code class="language-py" >
+import micropip
+await micropip.install("pandas")
+
+import pandas as pd
+my_dict = {'a': 10, 'b': 20, 'c': 30}
+
+series = pd.Series(my_dict)
+total = series.sum()
+print(f"Total sum of values using Pandas: {total}")
+</code></pre>
+<p>All these methods will give you the sum of the values in the
+dictionary. But if your dictionary contains non-numeric values (e.g.,
+strings, lists, <code>None</code>), attempting to sum the values will
+raise a <code>TypeError</code>.</p>
+<p>Note that <code>sum(my_dict)</code> will try to sum the keys of the
+dictionary (since <code>my_dict</code> in an iteration context yields
+its keys). This will cause a <code>TypeError</code> because the keys are
+strings and cannot be summed directly.</p>
 </body>
 </html>
