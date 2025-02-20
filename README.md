@@ -5,7 +5,7 @@
 - [Access Dictionary Items](dictionaries/dictionary-access.html)
 - [Change Dictionary Items](dictionaries/dictionary-change)
 - [Remove Dictionary Items](dictionaries/dictionary-remove)
-- [Loop Dictionaries](dictionaries/dictionaries/dictionary-loop.html)
+- [Loop Dictionaries](dictionaries/dictionary-loop.html)
 - [Dictionary Copying: Shallow and Deep Copy](dictionaries/dictionary-copy.html)
 - [Nested Dictionaries](dictionaries/dictionary-nested)
 - [Dictionary Comparison in Python](dictionaries/dictionary-compare)
