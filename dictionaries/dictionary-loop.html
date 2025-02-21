@@ -1130,7 +1130,7 @@ decimal places for precision.</li>
 <p>Output:</p>
 <pre><code>List time: 0.056749 seconds
 View time: 0.000002 seconds</code></pre>
-<p>💡 Note that actual times will vary depending on your computer's
+<p>Note that actual times will vary depending on your computer's
 specifications, python version, system load.</p>
 <p>As you can see, creating a list from the dictionary keys is slower
 than getting a view of the keys. This is because:</p>
@@ -1199,7 +1199,7 @@ memory used in bytes.</li>
 get a dictionary view object. This view references the dictionary’s key
 set without creating a separate data structure, so it requires only a
 small amount of memory (24 bytes in this example).</p>
-<p>However, when you use <code>list(dict)</code> и and similar
+<p>However, when you use <code>list(dict)</code> and similar
 <code>sorted(dict)</code> function, Python generates an actual list
 containing a copy of all the keys from the dictionary. This list must
 allocate space for every key object, leading to a significantly larger
@@ -1271,7 +1271,7 @@ for item, price in iter(menu.items()):
 for item in reversed(menu):
     print(f"Checking {item} from bottom to top")
 </code></pre>
-<p>🗝️ Important Notes</p>
+<p>Important Notes:</p>
 <ul>
 <li><code>iter</code> and <code>reversed</code> will work consistently
 with the order in which you added items.</li>

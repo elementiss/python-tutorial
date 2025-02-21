@@ -926,7 +926,7 @@ empty_dict = dict()
 
 print(empty_dict)
 </code></pre>
-<p>💡 Because <code>dict</code> is the name of a built-in function, you
+<p>Because <code>dict</code> is the name of a built-in function, you
 should avoid using it as a variable name.</p>
 <p>To create a dictionary with data, we use curly braces and colons to
 connect keys with their values:</p>
@@ -1033,8 +1033,8 @@ print(number_of_countries)  # 3
 <p>This gives us the total number of key-value pairs in the dictionary.
 It's useful when you need to check if a dictionary is empty:
 <code>len(capitals) == 0</code>.</p>
-<p>💡 Remember that each key-value pair counts as one item, regardless
-of how complex the values might be.</p>
+<p>Remember that each key-value pair counts as one item, regardless of
+how complex the values might be.</p>
 <h2 id="the-structure-behind-the-scenes">The Structure Behind the
 Scenes</h2>
 <p>Under the hood, Python dictionaries are implemented using hash
@@ -1087,9 +1087,9 @@ with "Milano".</li>
 assignment for the duplicate key and ignore any previous assignments for
 that key.</li>
 </ul>
-<p>💡 In Python, dictionaries cannot have two items with the same key.
-If a key is repeated, the last key-value pair will overwrite any
-previous ones.</p>
+<p>In Python, dictionaries cannot have two items with the same key. If a
+key is repeated, the last key-value pair will overwrite any previous
+ones.</p>
 <h3 id="dictionary-items---data-types">Dictionary Items - Data
 Types</h3>
 <p>Dictionaries are highly versatile and can store values of any data
@@ -1146,7 +1146,7 @@ tricky_dict = {
 print(tricky_dict[1])      # Access integer key
 print(tricky_dict["1"])    # Access string key
 </code></pre>
-<p>💡 Be careful! True == 1 in Python.</p>
+<p>Be careful! True == 1 in Python.</p>
 <p>In Python, True is equivalent to 1 and False is equivalent to 0. This
 behavior can lead to surprising results when working with dictionaries
 because both True and 1 will be treated as the same key.</p>
@@ -1172,9 +1172,9 @@ associated with that key.</li>
 <code>True: "boolean true"</code> will overwrite any prior values
 associated with the keys 1 and 1.0.</li>
 </ul>
-<p>🗝️ To avoid confusion, it's best to avoid using True, False,
-integers, and floats that may have equivalent values as dictionary keys
-if possible.</p>
+<p>To avoid confusion, it's best to avoid using True, False, integers,
+and floats that may have equivalent values as dictionary keys if
+possible.</p>
 <h3 id="invalid-key-types">Invalid Key Types</h3>
 <p>Not everything can be a dictionary key.</p>
 <p>In Python, dictionary keys must be immutable and hashable. Immutable
@@ -1213,7 +1213,7 @@ used as dictionary keys. Using a set as a key will raise a
 </ul>
 <p>Always use appropriate data types for dictionary keys to avoid
 runtime errors.</p>
-<h3 id="best-practices-for-choosing-keys">🗝️ Best Practices for Choosing
+<h3 id="best-practices-for-choosing-keys">Best Practices for Choosing
 Keys</h3>
 <ul>
 <li>Use strings when possible. They're the most common and readable
@@ -1343,14 +1343,15 @@ lists are more natural.</li>
 </ul>
 <p>Using a dictionary for everything can slow your code down, make it
 harder to read, and use more resources than necessary.</p>
-<p>🗝️ A good rule of thumb: Use a list when you have a collection of
+<p>A good rule of thumb: Use a list when you have a collection of
 similar items in a sequence. Use a dictionary when you need to associate
 values with unique keys or need fast lookups by key.</p>
 <h2 id="how-to-check-if-a-dictionary-is-empty">How to Check if a
 Dictionary is Empty</h2>
 <p>Often, you may need to check if a dictionary is empty before
 performing operations on it.</p>
-<p>📌 1. Using <code>not</code> with a Dictionary</p>
+<h3 id="using-not-with-a-dictionary">Using <code>not</code> with a
+Dictionary</h3>
 <pre><code class="language-py" >
 my_dict = {}
 
@@ -1367,7 +1368,7 @@ evaluate to False in a Boolean context.</li>
 and the corresponding block of code executes.</li>
 <li>It is concise, readable, and efficient.</li>
 </ul>
-<p>📌 2. Using <code>len()</code> Function</p>
+<h3 id="using-len-function">Using <code>len()</code> Function</h3>
 <pre><code class="language-py" >
 my_dict = {}
 if len(my_dict) == 0:
@@ -1382,7 +1383,8 @@ is empty.</li>
 <li>This method is explicit but slightly less Pythonic than using
 <code>not</code>.</li>
 </ul>
-<p>📌 3. Comparing with an Empty Dictionary</p>
+<h3 id="comparing-with-an-empty-dictionary">Comparing with an Empty
+Dictionary</h3>
 <pre><code class="language-py" >
 my_dict = {}
 if my_dict == {}:
@@ -1395,7 +1397,7 @@ if my_dict == {}:
 <li>While this approach works, it is not as efficient as using not
 because it performs a comparison operation.</li>
 </ul>
-<h2 id="faqs-on-python-dictionaries">🧐 FAQs on Python Dictionaries</h2>
+<h2 id="faqs-on-python-dictionaries">FAQs on Python Dictionaries</h2>
 <h3 id="what-is-a-dictionary-in-python-and-how-do-i-create-one">What is
 a dictionary in Python and how do I create one?</h3>
 <p>A dictionary is a collection of key-value pairs. You can create one

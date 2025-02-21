@@ -930,7 +930,7 @@ print(greek_capital)  # Returns "Athens"
 </code></pre>
 <p>Here, <code>capitals["Greece"]</code> fetches the value "Athens",
 because dictionaries store data in key-value pairs.</p>
-<p>💡 For lists and tuples, the index of the element is specified in
+<p>For lists and tuples, the index of the element is specified in
 brackets, and for dictionaries — the key.</p>
 <p>If the key doesn't exist, this method raises a
 <code>KeyError</code>:</p>
@@ -968,7 +968,7 @@ if "Greece" in capitals:
 if "France" not in capitals:
     print("We don't have data about France")
 </code></pre>
-<p>👣 Step-by-Step Explanation:</p>
+<p>👣 Explanation:</p>
 <ul>
 <li>Here, we check if the key "Greece" exists in the capitals
 dictionary.</li>
@@ -989,7 +989,7 @@ print(".pdf" in file_types)       # Output: True
 print(".mp3" in file_types)       # Output: False
 print(".mp3" not in file_types)   # Output: True
 </code></pre>
-<p>👣 Here's what's happening:</p>
+<p>👣 Explanation:</p>
 <ul>
 <li>First, a dictionary <code>file_types</code> is created that maps
 file extensions to their descriptions</li>
@@ -1077,7 +1077,7 @@ auto_save = settings.get("auto_save", False)
 print(user_theme)  # Output: dark
 print(auto_save)   # Output: False
 </code></pre>
-<p>👣 Step-by-Step Breakdown</p>
+<p>👣 Explanation:</p>
 <ul>
 <li>The dictionary contains the "theme" key, so
 <code>get("theme")</code> returns "dark".</li>
@@ -1116,7 +1116,7 @@ for word in text.split():
 print(word_count)  
 # Output: {'apple': 3, 'banana': 2, 'orange': 1}
 </code></pre>
-<p>👣 Step-by-Step Breakdown</p>
+<p>👣 Explanation:</p>
 <ul>
 <li>Initialize an empty dictionary <code>word_count = {}</code>. This
 dictionary will store our words and their respective counts.</li>
@@ -1162,7 +1162,7 @@ except KeyError:
 capital = capitals.get("France", "Unknown")
 print(capital)
 </code></pre>
-<p>👣 Step-by-Step Explanation</p>
+<p>👣 Explanation:</p>
 <ul>
 <li>try block: Python attempts to execute
 <code>capitals["France"]</code>.</li>
@@ -1194,14 +1194,14 @@ Square Brackets []</h2>
 <tbody>
 <tr>
 <td><code>dictionary[key]</code></td>
-<td>✅ Returns value</td>
-<td>❌ Raises <code>KeyError</code></td>
+<td>Returns value</td>
+<td>Raises <code>KeyError</code></td>
 <td>When you're sure the key exists</td>
 </tr>
 <tr>
 <td><code>dictionary.get(key)</code></td>
-<td>✅ Returns value</td>
-<td>✅ Returns <code>None</code> or a default</td>
+<td>Returns value</td>
+<td>Returns <code>None</code> or a default</td>
 <td>When keys might be missing</td>
 </tr>
 </tbody>
@@ -1320,7 +1320,7 @@ convert <code>dict_items</code> into a list using
 <p>We will talk more about <code>keys()</code>, <code>values()</code>,
 <code>items()</code> methods when we consider iterating over the
 dictionary.</p>
-<h2 id="practical-tips">🗝️ Practical Tips</h2>
+<h2 id="practical-tips">Practical Tips</h2>
 <ul>
 <li>Use <code>get()</code> when you're not sure if a key exists</li>
 <li>Use square brackets when you're certain the key exists</li>
@@ -1371,7 +1371,7 @@ message.</li>
 </ul>
 <p>Instead of writing the same logic every time you want to look up a
 capital, you can just reuse this function.</p>
-<h2 id="faqs-on-access-dictionary-items">🧐 FAQs on Access Dictionary
+<h2 id="faqs-on-access-dictionary-items">FAQs on Access Dictionary
 Items</h2>
 <h3 id="how-do-i-access-a-value-in-a-dictionary-by-key">How do I access
 a value in a dictionary by key?</h3>
