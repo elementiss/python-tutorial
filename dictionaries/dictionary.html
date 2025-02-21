@@ -476,9 +476,8 @@
   =============================================================================*/
 
   blockquote {
-    border-left: 4px solid #DDD;
+    border-left: 4px solid #4493f8; /* blue */
     padding: 0 15px;
-    color: #777;
   }
 
   blockquote>:first-child {
@@ -560,7 +559,7 @@
       vertical-align: middle;
     }
 
-    .note, .tip, .warning { 
+    .note, .tip, .warning, .important { 
       border-left-style: solid;
       border-left-width: 3px;
       padding-left: 7px;
@@ -587,6 +586,9 @@
     .warning > .title {
        color: #d29922 /* olive */;
     }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
     .note  {
        border-color: #4493f8; /* blue */
     }
@@ -595,6 +597,9 @@
     }
     .warning {
        border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
     }
 
 
@@ -926,8 +931,10 @@ empty_dict = dict()
 
 print(empty_dict)
 </code></pre>
+<blockquote>
 <p>Because <code>dict</code> is the name of a built-in function, you
 should avoid using it as a variable name.</p>
+</blockquote>
 <p>To create a dictionary with data, we use curly braces and colons to
 connect keys with their values:</p>
 <pre><code class="language-py" >
@@ -1033,8 +1040,10 @@ print(number_of_countries)  # 3
 <p>This gives us the total number of key-value pairs in the dictionary.
 It's useful when you need to check if a dictionary is empty:
 <code>len(capitals) == 0</code>.</p>
+<blockquote>
 <p>Remember that each key-value pair counts as one item, regardless of
 how complex the values might be.</p>
+</blockquote>
 <h2 id="the-structure-behind-the-scenes">The Structure Behind the
 Scenes</h2>
 <p>Under the hood, Python dictionaries are implemented using hash
@@ -1087,9 +1096,11 @@ with "Milano".</li>
 assignment for the duplicate key and ignore any previous assignments for
 that key.</li>
 </ul>
+<blockquote>
 <p>In Python, dictionaries cannot have two items with the same key. If a
 key is repeated, the last key-value pair will overwrite any previous
 ones.</p>
+</blockquote>
 <h3 id="dictionary-items---data-types">Dictionary Items - Data
 Types</h3>
 <p>Dictionaries are highly versatile and can store values of any data
@@ -1146,7 +1157,9 @@ tricky_dict = {
 print(tricky_dict[1])      # Access integer key
 print(tricky_dict["1"])    # Access string key
 </code></pre>
+<blockquote>
 <p>Be careful! True == 1 in Python.</p>
+</blockquote>
 <p>In Python, True is equivalent to 1 and False is equivalent to 0. This
 behavior can lead to surprising results when working with dictionaries
 because both True and 1 will be treated as the same key.</p>
@@ -1172,9 +1185,11 @@ associated with that key.</li>
 <code>True: "boolean true"</code> will overwrite any prior values
 associated with the keys 1 and 1.0.</li>
 </ul>
+<blockquote>
 <p>To avoid confusion, it's best to avoid using True, False, integers,
 and floats that may have equivalent values as dictionary keys if
 possible.</p>
+</blockquote>
 <h3 id="invalid-key-types">Invalid Key Types</h3>
 <p>Not everything can be a dictionary key.</p>
 <p>In Python, dictionary keys must be immutable and hashable. Immutable
@@ -1343,9 +1358,11 @@ lists are more natural.</li>
 </ul>
 <p>Using a dictionary for everything can slow your code down, make it
 harder to read, and use more resources than necessary.</p>
+<blockquote>
 <p>A good rule of thumb: Use a list when you have a collection of
 similar items in a sequence. Use a dictionary when you need to associate
 values with unique keys or need fast lookups by key.</p>
+</blockquote>
 <h2 id="how-to-check-if-a-dictionary-is-empty">How to Check if a
 Dictionary is Empty</h2>
 <p>Often, you may need to check if a dictionary is empty before

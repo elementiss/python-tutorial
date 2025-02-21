@@ -476,9 +476,8 @@
   =============================================================================*/
 
   blockquote {
-    border-left: 4px solid #DDD;
+    border-left: 4px solid #4493f8; /* blue */
     padding: 0 15px;
-    color: #777;
   }
 
   blockquote>:first-child {
@@ -560,7 +559,7 @@
       vertical-align: middle;
     }
 
-    .note, .tip, .warning { 
+    .note, .tip, .warning, .important { 
       border-left-style: solid;
       border-left-width: 3px;
       padding-left: 7px;
@@ -587,6 +586,9 @@
     .warning > .title {
        color: #d29922 /* olive */;
     }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
     .note  {
        border-color: #4493f8; /* blue */
     }
@@ -595,6 +597,9 @@
     }
     .warning {
        border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
     }
 
 
@@ -973,10 +978,12 @@ if "France" in capitals:
 else:
     print("Cannot modify: France is not in the dictionary")
 </code></pre>
+<blockquote>
 <p>Remember, when modifying dictionary items, Python doesn't distinguish
 between updating an existing value and creating a new one. It's up to
 you to implement any necessary checks if you want to prevent accidental
 additions to your dictionary.</p>
+</blockquote>
 <h2 id="updating-multiple-dictionary-values">Updating Multiple
 Dictionary Values</h2>
 <p>You can also use the <code>update()</code> method to modify existing

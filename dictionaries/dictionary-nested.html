@@ -476,9 +476,8 @@
   =============================================================================*/
 
   blockquote {
-    border-left: 4px solid #DDD;
+    border-left: 4px solid #4493f8; /* blue */
     padding: 0 15px;
-    color: #777;
   }
 
   blockquote>:first-child {
@@ -560,7 +559,7 @@
       vertical-align: middle;
     }
 
-    .note, .tip, .warning { 
+    .note, .tip, .warning, .important { 
       border-left-style: solid;
       border-left-width: 3px;
       padding-left: 7px;
@@ -587,6 +586,9 @@
     .warning > .title {
        color: #d29922 /* olive */;
     }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
     .note  {
        border-color: #4493f8; /* blue */
     }
@@ -595,6 +597,9 @@
     }
     .warning {
        border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
     }
 
 
@@ -961,10 +966,12 @@ class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a hr
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Accessing deep nested data</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>greek_currency <span class="op">=</span> capitals[<span class="st">&quot;Greece&quot;</span>][<span class="st">&quot;economy&quot;</span>][<span class="st">&quot;currency&quot;</span>]</span></code></pre></div>
+<blockquote>
 <p>Remember that while nested dictionaries are powerful, they should be
 designed thoughtfully. Too many levels of nesting can make your code
 harder to read and maintain. A good rule of thumb is to keep nesting to
 a maximum of three or four levels deep.</p>
+</blockquote>
 <p>Nested dictionaries are commonly used in:</p>
 <ul>
 <li>Configuration settings with multiple levels of options</li>

@@ -412,9 +412,8 @@
   =============================================================================*/
 
   blockquote {
-    border-left: 4px solid #DDD;
+    border-left: 4px solid #4493f8; /* blue */
     padding: 0 15px;
-    color: #777;
   }
 
   blockquote>:first-child {
@@ -496,7 +495,7 @@
       vertical-align: middle;
     }
 
-    .note, .tip, .warning { 
+    .note, .tip, .warning, .important { 
       border-left-style: solid;
       border-left-width: 3px;
       padding-left: 7px;
@@ -523,6 +522,9 @@
     .warning > .title {
        color: #d29922 /* olive */;
     }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
     .note  {
        border-color: #4493f8; /* blue */
     }
@@ -531,6 +533,9 @@
     }
     .warning {
        border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
     }
 
 
@@ -875,9 +880,11 @@ we are explicitly unpacking the values of the dictionary.</li>
 <li>The method <code>values()</code> returns a view object containing
 all the values of the dictionary in the order they appear.</li>
 </ul>
+<blockquote>
 <p>Remember that the number of variables to unpack must match the length
 of the dictionary. Otherwise, a <code>ValueError</code> will be raised -
 it won't let you accidentally miss any values!</p>
+</blockquote>
 <h2 id="merging-dictionaries">Merging Dictionaries</h2>
 <p>The basic syntax for dictionary unpacking involves using the
 <code>**</code> operator:</p>
