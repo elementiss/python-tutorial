@@ -806,7 +806,7 @@
               pyodideReadyPromise = initPyodide();
 
               // Get all Python code blocks
-              const codeBlocks = document.querySelectorAll("pre code.language-py");
+              const codeBlocks = document.querySelectorAll("pre code.editor-py");
               
               codeBlocks.forEach((el, index) => {
                   const preEl = el.parentNode;
@@ -912,7 +912,7 @@ this concept allows us to create complex data structures that mirror
 real-world hierarchical relationships.</p>
 <p>Let's transform our simple country capitals dictionary into something
 more interesting by adding layers of information about each country:</p>
-<pre><code class="language-py" >
+<pre><code class="editor-py" >
 capitals = {
     "Greece": {
         "capital": "Athens",
@@ -1001,7 +1001,7 @@ detailed information card. Each iteration of the loop creates a new
 nested structure for each country, complete with tracking information
 like whether someone has visited the country and what rating they gave
 it.</p>
-<pre><code class="language-py" height="360px">
+<pre><code class="editor-py" height="360px">
 # Starting with our base dictionary
 capitals = {
     "Greece": "Athens",
@@ -1104,7 +1104,7 @@ Dictionaries</h2>
 nested dictionaries into a single-level dictionary with compound
 keys.</p>
 <p>📌 Example:</p>
-<pre><code class="language-py"  height="320px">
+<pre><code class="editor-py"  height="320px">
 def flatten_dictionary(nested_dict, parent_key='', sep='.'):
     flat_dict = {}
     
@@ -1183,7 +1183,7 @@ level, using compound keys that represent the hierarchy.</p>
 Dictionaries</h2>
 <p>📌 Here’s a function <code>deep_merge</code> that merges two
 dictionaries, including nested dictionaries.</p>
-<pre><code class="language-py" height="320px">
+<pre><code class="editor-py" height="320px">
 def deep_merge(dict1, dict2):
     """Merge two dictionaries, including nested dictionaries."""
     result = dict1.copy()
@@ -1270,9 +1270,9 @@ ensuring that quantities and details are accurately updated.</li>
 sub-categories, tags) and combining updates without losing
 information.</li>
 </ul>
-<p>Note: The dictionary union operator (|) creates a new dictionary by
-merging <code>dict1</code> and <code>dict2</code>, but it performs a
-shallow merge.</p>
+<p>Note: The dictionary union operator (<code>|</code>) creates a new
+dictionary by merging <code>dict1</code> and <code>dict2</code>, but it
+performs a shallow merge.</p>
 <ul>
 <li>For top-level keys, if a key exists in both dictionaries, the value
 from <code>dict2</code> will overwrite the value from
@@ -1287,14 +1287,14 @@ overwritten. This is useful when you need to combine dictionaries while
 preserving nested structures.</p>
 <table>
 <colgroup>
-<col style="width: 20%" />
-<col style="width: 40%" />
-<col style="width: 40%" />
+<col style="width: 23%" />
+<col style="width: 38%" />
+<col style="width: 38%" />
 </colgroup>
 <thead>
 <tr>
 <th>Feature</th>
-<th><code>dict1 | dict2</code></th>
+<th><code>dict1 \| dict2</code></th>
 <th><code>deep_merge(dict1, dict2)</code></th>
 </tr>
 </thead>
@@ -1327,6 +1327,165 @@ you only need a shallow merge, <code>|</code> is convenient and
 straightforward. However, if you're working with complex, nested
 dictionaries and need to preserve and merge their structure
 comprehensively, <code>deep_merge</code> is the way to go.</p>
+<h2 id="addict-library">addict Library</h2>
+<p><code>addict</code> is a small library that lets you work with
+dictionaries in a more convenient way. Instead of having to check if
+certain keys exist or worry about nested dictionaries,
+<code>addict</code> allows you to do something like</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>a.b.c.d <span class="op">=</span> <span class="dv">1</span> </span></code></pre></div>
+<p>and it will create any missing keys on the fly.</p>
+<p>First, install it with pip:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install addict </span></code></pre></div>
+<p>The main thing that makes addict special is its <code>Dict</code>
+class, which lets you access dictionary keys like they're object
+attributes.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+import micropip
+await micropip.install('addict')
+
+from addict import Dict
+
+# Create a Dict object
+config = Dict()
+
+# You can set values using dot notation
+config.database.host = 'localhost'
+config.database.port = 5432
+config.database.user = 'admin'
+
+# This automatically creates nested dictionaries as needed!
+print(config.database.host)  # output: localhost
+print(config)
+</code></pre>
+<p>What's cool is that you don't have to pre-create the nested structure
+- addict handles that for you. With a regular Python dict, you'd need to
+do something like:</p>
+<pre><code class="editor-py">
+regular_config = {}
+regular_config['database'] = {}
+regular_config['database']['host'] = 'localhost'
+print(regular_config['database']['host'])
+</code></pre>
+<p>You can also convert existing dictionaries to addict's Dict:</p>
+<pre><code class="editor-py">
+import micropip
+await micropip.install('addict')
+from addict import Dict
+
+settings = Dict({
+    'api': {
+        'endpoint': 'https://api.example.com',
+        'timeout': 30
+    }
+})
+
+# Now you can access it with dots
+print(settings.api.endpoint)
+
+# You can also use normal dictionary syntax if you prefer:
+print(settings["api"]["endpoint"])
+</code></pre>
+<p>One really handy feature is that it won't raise <code>KeyError</code>
+exceptions for missing keys - it just returns an empty <code>Dict</code>
+object:</p>
+<pre><code class="editor-py">
+import micropip
+await micropip.install('addict')
+from addict import Dict
+
+settings = Dict({
+    'api': {
+        'endpoint': 'https://api.example.com',
+        'timeout': 30
+    }
+})
+
+print(settings.nonexistent.key)     # prints: {}
+print(settings.get('nonexistent') == None)  # prints: True
+</code></pre>
+<p>And when you need a regular dictionary back, just use the
+<code>to_dict()</code> method:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>regular_dict <span class="op">=</span> config.to_dict()</span></code></pre></div>
+<p>Why use <code>addict</code>? - It can save you from writing endless
+checks for whether a key exists. - It keeps your code readable and
+straightforward, especially if you’re dealing with a lot of nested data
+structures.</p>
+<p>In short, <code>addict</code> is extremely handy if you frequently
+interact with complex JSON or nested dictionaries and want a more
+natural way to create and access nested data.</p>
+<h2 id="counting">Counting</h2>
+<p>Sometimes, you need to group or count items by several
+attributes.</p>
+<p>For example, you might want to count the number of people in a
+dataset based on their birth year, gender, and eye color. Typically,
+you’d have to check if each key (year, gender, eye color) exists in a
+dictionary. If not, you’d create it, and so on. With addict, any missing
+keys are automatically created on the fly when you assign a value to
+them.</p>
+<p>Addict's ability to easily access and modify deeply-nested attributes
+makes it ideal for counting. This offers a distinct advantage over
+<code>collections.Counter</code>, as it will easily allow for counting
+by multiple levels.</p>
+<p>Below is a list of dictionaries, each representing a person. Each
+person’s dictionary includes:</p>
+<ul>
+<li>born: the year the person was born (1980 or 1981)</li>
+<li>gender: M or F</li>
+<li>eyes: possible color values (blue or green)</li>
+</ul>
+<p>We want to count how many people exist for each combination of born
+year, gender, and eye color.</p>
+<pre><code class="editor-py">
+import micropip
+await micropip.install('addict')
+from addict import Dict
+
+data = [
+    {'born': 1980, 'gender': 'M', 'eyes': 'green'},
+    {'born': 1980, 'gender': 'F', 'eyes': 'green'},
+    {'born': 1980, 'gender': 'M', 'eyes': 'blue'},
+    {'born': 1980, 'gender': 'M', 'eyes': 'green'},
+    {'born': 1980, 'gender': 'M', 'eyes': 'green'},
+    {'born': 1980, 'gender': 'F', 'eyes': 'blue'},
+    {'born': 1981, 'gender': 'M', 'eyes': 'blue'},
+    {'born': 1981, 'gender': 'F', 'eyes': 'green'},
+    {'born': 1981, 'gender': 'M', 'eyes': 'blue'},
+    {'born': 1981, 'gender': 'F', 'eyes': 'blue'},
+    {'born': 1981, 'gender': 'M', 'eyes': 'green'},
+    {'born': 1981, 'gender': 'F', 'eyes': 'blue'}
+]
+
+counter = Dict()
+
+for row in data:
+    born   = row['born']
+    gender = row['gender']
+    eyes   = row['eyes']
+
+    counter[born][gender][eyes] += 1
+
+from pprint import pformat
+print(pformat(counter))
+</code></pre>
+<p>Output:</p>
+<pre><code>{1980: {&#39;F&#39;: {&#39;blue&#39;: 1, &#39;green&#39;: 1}, 
+        &#39;M&#39;: {&#39;blue&#39;: 1, &#39;green&#39;: 3}},
+ 1981: {&#39;F&#39;: {&#39;blue&#39;: 2, &#39;green&#39;: 1}, 
+        &#39;M&#39;: {&#39;blue&#39;: 2, &#39;green&#39;: 1}}}</code></pre>
+<p>Key Points</p>
+<ol type="1">
+<li>No Need for Key Checks.</li>
+<li>The nested structure is built on the fly.</li>
+<li>You can adapt the same approach to different data sets or additional
+attributes.</li>
+</ol>
+<p>In short, addict gives you a straightforward approach to working with
+nested dictionaries, making tasks like multi-criteria counting less
+prone to errors and more readable.</p>
 <h2 id="faqs-on-nested-dictionaries">FAQs on Nested Dictionaries</h2>
 <h3 id="what-is-a-nested-dictionary-in-python">What is a nested
 dictionary in Python?</h3>
@@ -1338,9 +1497,9 @@ data in a structured way.</p>
 values in a nested dictionary?</h3>
 <p>You can access values in a nested dictionary by chaining square
 bracket notation with the appropriate keys. For example:</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">&quot;user&quot;</span>: {<span class="st">&quot;name&quot;</span>: <span class="st">&quot;Alice&quot;</span>, <span class="st">&quot;age&quot;</span>: <span class="dv">30</span>}}</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&quot;user&quot;</span>][<span class="st">&quot;name&quot;</span>])  <span class="co"># Output: Alice</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {<span class="st">&quot;user&quot;</span>: {<span class="st">&quot;name&quot;</span>: <span class="st">&quot;Alice&quot;</span>, <span class="st">&quot;age&quot;</span>: <span class="dv">30</span>}}</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(data[<span class="st">&quot;user&quot;</span>][<span class="st">&quot;name&quot;</span>])  <span class="co"># Output: Alice</span></span></code></pre></div>
 <h3 id="is-there-a-limit-to-how-deeply-i-can-nest-dictionaries">Is there
 a limit to how deeply I can nest dictionaries?</h3>
 <p>While there's no technical limit to dictionary nesting in Python,
