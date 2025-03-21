@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title> </title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  <!--
+
+  /* RESET
+  =============================================================================*/
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+      abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+      strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, 
+      legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+      embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, 
+      section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* BODY
+  =============================================================================*/
+
+  body {
+    font-family: Arimo, Nunito Sans, arial, clean, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;  /* межстрочное */
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 38em; /* ширина текста */
+    margin: 0 auto;
+  }
+
+  body>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  body>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* BLOCKS
+  =============================================================================*/
+
+  p, blockquote, ul, ol, dl, table, pre {
+    margin: 0.4em 0; /* между абзацами (кроме первого и последнего) */
+  }
+
+  /* HEADERS
+  =============================================================================*/
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+    padding: 0;
+    font-family: Opinion Pro, Neucha;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
+  }
+
+  h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    /*color: #000;*/
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    /*color: #000;*/
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1.1em;
+  }
+
+  h6 {
+    /*color: #777;*/
+    font-size: 1.0em;
+  }
+
+  body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+    margin-top: 10px;
+  }
+
+  /* LINKS
+  =============================================================================*/
+
+  a {
+    color: #4183C4;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* LISTS
+  =============================================================================*/
+
+  ul, ol {
+    padding-left: 30px;
+  }
+
+  ul li > :first-child, 
+  ol li > :first-child, 
+  ul li ul:first-of-type, 
+  ol li ol:first-of-type, 
+  ul li ol:first-of-type, 
+  ol li ul:first-of-type {
+    margin-top: 0px;
+  }
+
+  ul ul, ul ol, ol ol, ol ul {
+    margin-bottom: 0;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px;
+  }
+
+  dl dt:first-child {
+    padding: 0;
+  }
+
+  dl dt>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dt>:last-child {
+    margin-bottom: 0px;
+  }
+
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+  }
+
+  dl dd>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dd>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* CODE
+  =============================================================================*/
+
+  pre, code, tt {
+    font-size: 1rem;
+    font-family: Iosevka, Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code, tt {
+    margin: 0 0px;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+  /*   background-color: #f8f8f8; это `code` */
+    background-color: #EFFFEF;
+    border-radius: 3px;
+  }
+
+  pre>code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: none;
+    background: transparent; 
+  }
+
+  .sourceCode{
+    background-color: #F6FFF7; /* светло-зелен для блоков кода */
+    font-size: 100%;
+  }
+    div.sourceCode{
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 7%);
+    }
+
+  pre {
+  /*   background-color: #f8f8f8; это ``` */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 8px;
+    border-radius: 3px;
+  }
+
+  pre code, pre tt {
+    background-color: transparent; 
+    border: none;
+  }
+
+  kbd {
+      -moz-border-bottom-colors: none;
+      -moz-border-left-colors: none;
+      -moz-border-right-colors: none;
+      -moz-border-top-colors: none;
+      background-color: #DDDDDD;
+      background-image: linear-gradient(#F1F1F1, #DDDDDD);
+      background-repeat: repeat-x;
+      border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+      border-image: none;
+      border-radius: 2px 2px 2px 2px;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Iosevka, Helvetica, Arial, sans-serif;
+      line-height: 10px;
+      padding: 1px 4px;
+      box-shadow: 0 1px 0 rgba(63,63,63,0.25);
+  }
+
+  /* QUOTES
+  =============================================================================*/
+
+  blockquote {
+    border-left: 4px solid #4493f8; /* blue */
+    padding: 0 15px;
+  }
+
+  blockquote>:first-child {
+    margin-top: 0px;
+  }
+
+  blockquote>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* HORIZONTAL RULES
+  =============================================================================*/
+
+  hr {
+    clear: both;
+    margin: 15px 0;
+    height: 0px;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    border-bottom: 2px dotted #777;
+    padding: 0;
+  }
+
+  /* TABLES
+  =============================================================================*/
+
+    table {                                     
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+       display: inline-block;
+       width: auto;
+    }
+
+  table th {
+    font-weight: bold;
+  }
+
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px 13px;
+    font-size: 1rem;
+  }
+
+  table tr {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+  }
+
+  /* IMAGES
+  =============================================================================*/
+
+  img {
+    max-width: 100%
+  }
+
+    .footnote-back, .footnote-ref {
+      color: #4493f8 !important; /* blue */
+    }
+    .footnote-ref, .footnote-ref::after {
+      font-size: 0.95em;
+      font-weight: 700;
+      vertical-align: super; 
+    }
+    .footnote-ref::after {
+      content:")";
+    }
+    .footnotes-end-of-document  {
+      font-size: 0.85em;  
+    }
+
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 1.5em;
+      margin: 0 0.8em 0.2em -1.8em;
+      vertical-align: middle;
+    }
+
+    .note, .tip, .warning, .important { 
+      border-left-style: solid;
+      border-left-width: 3px;
+      padding-left: 7px;
+    }
+    div.title {
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    div.title > p::before{
+       content: '#';
+       width: 1em; 
+       height: 1em; 
+       display: inline-block; 
+    }
+
+
+
+    .note > .title {
+       color: #4493f8; /* blue */
+    }   
+    .tip > .title {
+       color: #3fb950; /* green */
+    }
+    .warning > .title {
+       color: #d29922 /* olive */;
+    }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
+    .note  {
+       border-color: #4493f8; /* blue */
+    }
+    .tip  {
+       border-color: #3fb950; /* green */ 
+    }
+    .warning {
+       border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
+    }
+
+
+  #TOC {
+     font-family: Opinion Pro;
+     font-weight: bold;
+     font-size: 0.9em;
+     padding-left: 1em;
+     padding: .2em 0 .2em 1.0em;
+     background: #f7f7f7;
+     border: dashed 1px rgb(128,128,128); /* grey */
+     box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+  }
+
+    figure {
+      margin: 0.3em 0 0.9em;
+      background-color: #eee;
+  /*  text-align: center; */
+      box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+      border: dashed 1px rgb(128,128,128); /* grey */
+    }
+
+    figcaption {
+      font-family: Iosevka, Bitter;
+      font-style: italic;
+      font-size: 95%;
+      background-color: #eee;
+      color: #000;
+      padding: 0em 1em .2em;
+      margin: 0;
+    }
+
+    figure:hover{
+      background: #fff;
+    }
+
+    figure:hover figcaption {
+      background: #fff;
+    }
+
+
+  -->
+  </style>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/yonce.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/panel.min.js" integrity="sha512-kS6L87i8KUuHFk6QTxAyZSp1xza7zuaDg1Mt9rjQXjRQyraT0oqEeVbC6No/pxNvE1dMAZYBQ5r/8GZQUowhnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.js" integrity="sha512-8Rk4wB3MfgQfuOw95XW/vAU8PSTHWI5HddVRXfg+Ykk8CzsiOZkDpxVSrnYq2u/IqO499ooZ61fFHppuzB2ghA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.css" integrity="sha512-T8xB3MmwpA77VK9lUH3UkdUTnkmpqOxHF8OceOKaHrvpcXMSNX0xtpa9FoLTDAVO1JnB2UiMdVeI2V0HTHjTWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <style>
+          .container {
+              width: 100%;
+              max-width: 800px;
+              margin: 20px auto;
+              font-family: Arial, sans-serif;
+          }
+          
+          .code-block {
+              position: relative;
+              background: white;
+              background: #2c2c2c; /* цвет рамки вокруг кода #263238 material */ 
+              border: 1px solid #ddd; 
+              border-radius: 4px;
+              padding: 10px;  /* толщина рамки вокруг кода */
+              margin-bottom: 0px;
+          }
+          
+          .code-textarea {
+              width: 98%;
+              height: 400px;
+              margin-top: 35px;
+              font-family: Iosevka, monospace;
+              padding: 10px;
+              border: 1px solid #ccc; 
+              border-radius: 4px; 
+              resize: vertical;
+          }
+          
+          .run-button {
+              position: absolute;
+              bottom: 25px;
+              right: 30px;
+              padding: 6px 10px 2px;
+              background: #000;   /* для светлой темы */
+              color: #fff;
+              background: #fff;   /* для темной темы */
+              color: #000;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+          
+          .run-button:hover {
+              opacity: 1.0;
+          }
+  	.run-button:disabled {
+              animation: pulse 1.0s infinite;
+          }                     
+
+  @keyframes pulse {
+      0% {
+          transform: scale(1);
+          opacity: 1;
+      }
+      50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+      }
+      100% {
+          transform: scale(1);
+          opacity: 1;
+      }
+  }
+                 
+          .hide-button {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              padding: 8px 10px;
+              background: white;
+              color: black;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+
+          .hide-button:hover {
+              opacity: 1.0;
+          }
+
+          .output-block {
+              display: none; 
+              background: #fafafa;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              padding: 20px;
+              position: relative;
+          }
+          
+          .code-label,
+          .output-label {
+              position: absolute;
+              color: #999;
+              font-size: 0.8em;
+              border: 1px #DDD solid;
+              background: #F5F5F5;
+              padding: 2px 4px;
+              border-radius: 4px;
+              font-weight: bold;
+              z-index: 10;
+          }
+          .output-label {
+              top: 10px;
+              left: 10px;
+          }
+          .code-label{
+              top: 10px;
+              right: 25px;
+          }
+          
+          .output {
+              margin-top: 25px;
+              font-family: Iosevka, monospace;
+              white-space: pre-wrap;
+          }                       
+
+         .cm-s-default {
+              height: 100px;
+         }
+         .CodeMirror {
+              font-family: Iosevka, monospace; 
+              font-size: 0.95em;
+         }
+      </style>
+
+
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js" id="pyodide" defer></script>
+
+      <script>
+          let editors = [];
+          let pyodideReadyPromise;
+          
+          document.getElementById("pyodide").onload = function() {
+              async function initPyodide() {
+                  const pyodide = await loadPyodide();
+                  await pyodide.loadPackage("micropip");
+                  const micropip = pyodide.pyimport("micropip");
+                  //await micropip.install('scipy')
+                  //let scipy = await pyodide.loadPackage('scipy')
+                  // see https://pyodide.org/en/stable/usage/loading-packages.html
+                  return pyodide;
+              }
+              pyodideReadyPromise = initPyodide();
+
+              // Get all Python code blocks
+              const codeBlocks = document.querySelectorAll("pre code.editor-py");
+              
+              codeBlocks.forEach((el, index) => {
+                  const preEl = el.parentNode;
+                  const blockId = index + 1;
+                  const str = el.innerText.trim();
+                  const lines = str.split('\n').length;                
+                  const height = el.getAttribute('height') || (lines * 25 + 4) + 'px'; 
+                  const div = document.createElement("div");
+                  div.innerHTML = `
+                      <div class="container">
+                          <div class="code-block">
+                              <!-- <span class="code-label">Try to edit and run code example</span> -->
+                              <button class="run-button" onclick="runPython(${blockId})" id="button${blockId}">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M8 5v14l11-7z"> </path> 
+                                  </svg>
+                              </button>
+                              <textarea id="code${blockId}" class="code-textarea">${str}</textarea>
+                          </div>
+                          <div id="output-block${blockId}" class="output-block">
+                              <span class="output-label">Output:</span>
+                              <div id="output${blockId}" class="output"></div>
+
+                              <button class="hide-button" onclick="hideOutput(${blockId})">
+  				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="undefined"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+  			    </button>
+                          </div>
+                      </div>
+                  `;
+                  
+                  preEl.parentNode.insertBefore(div, preEl);
+                  preEl.parentNode.removeChild(preEl);
+                  
+                  // Initialize CodeMirror for this instance
+                  setTimeout(() => {
+                      const textarea = document.getElementById(`code${blockId}`);
+                      if (textarea) {
+                          editors[blockId] = CodeMirror.fromTextArea(textarea, {
+                              mode: "python",
+                            //  lineNumbers: true,
+                              theme: "default",
+                              theme: "material",
+                              theme: "mbo", 
+                              theme: "neat",
+                              theme: "yonce",
+                              extraKeys: {
+          			"F7": function(cm) {
+  			          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          			},
+          			"Esc": function(cm) {
+            			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+          			}
+        			    } 
+                          });
+                          editors[blockId].setSize(null, height);
+                      }
+                  }, 0);
+              });
+          };
+
+          async function hideOutput(blockId) {
+              const outputBlock = document.getElementById(`output-block${blockId}`);
+              outputBlock.style.display = 'none';
+          }
+
+          async function runPython(blockId) {
+              let pyodide = await pyodideReadyPromise;
+              try {
+                  const outputDiv = document.getElementById(`output${blockId}`);
+                  const outputBlock = document.getElementById(`output-block${blockId}`);
+                  const runButton = document.getElementById(`button${blockId}`);
+                  
+                  outputBlock.style.display = 'block';
+
+                  let output = "";
+                  pyodide.globals.set("print", (...args) => {
+                     output += args.join(" ") + "\n";
+                  });
+
+                  runButton.disabled = true;
+                  
+                  await pyodide.runPythonAsync(editors[blockId].getValue());
+                  
+                  runButton.disabled = false;
+                  outputDiv.innerText = output;
+              } catch(err) {
+                  document.getElementById(`button${blockId}`).disabled = false;
+                  document.getElementById(`output${blockId}`).innerText = "Error: " + err;
+              }
+          }
+      </script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"> </h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#python---list-comprehensions"
+id="toc-python---list-comprehensions">Python - List Comprehensions</a>
+<ul>
+<li><a href="#what-are-list-comprehensions"
+id="toc-what-are-list-comprehensions">What Are List
+Comprehensions?</a></li>
+<li><a href="#helpful-tips" id="toc-helpful-tips">Helpful Tips</a></li>
+<li><a href="#more-advanced-examples"
+id="toc-more-advanced-examples">More Advanced Examples</a></li>
+<li><a href="#assignment-with-the-walrus-operator"
+id="toc-assignment-with-the-walrus-operator">Assignment with the Walrus
+Operator</a></li>
+<li><a href="#nested-lists" id="toc-nested-lists">Nested Lists</a></li>
+<li><a href="#alternatives-to-list-comprehensions"
+id="toc-alternatives-to-list-comprehensions">Alternatives to List
+Comprehensions</a></li>
+<li><a href="#performance-comparison-list-comprehensions-vs.-loops"
+id="toc-performance-comparison-list-comprehensions-vs.-loops">Performance
+Comparison: List Comprehensions vs. Loops</a>
+<ul>
+<li><a href="#why-is-list-comprehension-faster"
+id="toc-why-is-list-comprehension-faster">Why Is List Comprehension
+Faster?</a></li>
+<li><a href="#when-to-use-each-method"
+id="toc-when-to-use-each-method">When to Use Each Method?</a></li>
+</ul></li>
+<li><a href="#practice-problems" id="toc-practice-problems">Practice
+Problems</a></li>
+<li><a href="#frequently-asked-questions-about-list-comprehensions"
+id="toc-frequently-asked-questions-about-list-comprehensions">Frequently
+Asked Questions About List Comprehensions</a>
+<ul>
+<li><a href="#what-is-a-list-comprehension-in-python"
+id="toc-what-is-a-list-comprehension-in-python">What is a List
+Comprehension in Python?</a></li>
+<li><a
+href="#whats-the-advantage-of-list-comprehension-over-a-regular-loop"
+id="toc-whats-the-advantage-of-list-comprehension-over-a-regular-loop">What’s
+the Advantage of List Comprehension Over a Regular Loop?</a></li>
+<li><a href="#can-you-use-nested-list-comprehensions"
+id="toc-can-you-use-nested-list-comprehensions">Can You Use Nested List
+Comprehensions?</a></li>
+<li><a
+href="#whats-the-difference-between-list-comprehension-and-generator-expression"
+id="toc-whats-the-difference-between-list-comprehension-and-generator-expression">What’s
+the Difference Between List Comprehension and Generator
+Expression?</a></li>
+<li><a href="#can-list-comprehensions-create-other-data-structures"
+id="toc-can-list-comprehensions-create-other-data-structures">Can List
+Comprehensions Create Other Data Structures?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="python---list-comprehensions">Python - List Comprehensions</h1>
+<p>Python is one of the most popular programming languages due to its
+simplicity, readability, and powerful tools. One of its elegant and
+efficient features is <strong>list comprehensions</strong>. This
+construct allows you to create lists concisely, replacing traditional
+<code>for</code> loops with a single line of code.</p>
+<h2 id="what-are-list-comprehensions">What Are List Comprehensions?</h2>
+<p>List comprehensions are a compact way to create lists in Python,
+combining a <code>for</code> loop and, optionally, conditional
+expressions (<code>if</code>). Instead of writing multiple lines of code
+with a loop, you can achieve the same result in one line. This not only
+saves time but also, when used correctly, makes your code more
+readable.</p>
+<p>The general syntax is as follows:</p>
+<p>✳️ <strong>Syntax:</strong></p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>[expression <span class="cf">for</span> item <span class="kw">in</span> iterable]</span></code></pre></div>
+<ul>
+<li><code>expression</code> — what you want to put in the list;</li>
+<li><code>item</code> — a variable representing each element of the
+iterable;</li>
+<li><code>iterable</code> — a data structure that can be iterated over
+(e.g., a list, string, tuple, <code>range</code>, etc.).</li>
+</ul>
+<p>If you need to add a condition, the syntax expands to:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>[expression <span class="cf">for</span> item <span class="kw">in</span> iterable <span class="cf">if</span> condition]</span></code></pre></div>
+<p>For more complex cases, you can use nested loops or multiple
+conditions.</p>
+<p>📌 <strong>Example 1. Creating a Simple List</strong></p>
+<p>Suppose you want to create a list of numbers from 0 to 9. Using a
+traditional loop, it would look like this:</p>
+<pre><code class="editor-py">
+numbers = []
+for i in range(10):
+    numbers.append(i)
+
+print(numbers)  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre>
+<p>With a list comprehension, it becomes a single line:</p>
+<pre><code class="editor-py">
+numbers = [i for i in range(10)]
+print(numbers)  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre>
+<p>📌 <strong>Example 2. Squaring Numbers</strong></p>
+<p>Let’s create a list of squares for numbers from 1 to 5:</p>
+<pre><code class="editor-py">
+squares = [x**2 for x in range(1, 6)]
+print(squares)  # [1, 4, 9, 16, 25]
+</code></pre>
+<p>Here, <code>x**2</code> is the expression applied to each
+<code>x</code> from the range <code>range(1, 6)</code>.</p>
+<p>📌 <strong>Example 3. Filtering with a Condition</strong></p>
+<p>Task: Get only even numbers from 0 to 10. With a regular loop:</p>
+<pre><code class="editor-py">
+even_numbers = []
+for i in range(11):
+    if i % 2 == 0:
+        even_numbers.append(i)
+print(even_numbers)  # [0, 2, 4, 6, 8, 10]
+</code></pre>
+<p>Using a list comprehension:</p>
+<pre><code class="editor-py">
+even_numbers = [i for i in range(11) if i % 2 == 0]
+print(even_numbers)  # [0, 2, 4, 6, 8, 10]
+</code></pre>
+<p>The condition <code>if i % 2 == 0</code> filters the elements,
+keeping only those that satisfy it.</p>
+<h2 id="helpful-tips">Helpful Tips</h2>
+<ul>
+<li><strong>Keep it simple</strong>: If a list comprehension exceeds
+80-100 characters or includes too much logic, consider using a regular
+loop instead.</li>
+<li><strong>Use meaningful names</strong>: Opt for descriptive variable
+names (e.g., <code>word</code> instead of <code>x</code>) to keep your
+code clear.</li>
+</ul>
+<h2 id="more-advanced-examples">More Advanced Examples</h2>
+<p>📌 <strong>Example 4. Capitalizing Words</strong></p>
+<p>Suppose you have a list of words and want to capitalize them:</p>
+<pre><code class="editor-py">
+words = ["hello", "world", "python"]
+upper_words = [word.upper() for word in words]
+print(upper_words)  # ['HELLO', 'WORLD', 'PYTHON']
+</code></pre>
+<p>Here, the <code>.upper()</code> method is applied to each element in
+the <code>words</code> list.</p>
+<p>📌 <strong>Example 5. Conditional Logic with if/else</strong></p>
+<p>List comprehensions support conditional expressions not just for
+filtering but also for transforming elements. For example, replace even
+numbers with “even” and odd numbers with “odd”:</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4, 5]
+result = ["even" if x % 2 == 0 else "odd" for x in numbers]
+print(result)  # ['odd', 'even', 'odd', 'even', 'odd']
+</code></pre>
+<blockquote>
+<p><strong>Note</strong>: When using <code>if/else</code>, it’s part of
+the expression and comes before the <code>for</code>. A filtering
+<code>if</code> (as in Example 3) goes after the <code>for</code>.</p>
+</blockquote>
+<p>📌 <strong>Example 6. Extracting First Letters from a List of
+Words</strong></p>
+<pre><code class="editor-py">
+words = ["apple", "banana", "cherry"]
+first_letters = [word[0] for word in words]
+print(first_letters)  # ['a', 'b', 'c']
+</code></pre>
+<p>📌 <strong>Example 7. Checking if a Number is a Power of
+Three</strong></p>
+<pre><code class="editor-py">
+def isPowerOfThree(n: int) -> bool:
+    return n in [3**x for x in range(21)]
+
+print(isPowerOfThree(3486784400))  # False
+print(isPowerOfThree(3486784401))  # True
+print(isPowerOfThree(3486784402))  # False
+</code></pre>
+<p>This code calculates powers of three up to a certain point without
+pre-generating the entire list.</p>
+<h2 id="assignment-with-the-walrus-operator">Assignment with the Walrus
+Operator</h2>
+<p>Introduced in Python 3.8, the walrus operator
+(<code>:=</code>)—nicknamed for its resemblance to a walrus’s face—lets
+you assign a value to a variable within an expression. Let’s see how it
+works with a simple example.</p>
+<p>Imagine you need to query temperature data 10 times (e.g., via an
+API) and keep only values above 100°F. Normally, in a list comprehension
+with a condition, you can’t save the result of a function call and test
+it in one go. The walrus operator solves this by computing the value,
+assigning it to a variable, and checking it—all in one step.</p>
+<p>Here’s an example with a function that returns random
+temperatures:</p>
+<pre><code class="editor-py">
+import random
+
+def get_weather_data():
+    return random.randrange(90, 110)  # Random temperature between 90 and 110
+
+# Keep only temperatures >= 100
+temps = [temp for _ in range(10) if (temp := get_weather_data()) >= 100]
+print(temps)  # E.g., [105, 102, 108]
+</code></pre>
+<p>The <code>:=</code> operator inside the <code>if</code> condition
+calls <code>get_weather_data()</code>, assigns the result to
+<code>temp</code>, and checks if it’s at least 100. If true, the value
+is added to the list. Note: The walrus operator must be in the condition
+(<code>if</code>) part, not at the start of the comprehension.</p>
+<p>While not commonly needed in list comprehensions, it’s handy for
+making code shorter and cleaner when applicable.</p>
+<h2 id="nested-lists">Nested Lists</h2>
+<p>List comprehensions can handle nested structures. For example,
+flattening a list of lists:</p>
+<pre><code class="editor-py">
+nested_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flatten_list = [item for sublist in nested_list for item in sublist]
+print(flatten_list)  # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+</code></pre>
+<p>Here, two <code>for</code> clauses are used: first iterating over
+sublists (<code>sublist</code>), then over items within them
+(<code>item</code>).</p>
+<p>📌 <strong>Example. Creating a 4x4 Multiplication Table</strong></p>
+<pre><code class="editor-py">
+multiplication_table = [[i * j for j in range(1, 5)] for i in range(1, 5)]
+print(multiplication_table)
+# [[1, 2, 3, 4], [2, 4, 6, 8], [3, 6, 9, 12], [4, 8, 12, 16]]
+</code></pre>
+<p>This creates a multiplication table for numbers 1 through 4.</p>
+<h2 id="alternatives-to-list-comprehensions">Alternatives to List
+Comprehensions</h2>
+<ol type="1">
+<li><strong>Generator Expressions</strong>: Use parentheses
+<code>()</code> instead of brackets <code>[]</code> if you want an
+iterator instead of a list. This saves memory.</li>
+</ol>
+<pre><code class="editor-py">
+gen = (x**2 for x in range(10))
+print(list(gen))  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre>
+<ol start="2" type="1">
+<li><strong><code>map()</code> and <code>filter()</code></strong>: These
+offer a functional approach but are less readable for beginners:</li>
+</ol>
+<pre><code class="editor-py">
+squares = list(map(lambda x: x**2, range(10)))
+print(squares)  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+</code></pre>
+<ol start="3" type="1">
+<li><strong>Regular Loops</strong>: For complex logic, don’t hesitate to
+use a <code>for</code> loop.</li>
+</ol>
+<h2
+id="performance-comparison-list-comprehensions-vs.-loops">Performance
+Comparison: List Comprehensions vs. Loops</h2>
+<p>List comprehensions are typically slightly faster than equivalent
+<code>for</code> loops that build a list, likely because they avoid
+calling <code>.append()</code> on each iteration.</p>
+<p>Let’s explore a task: calculating the sum of squares of numbers in a
+list. We’ll compare several approaches—<code>for</code> loop,
+<code>map()</code>, <code>reduce()</code>, list comprehension, and
+generator expression—measuring their performance and explaining the
+differences.</p>
+<p><strong>Task</strong>: Find the sum of squares for the list
+<code>[1, 2, 5, 3, 1, 2, 5, 3]</code>. The result should be 78. Here’s
+how we can implement it:</p>
+<ul>
+<li><strong><code>for</code> Loop</strong>: A straightforward approach
+for beginners. We iterate, square each number, append to a list, and sum
+it.</li>
+<li><strong><code>map()</code></strong>: Applies a function (squaring)
+to each element and returns an iterator, which we sum.</li>
+<li><strong><code>reduce()</code></strong>: From the
+<code>functools</code> module, it “reduces” the list to a single value
+by accumulating the sum of squares.</li>
+<li><strong>List Comprehension</strong>: A concise, “Pythonic” way to
+create the list of squares and sum it.</li>
+<li><strong>Generator Expression</strong>: Uses <code>()</code> to
+create a generator that computes values on-the-fly, summed with
+<code>sum()</code>.</li>
+</ul>
+<p>We’ll use the <code>cProfile</code> module to measure performance,
+running each function a million times on the list
+<code>[1, 2, 5, 3, 1, 2, 5, 3]</code>:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> <span class="bu">reduce</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> reduce_(numbers):</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">reduce</span>(<span class="kw">lambda</span> <span class="bu">sum</span>, <span class="bu">next</span>: <span class="bu">sum</span> <span class="op">+</span> <span class="bu">next</span> <span class="op">*</span> <span class="bu">next</span>, numbers, <span class="dv">0</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> for_loop(numbers):</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> []</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> numbers:</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        a.append(i<span class="op">*</span>i)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="bu">sum</span>(a)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> map_(numbers):</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    sqrt <span class="op">=</span> <span class="kw">lambda</span> x: x<span class="op">*</span>x</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>(<span class="bu">map</span>(sqrt, numbers))</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> list_comp(numbers):</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>([i<span class="op">*</span>i <span class="cf">for</span> i <span class="kw">in</span> numbers])</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gen_expr(numbers):</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">sum</span>((i<span class="op">*</span>i <span class="cf">for</span> i <span class="kw">in</span> numbers))</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>funcs <span class="op">=</span> [reduce_, for_loop, map_, list_comp, gen_expr]</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>lst <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">3</span>]</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cProfile</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> funcs:</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;=&#39;</span> <span class="op">*</span> <span class="dv">25</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;Profiling:&quot;</span>, f.<span class="va">__name__</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&#39;=&#39;</span> <span class="op">*</span> <span class="dv">25</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    pr <span class="op">=</span> cProfile.Profile()</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span><span class="op">**</span><span class="dv">6</span>):</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>        pr.runcall(f, lst)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    pr.create_stats()</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    pr.print_stats()</span></code></pre></div>
+<p><strong>Results</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Function or Method</th>
+<th>Time (seconds)</th>
+<th>Function Calls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reduce()</code></td>
+<td>1.577</td>
+<td>11M</td>
+</tr>
+<tr>
+<td><code>for</code> loop</td>
+<td>1.596</td>
+<td>11M</td>
+</tr>
+<tr>
+<td><code>map()</code></td>
+<td>1.510</td>
+<td>11M</td>
+</tr>
+<tr>
+<td>List Comprehension</td>
+<td>0.814</td>
+<td>4M</td>
+</tr>
+<tr>
+<td>Generator Expression</td>
+<td>1.593</td>
+<td>12M</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note</strong>: Your results may vary depending on your
+system, Python version, list size, and current workload.</p>
+</blockquote>
+<p>Interestingly, switching from a list comprehension
+<code>[i*i for i in numbers]</code> to a generator expression
+<code>(i*i for i in numbers)</code> worsens performance.</p>
+<h3 id="why-is-list-comprehension-faster">Why Is List Comprehension
+Faster?</h3>
+<p>List comprehension stands out as the clear winner in this test.
+Here’s why:</p>
+<ul>
+<li><strong>Lower Overhead</strong>: Unlike a <code>for</code> loop,
+which calls <code>.append()</code> each iteration, list comprehension
+builds the list in a single pass at the interpreter level, reducing
+operations.</li>
+<li><strong>Python Optimization</strong>: List comprehensions are
+specifically optimized in Python’s implementation (written in C), making
+them highly efficient.</li>
+<li><strong>Fewer Function Calls</strong>: <code>map()</code> and
+<code>reduce()</code> involve extra function calls (e.g.,
+<code>lambda</code>), adding slight overhead. List comprehension avoids
+this, while generator expressions triple the function calls in this
+case.</li>
+</ul>
+<h3 id="when-to-use-each-method">When to Use Each Method?</h3>
+<ul>
+<li><strong><code>for</code> Loop</strong>: Great for learning and
+complex logic where you need more control.</li>
+<li><strong><code>map()</code></strong>: Handy for functional
+programming or when you already have a function to apply.</li>
+<li><strong><code>reduce()</code></strong>: Useful for reducing data to
+a single value (e.g., product or maximum).</li>
+<li><strong>List Comprehension</strong>: The best choice for simple list
+operations when speed and readability matter.</li>
+<li><strong>Generator Expressions</strong>: Ideal for memory efficiency
+with large datasets that don’t fit in memory. For our small list (8
+elements), memory savings aren’t needed, and the overhead becomes
+noticeable.</li>
+</ul>
+<p>Choosing between list comprehensions and generator expressions is a
+trade-off between speed and memory. For beginners, this is a great
+example of how small code changes can significantly impact
+performance.</p>
+<p><strong>Conclusion</strong>: For this task, list comprehension is the
+fastest and most readable solution. It’s not always the best
+choice—context matters—but for simple list operations, it’s a fantastic
+tool worth mastering.</p>
+<h2 id="practice-problems">Practice Problems</h2>
+<p>List comprehensions are a powerful tool in a Python programmer’s
+toolkit, enabling concise and expressive code. The key is balancing
+brevity with readability.</p>
+<p>Try writing some list comprehensions yourself to reinforce the
+material:</p>
+<ul>
+<li>Create a list of the first 10 Fibonacci numbers.</li>
+<li>Filter a list of strings, keeping only those longer than 5
+characters.</li>
+<li>Transform a list of numbers, replacing negative values with 0.</li>
+</ul>
+<h2 id="frequently-asked-questions-about-list-comprehensions">Frequently
+Asked Questions About List Comprehensions</h2>
+<h3 id="what-is-a-list-comprehension-in-python">What is a List
+Comprehension in Python?</h3>
+<p>A list comprehension is a concise way to create lists in Python using
+a single line of code. It replaces traditional <code>for</code> loops
+and <code>.append()</code> calls. For example,
+<code>[x * 2 for x in range(5)]</code> produces
+<code>[0, 2, 4, 6, 8]</code>.</p>
+<h3
+id="whats-the-advantage-of-list-comprehension-over-a-regular-loop">What’s
+the Advantage of List Comprehension Over a Regular Loop?</h3>
+<p>List comprehensions are more concise, readable, and often faster than
+equivalent <code>for</code> loops.</p>
+<h3 id="can-you-use-nested-list-comprehensions">Can You Use Nested List
+Comprehensions?</h3>
+<p>Yes, you can create nested lists or process nested structures. For
+example:</p>
+<pre><code class="editor-py">
+print([[i * j for j in range(3)] for i in range(3)])
+# [[0, 0, 0], [0, 1, 2], [0, 2, 4]]
+</code></pre>
+<p>However, these can become hard to read, so use them judiciously.</p>
+<h3
+id="whats-the-difference-between-list-comprehension-and-generator-expression">What’s
+the Difference Between List Comprehension and Generator Expression?</h3>
+<p>List comprehensions use square brackets <code>[]</code> and create a
+full list in memory. Generator expressions use parentheses
+<code>()</code> and produce a generator that computes values on-the-fly,
+saving memory for large datasets:</p>
+<pre><code class="editor-py">
+# List comprehension
+squares_list = [x**2 for x in range(1000)]  # Creates the list in memory
+
+# Generator expression
+squares_gen = (x**2 for x in range(1000))   # Computes values as needed
+</code></pre>
+<h3 id="can-list-comprehensions-create-other-data-structures">Can List
+Comprehensions Create Other Data Structures?</h3>
+<p>Yes, similar syntax works for:</p>
+<ul>
+<li>Dictionaries (Dict Comprehension):
+<code>{key: value for item in iterable}</code></li>
+<li>Sets (Set Comprehension):
+<code>{expression for item in iterable}</code></li>
+</ul>
+</body>
+</html>

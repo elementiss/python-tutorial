@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title> </title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  <!--
+
+  /* RESET
+  =============================================================================*/
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+      abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+      strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, 
+      legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+      embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, 
+      section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* BODY
+  =============================================================================*/
+
+  body {
+    font-family: Arimo, Nunito Sans, arial, clean, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;  /* межстрочное */
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 38em; /* ширина текста */
+    margin: 0 auto;
+  }
+
+  body>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  body>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* BLOCKS
+  =============================================================================*/
+
+  p, blockquote, ul, ol, dl, table, pre {
+    margin: 0.4em 0; /* между абзацами (кроме первого и последнего) */
+  }
+
+  /* HEADERS
+  =============================================================================*/
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+    padding: 0;
+    font-family: Opinion Pro, Neucha;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
+  }
+
+  h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    /*color: #000;*/
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    /*color: #000;*/
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1.1em;
+  }
+
+  h6 {
+    /*color: #777;*/
+    font-size: 1.0em;
+  }
+
+  body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+    margin-top: 10px;
+  }
+
+  /* LINKS
+  =============================================================================*/
+
+  a {
+    color: #4183C4;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* LISTS
+  =============================================================================*/
+
+  ul, ol {
+    padding-left: 30px;
+  }
+
+  ul li > :first-child, 
+  ol li > :first-child, 
+  ul li ul:first-of-type, 
+  ol li ol:first-of-type, 
+  ul li ol:first-of-type, 
+  ol li ul:first-of-type {
+    margin-top: 0px;
+  }
+
+  ul ul, ul ol, ol ol, ol ul {
+    margin-bottom: 0;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px;
+  }
+
+  dl dt:first-child {
+    padding: 0;
+  }
+
+  dl dt>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dt>:last-child {
+    margin-bottom: 0px;
+  }
+
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+  }
+
+  dl dd>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dd>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* CODE
+  =============================================================================*/
+
+  pre, code, tt {
+    font-size: 1rem;
+    font-family: Iosevka, Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code, tt {
+    margin: 0 0px;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+  /*   background-color: #f8f8f8; это `code` */
+    background-color: #EFFFEF;
+    border-radius: 3px;
+  }
+
+  pre>code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: none;
+    background: transparent; 
+  }
+
+  .sourceCode{
+    background-color: #F6FFF7; /* светло-зелен для блоков кода */
+    font-size: 100%;
+  }
+    div.sourceCode{
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 7%);
+    }
+
+  pre {
+  /*   background-color: #f8f8f8; это ``` */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 8px;
+    border-radius: 3px;
+  }
+
+  pre code, pre tt {
+    background-color: transparent; 
+    border: none;
+  }
+
+  kbd {
+      -moz-border-bottom-colors: none;
+      -moz-border-left-colors: none;
+      -moz-border-right-colors: none;
+      -moz-border-top-colors: none;
+      background-color: #DDDDDD;
+      background-image: linear-gradient(#F1F1F1, #DDDDDD);
+      background-repeat: repeat-x;
+      border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+      border-image: none;
+      border-radius: 2px 2px 2px 2px;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Iosevka, Helvetica, Arial, sans-serif;
+      line-height: 10px;
+      padding: 1px 4px;
+      box-shadow: 0 1px 0 rgba(63,63,63,0.25);
+  }
+
+  /* QUOTES
+  =============================================================================*/
+
+  blockquote {
+    border-left: 4px solid #4493f8; /* blue */
+    padding: 0 15px;
+  }
+
+  blockquote>:first-child {
+    margin-top: 0px;
+  }
+
+  blockquote>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* HORIZONTAL RULES
+  =============================================================================*/
+
+  hr {
+    clear: both;
+    margin: 15px 0;
+    height: 0px;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    border-bottom: 2px dotted #777;
+    padding: 0;
+  }
+
+  /* TABLES
+  =============================================================================*/
+
+    table {                                     
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+       display: inline-block;
+       width: auto;
+    }
+
+  table th {
+    font-weight: bold;
+  }
+
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px 13px;
+    font-size: 1rem;
+  }
+
+  table tr {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+  }
+
+  /* IMAGES
+  =============================================================================*/
+
+  img {
+    max-width: 100%
+  }
+
+    .footnote-back, .footnote-ref {
+      color: #4493f8 !important; /* blue */
+    }
+    .footnote-ref, .footnote-ref::after {
+      font-size: 0.95em;
+      font-weight: 700;
+      vertical-align: super; 
+    }
+    .footnote-ref::after {
+      content:")";
+    }
+    .footnotes-end-of-document  {
+      font-size: 0.85em;  
+    }
+
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 1.5em;
+      margin: 0 0.8em 0.2em -1.8em;
+      vertical-align: middle;
+    }
+
+    .note, .tip, .warning, .important { 
+      border-left-style: solid;
+      border-left-width: 3px;
+      padding-left: 7px;
+    }
+    div.title {
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    div.title > p::before{
+       content: '#';
+       width: 1em; 
+       height: 1em; 
+       display: inline-block; 
+    }
+
+
+
+    .note > .title {
+       color: #4493f8; /* blue */
+    }   
+    .tip > .title {
+       color: #3fb950; /* green */
+    }
+    .warning > .title {
+       color: #d29922 /* olive */;
+    }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
+    .note  {
+       border-color: #4493f8; /* blue */
+    }
+    .tip  {
+       border-color: #3fb950; /* green */ 
+    }
+    .warning {
+       border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
+    }
+
+
+  #TOC {
+     font-family: Opinion Pro;
+     font-weight: bold;
+     font-size: 0.9em;
+     padding-left: 1em;
+     padding: .2em 0 .2em 1.0em;
+     background: #f7f7f7;
+     border: dashed 1px rgb(128,128,128); /* grey */
+     box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+  }
+
+    figure {
+      margin: 0.3em 0 0.9em;
+      background-color: #eee;
+  /*  text-align: center; */
+      box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+      border: dashed 1px rgb(128,128,128); /* grey */
+    }
+
+    figcaption {
+      font-family: Iosevka, Bitter;
+      font-style: italic;
+      font-size: 95%;
+      background-color: #eee;
+      color: #000;
+      padding: 0em 1em .2em;
+      margin: 0;
+    }
+
+    figure:hover{
+      background: #fff;
+    }
+
+    figure:hover figcaption {
+      background: #fff;
+    }
+
+
+  -->
+  </style>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/yonce.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/panel.min.js" integrity="sha512-kS6L87i8KUuHFk6QTxAyZSp1xza7zuaDg1Mt9rjQXjRQyraT0oqEeVbC6No/pxNvE1dMAZYBQ5r/8GZQUowhnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.js" integrity="sha512-8Rk4wB3MfgQfuOw95XW/vAU8PSTHWI5HddVRXfg+Ykk8CzsiOZkDpxVSrnYq2u/IqO499ooZ61fFHppuzB2ghA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.css" integrity="sha512-T8xB3MmwpA77VK9lUH3UkdUTnkmpqOxHF8OceOKaHrvpcXMSNX0xtpa9FoLTDAVO1JnB2UiMdVeI2V0HTHjTWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <style>
+          .container {
+              width: 100%;
+              max-width: 800px;
+              margin: 20px auto;
+              font-family: Arial, sans-serif;
+          }
+          
+          .code-block {
+              position: relative;
+              background: white;
+              background: #2c2c2c; /* цвет рамки вокруг кода #263238 material */ 
+              border: 1px solid #ddd; 
+              border-radius: 4px;
+              padding: 10px;  /* толщина рамки вокруг кода */
+              margin-bottom: 0px;
+          }
+          
+          .code-textarea {
+              width: 98%;
+              height: 400px;
+              margin-top: 35px;
+              font-family: Iosevka, monospace;
+              padding: 10px;
+              border: 1px solid #ccc; 
+              border-radius: 4px; 
+              resize: vertical;
+          }
+          
+          .run-button {
+              position: absolute;
+              bottom: 25px;
+              right: 30px;
+              padding: 6px 10px 2px;
+              background: #000;   /* для светлой темы */
+              color: #fff;
+              background: #fff;   /* для темной темы */
+              color: #000;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+          
+          .run-button:hover {
+              opacity: 1.0;
+          }
+  	.run-button:disabled {
+              animation: pulse 1.0s infinite;
+          }                     
+
+  @keyframes pulse {
+      0% {
+          transform: scale(1);
+          opacity: 1;
+      }
+      50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+      }
+      100% {
+          transform: scale(1);
+          opacity: 1;
+      }
+  }
+                 
+          .hide-button {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              padding: 8px 10px;
+              background: white;
+              color: black;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+
+          .hide-button:hover {
+              opacity: 1.0;
+          }
+
+          .output-block {
+              display: none; 
+              background: #fafafa;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              padding: 20px;
+              position: relative;
+          }
+          
+          .code-label,
+          .output-label {
+              position: absolute;
+              color: #999;
+              font-size: 0.8em;
+              border: 1px #DDD solid;
+              background: #F5F5F5;
+              padding: 2px 4px;
+              border-radius: 4px;
+              font-weight: bold;
+              z-index: 10;
+          }
+          .output-label {
+              top: 10px;
+              left: 10px;
+          }
+          .code-label{
+              top: 10px;
+              right: 25px;
+          }
+          
+          .output {
+              margin-top: 25px;
+              font-family: Iosevka, monospace;
+              white-space: pre-wrap;
+          }                       
+
+         .cm-s-default {
+              height: 100px;
+         }
+         .CodeMirror {
+              font-family: Iosevka, monospace; 
+              font-size: 0.95em;
+         }
+      </style>
+
+
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js" id="pyodide" defer></script>
+
+      <script>
+          let editors = [];
+          let pyodideReadyPromise;
+          
+          document.getElementById("pyodide").onload = function() {
+              async function initPyodide() {
+                  const pyodide = await loadPyodide();
+                  await pyodide.loadPackage("micropip");
+                  const micropip = pyodide.pyimport("micropip");
+                  //await micropip.install('scipy')
+                  //let scipy = await pyodide.loadPackage('scipy')
+                  // see https://pyodide.org/en/stable/usage/loading-packages.html
+                  return pyodide;
+              }
+              pyodideReadyPromise = initPyodide();
+
+              // Get all Python code blocks
+              const codeBlocks = document.querySelectorAll("pre code.editor-py");
+              
+              codeBlocks.forEach((el, index) => {
+                  const preEl = el.parentNode;
+                  const blockId = index + 1;
+                  const str = el.innerText.trim();
+                  const lines = str.split('\n').length;                
+                  const height = el.getAttribute('height') || (lines * 25 + 4) + 'px'; 
+                  const div = document.createElement("div");
+                  div.innerHTML = `
+                      <div class="container">
+                          <div class="code-block">
+                              <!-- <span class="code-label">Try to edit and run code example</span> -->
+                              <button class="run-button" onclick="runPython(${blockId})" id="button${blockId}">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M8 5v14l11-7z"> </path> 
+                                  </svg>
+                              </button>
+                              <textarea id="code${blockId}" class="code-textarea">${str}</textarea>
+                          </div>
+                          <div id="output-block${blockId}" class="output-block">
+                              <span class="output-label">Output:</span>
+                              <div id="output${blockId}" class="output"></div>
+
+                              <button class="hide-button" onclick="hideOutput(${blockId})">
+  				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="undefined"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+  			    </button>
+                          </div>
+                      </div>
+                  `;
+                  
+                  preEl.parentNode.insertBefore(div, preEl);
+                  preEl.parentNode.removeChild(preEl);
+                  
+                  // Initialize CodeMirror for this instance
+                  setTimeout(() => {
+                      const textarea = document.getElementById(`code${blockId}`);
+                      if (textarea) {
+                          editors[blockId] = CodeMirror.fromTextArea(textarea, {
+                              mode: "python",
+                            //  lineNumbers: true,
+                              theme: "default",
+                              theme: "material",
+                              theme: "mbo", 
+                              theme: "neat",
+                              theme: "yonce",
+                              extraKeys: {
+          			"F7": function(cm) {
+  			          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          			},
+          			"Esc": function(cm) {
+            			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+          			}
+        			    } 
+                          });
+                          editors[blockId].setSize(null, height);
+                      }
+                  }, 0);
+              });
+          };
+
+          async function hideOutput(blockId) {
+              const outputBlock = document.getElementById(`output-block${blockId}`);
+              outputBlock.style.display = 'none';
+          }
+
+          async function runPython(blockId) {
+              let pyodide = await pyodideReadyPromise;
+              try {
+                  const outputDiv = document.getElementById(`output${blockId}`);
+                  const outputBlock = document.getElementById(`output-block${blockId}`);
+                  const runButton = document.getElementById(`button${blockId}`);
+                  
+                  outputBlock.style.display = 'block';
+
+                  let output = "";
+                  pyodide.globals.set("print", (...args) => {
+                     output += args.join(" ") + "\n";
+                  });
+
+                  runButton.disabled = true;
+                  
+                  await pyodide.runPythonAsync(editors[blockId].getValue());
+                  
+                  runButton.disabled = false;
+                  outputDiv.innerText = output;
+              } catch(err) {
+                  document.getElementById(`button${blockId}`).disabled = false;
+                  document.getElementById(`output${blockId}`).innerText = "Error: " + err;
+              }
+          }
+      </script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"> </h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#python-removing-elements-from-a-list"
+id="toc-python-removing-elements-from-a-list">Python: Removing Elements
+from a List</a>
+<ul>
+<li><a href="#how-to-remove-elements-from-lists"
+id="toc-how-to-remove-elements-from-lists">How to Remove Elements From
+Lists</a>
+<ul>
+<li><a href="#the-remove-method" id="toc-the-remove-method">1. The
+<code>remove()</code> Method</a></li>
+<li><a href="#the-pop-method" id="toc-the-pop-method">2. The
+<code>pop()</code> Method</a></li>
+<li><a href="#the-del-statement" id="toc-the-del-statement">3. The
+<code>del</code> Statement</a></li>
+<li><a href="#the-clear-method" id="toc-the-clear-method">4. The
+<code>clear()</code> Method</a></li>
+<li><a href="#using-list-comprehension"
+id="toc-using-list-comprehension">5. Using List Comprehension</a></li>
+<li><a href="#the-filter-method-for-conditional-removal"
+id="toc-the-filter-method-for-conditional-removal">6. The
+<code>filter()</code> Method for Conditional Removal</a></li>
+</ul></li>
+<li><a href="#comparison-of-methods"
+id="toc-comparison-of-methods">Comparison of Methods</a></li>
+<li><a href="#useful-tips" id="toc-useful-tips">Useful Tips</a>
+<ul>
+<li><a href="#removing-all-occurrences"
+id="toc-removing-all-occurrences">Removing All Occurrences</a></li>
+</ul></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+<li><a href="#frequently-asked-questions-about-removing-list-elements"
+id="toc-frequently-asked-questions-about-removing-list-elements">Frequently
+Asked Questions About Removing List Elements</a>
+<ul>
+<li><a href="#what-errors-can-occur-when-removing-elements-from-a-list"
+id="toc-what-errors-can-occur-when-removing-elements-from-a-list">What
+errors can occur when removing elements from a list?</a></li>
+<li><a href="#how-do-i-remove-the-first-element-of-a-list"
+id="toc-how-do-i-remove-the-first-element-of-a-list">How do I remove the
+first element of a list?</a></li>
+<li><a href="#how-do-i-remove-the-last-element-of-a-list"
+id="toc-how-do-i-remove-the-last-element-of-a-list">How do I remove the
+last element of a list?</a></li>
+<li><a href="#how-do-i-clear-an-entire-list"
+id="toc-how-do-i-clear-an-entire-list">How do I clear an entire
+list?</a></li>
+<li><a
+href="#how-do-i-remove-all-occurrences-of-a-specific-value-from-a-list"
+id="toc-how-do-i-remove-all-occurrences-of-a-specific-value-from-a-list">How
+do I remove all occurrences of a specific value from a list?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="python-removing-elements-from-a-list">Python: Removing Elements
+from a List</h1>
+<p>Lists in Python are one of the fundamental data types, widely used
+for storing ordered collections of items. Let’s explore how to remove
+elements from a list.</p>
+<h2 id="how-to-remove-elements-from-lists">How to Remove Elements From
+Lists</h2>
+<p>Python offers several ways to remove elements from a list. The choice
+of method depends on what you want to remove: a specific value, an
+element by its index, or multiple elements that meet a certain
+condition.</p>
+<h3 id="the-remove-method">1. The <code>remove()</code> Method</h3>
+<p>The <code>remove()</code> method is used to delete the first
+occurrence of a specified value from a list.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>.remove(value)</span></code></pre></div>
+<p>Key Features:</p>
+<ul>
+<li>Removes only the first occurrence of the value.</li>
+<li>Raises a <code>ValueError</code> if the element is not in the
+list.</li>
+<li>Modifies the original list and returns nothing.</li>
+</ul>
+<p>📌 Example 1: Removing an Existing Element</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear", "orange"]
+fruits.remove("banana")
+print(fruits)  # ['apple', 'pear', 'orange']
+</code></pre>
+<p>We passed the value <code>"banana"</code> to the
+<code>remove()</code> method, and it was removed from the list.</p>
+<p>📌 Example 2: Attempting to Remove a Non-Existent Element</p>
+<pre><code class="editor-py">
+fruits = ["apple", "pear", "orange"]
+fruits.remove("kiwi")  # Error!
+</code></pre>
+<p>Since <code>"kiwi"</code> isn’t in the list, Python raises a
+<code>ValueError: list.remove(x): x not in list</code>. To avoid this,
+you can check if the element exists using the <code>in</code> operator
+beforehand.</p>
+<p>📌 Example 3: Removal with a Check</p>
+<pre><code class="editor-py">
+fruits = ["apple", "pear", "orange"]
+if "kiwi" in fruits:
+    fruits.remove("kiwi")
+else:
+    print("Kiwi is not in the list!")
+print(fruits)  # ['apple', 'pear', 'orange']
+</code></pre>
+<p>Here, we first check if the element exists in the list before
+attempting to remove it.</p>
+<h3 id="the-pop-method">2. The <code>pop()</code> Method</h3>
+<p>The <code>pop()</code> method removes an element at a specified index
+and returns its value.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>removed_element <span class="op">=</span> <span class="bu">list</span>.pop(index)</span></code></pre></div>
+<p>Key Features:</p>
+<ul>
+<li>If no index is provided, it removes and returns the last
+element.</li>
+<li>Raises an <code>IndexError</code> if the index is out of range.</li>
+<li>Returns the removed element, allowing you to use it later.</li>
+</ul>
+<p>The <code>pop()</code> method supports negative indices. In Python,
+negative indices are used to access elements from the end of the list:
+-1 is the last element, -2 is the second-to-last, and so on. The
+<code>pop()</code> method works with negative indices just like positive
+ones, removing and returning the element at the specified position.</p>
+<p>📌 Example 1: Removing by Index</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear", "orange"]
+removed_item = fruits.pop(1)
+print(removed_item)  # banana
+print(fruits)        # ['apple', 'pear', 'orange']
+</code></pre>
+<p>We removed the element at index 1 (the second item), and it was
+returned to the variable <code>removed_item</code>.</p>
+<p>📌 Example 2: Removing the Last Element</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+last_item = fruits.pop()
+print(last_item)  # pear
+print(fruits)     # ['apple', 'banana']
+</code></pre>
+<p>Without an index, <code>pop()</code> removes the last element (-1 is
+the default argument).</p>
+<p>📌 Example 3: Error with an Invalid Index</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana"]
+fruits.pop(5)  # Error!
+</code></pre>
+<p>Index 5 is out of range, so Python raises an
+<code>IndexError: pop index out of range</code>.</p>
+<p>📌 Example 4: Using a Negative Index</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear", "orange"]
+removed_item = fruits.pop(-1)  # Removes the last element
+print(removed_item)  # orange
+print(fruits)        # ['apple', 'banana', 'pear']
+</code></pre>
+<p>If the negative index is out of range (e.g., -5 for a list with 4
+elements), an <code>IndexError: pop index out of range</code> will
+occur.</p>
+<p>Negative indices are especially handy when you want to remove
+elements from the end without calculating the list’s length.</p>
+<h3 id="the-del-statement">3. The <code>del</code> Statement</h3>
+<p>The <code>del</code> statement allows you to remove an element by
+index or an entire slice of elements. Unlike <code>pop()</code>, it
+doesn’t return the removed elements.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> <span class="bu">list</span>[index]          <span class="co"># Remove one element</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> <span class="bu">list</span>[start:end]      <span class="co"># Remove a slice</span></span></code></pre></div>
+<p>Key Features:</p>
+<ul>
+<li>Doesn’t return the removed elements.</li>
+<li>Can delete multiple elements at once using a slice.</li>
+<li>Raises an <code>IndexError</code> if the index is out of range.</li>
+</ul>
+<p>📌 Example 1: Removing a Single Element</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear", "orange"]
+del fruits[0]
+print(fruits)  # ['banana', 'pear', 'orange']
+</code></pre>
+<p>The element at index 0 (the first item) was removed.</p>
+<p>📌 Example 2: Removing a Slice</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear", "orange"]
+del fruits[1:3]
+print(fruits)  # ['apple', 'orange']
+</code></pre>
+<p>Elements from index 1 to 2 (inclusive of the start, exclusive of the
+end) were removed.</p>
+<p>📌 Example 3: Deleting the Entire List</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana"]
+del fruits
+print(fruits)  # Error!
+</code></pre>
+<p>After <code>del fruits</code>, the list is completely removed from
+memory, and attempting to access <code>fruits</code> raises a
+<code>NameError: name 'fruits' is not defined</code>.</p>
+<h3 id="the-clear-method">4. The <code>clear()</code> Method</h3>
+<p>The <code>clear()</code> method removes all elements from a list,
+leaving it empty.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>.clear()</span></code></pre></div>
+<p>Key Features:</p>
+<ul>
+<li>The list remains in memory but becomes empty <code>[]</code>.</li>
+<li>Returns nothing.</li>
+</ul>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+fruits.clear()
+print(fruits)  # []
+</code></pre>
+<p>All elements are removed, but the <code>fruits</code> variable still
+exists as an empty list.</p>
+<h3 id="using-list-comprehension">5. Using List Comprehension</h3>
+<p>List comprehension is a way to create a new list by excluding certain
+elements based on a condition. It’s not a direct removal but rather a
+filtering technique.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>new_list <span class="op">=</span> [item <span class="cf">for</span> item <span class="kw">in</span> <span class="bu">list</span> <span class="cf">if</span> condition]</span></code></pre></div>
+<p>📌 Example: Removing All Even Numbers</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4, 5, 6]
+numbers = [x for x in numbers if x % 2 != 0]
+print(numbers)  # [1, 3, 5]
+</code></pre>
+<p>The new list contains only odd numbers, as the condition
+<code>x % 2 != 0</code> excludes even ones.</p>
+<h3 id="the-filter-method-for-conditional-removal">6. The
+<code>filter()</code> Method for Conditional Removal</h3>
+<p>The <code>filter()</code> function allows you to filter list elements
+based on a condition function.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4, 5, 6]
+numbers = list(filter(lambda x: x % 2 != 0, numbers))
+print(numbers)  # [1, 3, 5]
+</code></pre>
+<p>Here, <code>filter()</code> keeps only the elements for which the
+<code>lambda x: x % 2 != 0</code> function returns
+<code>True</code>.</p>
+<h2 id="comparison-of-methods">Comparison of Methods</h2>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 16%" />
+<col style="width: 17%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Removes by</th>
+<th>Returns Element</th>
+<th>Modifies Original List</th>
+<th>Error on Absence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>remove()</code></td>
+<td>Value</td>
+<td>No</td>
+<td>Yes</td>
+<td><code>ValueError</code></td>
+</tr>
+<tr>
+<td><code>pop()</code></td>
+<td>Index</td>
+<td>Yes</td>
+<td>Yes</td>
+<td><code>IndexError</code></td>
+</tr>
+<tr>
+<td><code>del</code></td>
+<td>Index/Slice</td>
+<td>No</td>
+<td>Yes</td>
+<td><code>IndexError</code></td>
+</tr>
+<tr>
+<td><code>clear()</code></td>
+<td>All Elements</td>
+<td>No</td>
+<td>Yes</td>
+<td>None</td>
+</tr>
+<tr>
+<td>List Comprehension</td>
+<td>Condition</td>
+<td>No</td>
+<td>No (creates new)</td>
+<td>None</td>
+</tr>
+<tr>
+<td><code>filter()</code></td>
+<td>Condition</td>
+<td>No</td>
+<td>No (creates new)</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<h2 id="useful-tips">Useful Tips</h2>
+<ol type="1">
+<li><strong>Check Before Removal:</strong> Use the <code>in</code>
+operator before <code>remove()</code> to avoid errors.</li>
+<li><strong>Working with Large Lists:</strong> For removing many
+elements by condition, <code>filter()</code> or list comprehension can
+be more readable.</li>
+<li><strong>Saving Removed Data:</strong> Use <code>pop()</code> if you
+need to keep the removed element.</li>
+<li><strong>Removing Duplicates:</strong> To remove all occurrences of
+an element, use a loop with <code>remove()</code> or convert the list to
+a set if order doesn’t matter.</li>
+</ol>
+<h3 id="removing-all-occurrences">Removing All Occurrences</h3>
+<p>For example, a common operation is “compacting” a list by removing
+all <code>None</code> values.</p>
+<p>Option 1: Using a <code>while</code> Loop</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "apple", "pear"]
+while "apple" in fruits:
+    fruits.remove("apple")
+print(fruits)  # ['banana', 'pear']
+</code></pre>
+<blockquote>
+<p>Removing elements directly during a <code>for</code> loop iteration
+can lead to errors.</p>
+</blockquote>
+<pre><code class="editor-py">
+# Removing elements in a loop can break the iteration order
+numbers = [1, 0, 2, 0, 3, 4]
+for i in range(len(numbers)):
+    print('current elem = ', numbers[i])
+    if numbers[i] == 0:
+        numbers.pop(i)
+</code></pre>
+<p>This example raises an
+<code>IndexError: list index out of range</code> because removing an
+element shifts the indices, causing the loop to skip elements.</p>
+<p>Option 2: Iterating Over a Copy of the List</p>
+<pre><code class="editor-py">
+my_list = [10, 20, 30, 40, 30]
+for item in my_list[:]:  # Create a copy of the list for iteration
+    if item == 30:
+        my_list.remove(item)
+print(my_list)   # [10, 20, 40]
+</code></pre>
+<p>Option 3: Iterating in Reverse Order</p>
+<pre><code class="editor-py">
+my_list = [10, 20, 30, 40, 30]
+for i in reversed(range(len(my_list))):
+    if my_list[i] == 30:
+        del my_list[i]
+print(my_list)   # [10, 20, 40]
+</code></pre>
+<p>Here, we use the <code>reversed()</code> function to iterate over the
+list in reverse order.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Removing elements from a list in Python is a straightforward yet
+flexible operation that can be done in various ways depending on your
+needs. Practice with these examples, experiment, and choose the method
+that best fits your situation!</p>
+<h2
+id="frequently-asked-questions-about-removing-list-elements">Frequently
+Asked Questions About Removing List Elements</h2>
+<h3 id="what-errors-can-occur-when-removing-elements-from-a-list">What
+errors can occur when removing elements from a list?</h3>
+<p>Common errors include:</p>
+<ul>
+<li><code>IndexError</code>: Occurs when trying to remove an element at
+a non-existent index.</li>
+<li><code>ValueError</code>: Occurs when trying to remove a value that
+doesn’t exist with <code>remove()</code>.</li>
+</ul>
+<h3 id="how-do-i-remove-the-first-element-of-a-list">How do I remove the
+first element of a list?</h3>
+<p>To remove the first element, use <code>my_list.pop(0)</code> or
+<code>del my_list[0]</code>.</p>
+<h3 id="how-do-i-remove-the-last-element-of-a-list">How do I remove the
+last element of a list?</h3>
+<p>To remove the last element, use <code>my_list.pop()</code>,
+<code>my_list.pop(-1)</code>, or <code>del my_list[-1]</code>.</p>
+<pre><code class="editor-py">
+my_list = [10, 20, 30]
+del my_list[-1]    # Removes 30
+print(my_list)     # [10, 20]
+</code></pre>
+<h3 id="how-do-i-clear-an-entire-list">How do I clear an entire
+list?</h3>
+<p>You can clear a list in several ways:</p>
+<ul>
+<li>Using the <code>my_list.clear()</code> method.</li>
+<li>Assigning an empty list: <code>my_list = []</code>.</li>
+<li>Replacing all elements with a slice:
+<code>my_list[:] = []</code>.</li>
+</ul>
+<h3
+id="how-do-i-remove-all-occurrences-of-a-specific-value-from-a-list">How
+do I remove all occurrences of a specific value from a list?</h3>
+<p>To remove all instances of a value, use list comprehension:</p>
+<pre><code class="editor-py">
+my_list = [10, 20, 30, 20, 40, 20]
+value_to_remove = 20
+my_list = [x for x in my_list if x != value_to_remove]
+print(my_list)  # Result: [10, 30, 40]
+</code></pre>
+</body>
+</html>

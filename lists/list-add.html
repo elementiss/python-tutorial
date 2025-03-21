@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title> </title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  <!--
+
+  /* RESET
+  =============================================================================*/
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+      abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+      strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, 
+      legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+      embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, 
+      section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* BODY
+  =============================================================================*/
+
+  body {
+    font-family: Arimo, Nunito Sans, arial, clean, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;  /* межстрочное */
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 38em; /* ширина текста */
+    margin: 0 auto;
+  }
+
+  body>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  body>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* BLOCKS
+  =============================================================================*/
+
+  p, blockquote, ul, ol, dl, table, pre {
+    margin: 0.4em 0; /* между абзацами (кроме первого и последнего) */
+  }
+
+  /* HEADERS
+  =============================================================================*/
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+    padding: 0;
+    font-family: Opinion Pro, Neucha;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
+  }
+
+  h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    /*color: #000;*/
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    /*color: #000;*/
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1.1em;
+  }
+
+  h6 {
+    /*color: #777;*/
+    font-size: 1.0em;
+  }
+
+  body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+    margin-top: 10px;
+  }
+
+  /* LINKS
+  =============================================================================*/
+
+  a {
+    color: #4183C4;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* LISTS
+  =============================================================================*/
+
+  ul, ol {
+    padding-left: 30px;
+  }
+
+  ul li > :first-child, 
+  ol li > :first-child, 
+  ul li ul:first-of-type, 
+  ol li ol:first-of-type, 
+  ul li ol:first-of-type, 
+  ol li ul:first-of-type {
+    margin-top: 0px;
+  }
+
+  ul ul, ul ol, ol ol, ol ul {
+    margin-bottom: 0;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px;
+  }
+
+  dl dt:first-child {
+    padding: 0;
+  }
+
+  dl dt>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dt>:last-child {
+    margin-bottom: 0px;
+  }
+
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+  }
+
+  dl dd>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dd>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* CODE
+  =============================================================================*/
+
+  pre, code, tt {
+    font-size: 1rem;
+    font-family: Iosevka, Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code, tt {
+    margin: 0 0px;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+  /*   background-color: #f8f8f8; это `code` */
+    background-color: #EFFFEF;
+    border-radius: 3px;
+  }
+
+  pre>code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: none;
+    background: transparent; 
+  }
+
+  .sourceCode{
+    background-color: #F6FFF7; /* светло-зелен для блоков кода */
+    font-size: 100%;
+  }
+    div.sourceCode{
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 7%);
+    }
+
+  pre {
+  /*   background-color: #f8f8f8; это ``` */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 8px;
+    border-radius: 3px;
+  }
+
+  pre code, pre tt {
+    background-color: transparent; 
+    border: none;
+  }
+
+  kbd {
+      -moz-border-bottom-colors: none;
+      -moz-border-left-colors: none;
+      -moz-border-right-colors: none;
+      -moz-border-top-colors: none;
+      background-color: #DDDDDD;
+      background-image: linear-gradient(#F1F1F1, #DDDDDD);
+      background-repeat: repeat-x;
+      border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+      border-image: none;
+      border-radius: 2px 2px 2px 2px;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Iosevka, Helvetica, Arial, sans-serif;
+      line-height: 10px;
+      padding: 1px 4px;
+      box-shadow: 0 1px 0 rgba(63,63,63,0.25);
+  }
+
+  /* QUOTES
+  =============================================================================*/
+
+  blockquote {
+    border-left: 4px solid #4493f8; /* blue */
+    padding: 0 15px;
+  }
+
+  blockquote>:first-child {
+    margin-top: 0px;
+  }
+
+  blockquote>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* HORIZONTAL RULES
+  =============================================================================*/
+
+  hr {
+    clear: both;
+    margin: 15px 0;
+    height: 0px;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    border-bottom: 2px dotted #777;
+    padding: 0;
+  }
+
+  /* TABLES
+  =============================================================================*/
+
+    table {                                     
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+       display: inline-block;
+       width: auto;
+    }
+
+  table th {
+    font-weight: bold;
+  }
+
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px 13px;
+    font-size: 1rem;
+  }
+
+  table tr {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+  }
+
+  /* IMAGES
+  =============================================================================*/
+
+  img {
+    max-width: 100%
+  }
+
+    .footnote-back, .footnote-ref {
+      color: #4493f8 !important; /* blue */
+    }
+    .footnote-ref, .footnote-ref::after {
+      font-size: 0.95em;
+      font-weight: 700;
+      vertical-align: super; 
+    }
+    .footnote-ref::after {
+      content:")";
+    }
+    .footnotes-end-of-document  {
+      font-size: 0.85em;  
+    }
+
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 1.5em;
+      margin: 0 0.8em 0.2em -1.8em;
+      vertical-align: middle;
+    }
+
+    .note, .tip, .warning, .important { 
+      border-left-style: solid;
+      border-left-width: 3px;
+      padding-left: 7px;
+    }
+    div.title {
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    div.title > p::before{
+       content: '#';
+       width: 1em; 
+       height: 1em; 
+       display: inline-block; 
+    }
+
+
+
+    .note > .title {
+       color: #4493f8; /* blue */
+    }   
+    .tip > .title {
+       color: #3fb950; /* green */
+    }
+    .warning > .title {
+       color: #d29922 /* olive */;
+    }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
+    .note  {
+       border-color: #4493f8; /* blue */
+    }
+    .tip  {
+       border-color: #3fb950; /* green */ 
+    }
+    .warning {
+       border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
+    }
+
+
+  #TOC {
+     font-family: Opinion Pro;
+     font-weight: bold;
+     font-size: 0.9em;
+     padding-left: 1em;
+     padding: .2em 0 .2em 1.0em;
+     background: #f7f7f7;
+     border: dashed 1px rgb(128,128,128); /* grey */
+     box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+  }
+
+    figure {
+      margin: 0.3em 0 0.9em;
+      background-color: #eee;
+  /*  text-align: center; */
+      box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+      border: dashed 1px rgb(128,128,128); /* grey */
+    }
+
+    figcaption {
+      font-family: Iosevka, Bitter;
+      font-style: italic;
+      font-size: 95%;
+      background-color: #eee;
+      color: #000;
+      padding: 0em 1em .2em;
+      margin: 0;
+    }
+
+    figure:hover{
+      background: #fff;
+    }
+
+    figure:hover figcaption {
+      background: #fff;
+    }
+
+
+  -->
+  </style>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/yonce.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/panel.min.js" integrity="sha512-kS6L87i8KUuHFk6QTxAyZSp1xza7zuaDg1Mt9rjQXjRQyraT0oqEeVbC6No/pxNvE1dMAZYBQ5r/8GZQUowhnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.js" integrity="sha512-8Rk4wB3MfgQfuOw95XW/vAU8PSTHWI5HddVRXfg+Ykk8CzsiOZkDpxVSrnYq2u/IqO499ooZ61fFHppuzB2ghA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.css" integrity="sha512-T8xB3MmwpA77VK9lUH3UkdUTnkmpqOxHF8OceOKaHrvpcXMSNX0xtpa9FoLTDAVO1JnB2UiMdVeI2V0HTHjTWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <style>
+          .container {
+              width: 100%;
+              max-width: 800px;
+              margin: 20px auto;
+              font-family: Arial, sans-serif;
+          }
+          
+          .code-block {
+              position: relative;
+              background: white;
+              background: #2c2c2c; /* цвет рамки вокруг кода #263238 material */ 
+              border: 1px solid #ddd; 
+              border-radius: 4px;
+              padding: 10px;  /* толщина рамки вокруг кода */
+              margin-bottom: 0px;
+          }
+          
+          .code-textarea {
+              width: 98%;
+              height: 400px;
+              margin-top: 35px;
+              font-family: Iosevka, monospace;
+              padding: 10px;
+              border: 1px solid #ccc; 
+              border-radius: 4px; 
+              resize: vertical;
+          }
+          
+          .run-button {
+              position: absolute;
+              bottom: 25px;
+              right: 30px;
+              padding: 6px 10px 2px;
+              background: #000;   /* для светлой темы */
+              color: #fff;
+              background: #fff;   /* для темной темы */
+              color: #000;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+          
+          .run-button:hover {
+              opacity: 1.0;
+          }
+  	.run-button:disabled {
+              animation: pulse 1.0s infinite;
+          }                     
+
+  @keyframes pulse {
+      0% {
+          transform: scale(1);
+          opacity: 1;
+      }
+      50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+      }
+      100% {
+          transform: scale(1);
+          opacity: 1;
+      }
+  }
+                 
+          .hide-button {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              padding: 8px 10px;
+              background: white;
+              color: black;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+
+          .hide-button:hover {
+              opacity: 1.0;
+          }
+
+          .output-block {
+              display: none; 
+              background: #fafafa;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              padding: 20px;
+              position: relative;
+          }
+          
+          .code-label,
+          .output-label {
+              position: absolute;
+              color: #999;
+              font-size: 0.8em;
+              border: 1px #DDD solid;
+              background: #F5F5F5;
+              padding: 2px 4px;
+              border-radius: 4px;
+              font-weight: bold;
+              z-index: 10;
+          }
+          .output-label {
+              top: 10px;
+              left: 10px;
+          }
+          .code-label{
+              top: 10px;
+              right: 25px;
+          }
+          
+          .output {
+              margin-top: 25px;
+              font-family: Iosevka, monospace;
+              white-space: pre-wrap;
+          }                       
+
+         .cm-s-default {
+              height: 100px;
+         }
+         .CodeMirror {
+              font-family: Iosevka, monospace; 
+              font-size: 0.95em;
+         }
+      </style>
+
+
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js" id="pyodide" defer></script>
+
+      <script>
+          let editors = [];
+          let pyodideReadyPromise;
+          
+          document.getElementById("pyodide").onload = function() {
+              async function initPyodide() {
+                  const pyodide = await loadPyodide();
+                  await pyodide.loadPackage("micropip");
+                  const micropip = pyodide.pyimport("micropip");
+                  //await micropip.install('scipy')
+                  //let scipy = await pyodide.loadPackage('scipy')
+                  // see https://pyodide.org/en/stable/usage/loading-packages.html
+                  return pyodide;
+              }
+              pyodideReadyPromise = initPyodide();
+
+              // Get all Python code blocks
+              const codeBlocks = document.querySelectorAll("pre code.editor-py");
+              
+              codeBlocks.forEach((el, index) => {
+                  const preEl = el.parentNode;
+                  const blockId = index + 1;
+                  const str = el.innerText.trim();
+                  const lines = str.split('\n').length;                
+                  const height = el.getAttribute('height') || (lines * 25 + 4) + 'px'; 
+                  const div = document.createElement("div");
+                  div.innerHTML = `
+                      <div class="container">
+                          <div class="code-block">
+                              <!-- <span class="code-label">Try to edit and run code example</span> -->
+                              <button class="run-button" onclick="runPython(${blockId})" id="button${blockId}">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M8 5v14l11-7z"> </path> 
+                                  </svg>
+                              </button>
+                              <textarea id="code${blockId}" class="code-textarea">${str}</textarea>
+                          </div>
+                          <div id="output-block${blockId}" class="output-block">
+                              <span class="output-label">Output:</span>
+                              <div id="output${blockId}" class="output"></div>
+
+                              <button class="hide-button" onclick="hideOutput(${blockId})">
+  				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="undefined"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+  			    </button>
+                          </div>
+                      </div>
+                  `;
+                  
+                  preEl.parentNode.insertBefore(div, preEl);
+                  preEl.parentNode.removeChild(preEl);
+                  
+                  // Initialize CodeMirror for this instance
+                  setTimeout(() => {
+                      const textarea = document.getElementById(`code${blockId}`);
+                      if (textarea) {
+                          editors[blockId] = CodeMirror.fromTextArea(textarea, {
+                              mode: "python",
+                            //  lineNumbers: true,
+                              theme: "default",
+                              theme: "material",
+                              theme: "mbo", 
+                              theme: "neat",
+                              theme: "yonce",
+                              extraKeys: {
+          			"F7": function(cm) {
+  			          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          			},
+          			"Esc": function(cm) {
+            			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+          			}
+        			    } 
+                          });
+                          editors[blockId].setSize(null, height);
+                      }
+                  }, 0);
+              });
+          };
+
+          async function hideOutput(blockId) {
+              const outputBlock = document.getElementById(`output-block${blockId}`);
+              outputBlock.style.display = 'none';
+          }
+
+          async function runPython(blockId) {
+              let pyodide = await pyodideReadyPromise;
+              try {
+                  const outputDiv = document.getElementById(`output${blockId}`);
+                  const outputBlock = document.getElementById(`output-block${blockId}`);
+                  const runButton = document.getElementById(`button${blockId}`);
+                  
+                  outputBlock.style.display = 'block';
+
+                  let output = "";
+                  pyodide.globals.set("print", (...args) => {
+                     output += args.join(" ") + "\n";
+                  });
+
+                  runButton.disabled = true;
+                  
+                  await pyodide.runPythonAsync(editors[blockId].getValue());
+                  
+                  runButton.disabled = false;
+                  outputDiv.innerText = output;
+              } catch(err) {
+                  document.getElementById(`button${blockId}`).disabled = false;
+                  document.getElementById(`output${blockId}`).innerText = "Error: " + err;
+              }
+          }
+      </script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"> </h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#python-adding-elements-to-a-list"
+id="toc-python-adding-elements-to-a-list">Python: Adding Elements to a
+List</a>
+<ul>
+<li><a href="#ways-to-add-elements-to-a-list"
+id="toc-ways-to-add-elements-to-a-list">Ways to Add Elements to a
+List</a>
+<ul>
+<li><a href="#the-append-method" id="toc-the-append-method">The
+<code>append()</code> Method</a></li>
+<li><a href="#the-extend-method" id="toc-the-extend-method">The
+<code>extend()</code> Method</a></li>
+<li><a href="#the-insert-method" id="toc-the-insert-method">The
+<code>insert()</code> Method</a></li>
+<li><a href="#the-operator" id="toc-the-operator">The <code>+</code>
+Operator</a></li>
+<li><a href="#the-operator-1" id="toc-the-operator-1">The <code>*</code>
+Operator</a></li>
+</ul></li>
+<li><a
+href="#advanced-techniques-using-collections.deque-for-adding-elements"
+id="toc-advanced-techniques-using-collections.deque-for-adding-elements">Advanced
+Techniques: Using <code>collections.deque</code> for Adding Elements</a>
+<ul>
+<li><a href="#why-use-deque" id="toc-why-use-deque">Why Use
+<code>deque</code>?</a></li>
+<li><a href="#key-deque-methods-for-adding"
+id="toc-key-deque-methods-for-adding">Key <code>deque</code> Methods for
+Adding</a></li>
+<li><a href="#example-1-adding-to-the-beginning-with-deque"
+id="toc-example-1-adding-to-the-beginning-with-deque">📌 Example 1:
+Adding to the Beginning with <code>deque</code></a></li>
+<li><a href="#example-2-comparing-with-list.insert"
+id="toc-example-2-comparing-with-list.insert">📌 Example 2: Comparing
+with <code>list.insert()</code></a></li>
+<li><a href="#example-3-adding-to-both-ends"
+id="toc-example-3-adding-to-both-ends">📌 Example 3: Adding to Both
+Ends</a></li>
+<li><a href="#when-to-use-deque" id="toc-when-to-use-deque">When to Use
+<code>deque</code>?</a></li>
+<li><a href="#limitations-of-deque"
+id="toc-limitations-of-deque">Limitations of <code>deque</code></a></li>
+</ul></li>
+<li><a href="#helpful-tips" id="toc-helpful-tips">Helpful Tips</a></li>
+<li><a href="#practice-examples" id="toc-practice-examples">Practice
+Examples</a>
+<ul>
+<li><a href="#example-1-creating-a-shopping-list"
+id="toc-example-1-creating-a-shopping-list">📌 Example 1: Creating a
+Shopping List</a></li>
+<li><a href="#example-2-expanding-a-list-with-user-input"
+id="toc-example-2-expanding-a-list-with-user-input">📌 Example 2:
+Expanding a List with User Input</a></li>
+</ul></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a>
+<ul>
+<li><a href="#how-do-i-add-a-single-element-to-the-end-of-a-list"
+id="toc-how-do-i-add-a-single-element-to-the-end-of-a-list">How Do I Add
+a Single Element to the End of a List?</a></li>
+<li><a href="#how-do-i-add-multiple-elements-to-the-end-of-a-list"
+id="toc-how-do-i-add-multiple-elements-to-the-end-of-a-list">How Do I
+Add Multiple Elements to the End of a List?</a></li>
+<li><a href="#how-do-i-create-a-list-with-repeated-elements"
+id="toc-how-do-i-create-a-list-with-repeated-elements">How Do I Create a
+List with Repeated Elements?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="python-adding-elements-to-a-list">Python: Adding Elements to a
+List</h1>
+<p>Lists in Python are one of the key data structures that allow you to
+store ordered collections of items. Let’s explore the main ways to add
+elements to a list.</p>
+<h2 id="ways-to-add-elements-to-a-list">Ways to Add Elements to a
+List</h2>
+<p>In Python, there are several approaches to adding elements to a
+list.</p>
+<h3 id="the-append-method">The <code>append()</code> Method</h3>
+<p>The <code>append()</code> method adds a single element to the end of
+a list. It’s the simplest and most commonly used method.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>.append(element)</span></code></pre></div>
+<h4 id="example-1-adding-a-string">📌 Example 1: Adding a String</h4>
+<pre><code class="editor-py">
+fruits = ["apple", "banana"]
+fruits.append("orange")
+print(fruits)  # Output: ['apple', 'banana', 'orange']
+</code></pre>
+<p>The element <code>"orange"</code> is added to the end of the
+<code>fruits</code> list. The list automatically grows in size.</p>
+<h4 id="example-2-adding-a-list-to-a-list">📌 Example 2: Adding a List
+to a List</h4>
+<p>The <code>append()</code> method works with any data type, including
+numbers, strings, and other lists.</p>
+<pre><code class="editor-py">
+data = [1, 2]
+data.append([3, 4])
+print(data)  # Output: [1, 2, [3, 4]]
+</code></pre>
+<p>Here, <code>[3, 4]</code> is added as a single element, not as
+individual numbers. The <code>data</code> list now contains a nested
+list.</p>
+<h4 id="example-3-using-a-loop-to-add-elements">📌 Example 3: Using a
+Loop to Add Elements</h4>
+<p>Sometimes you need to add elements to a list within a loop.</p>
+<pre><code class="editor-py">
+squares = []
+for i in range(1, 6):
+    squares.append(i * i)
+
+print(squares)  # Output: [1, 4, 9, 16, 25]
+</code></pre>
+<p>This code creates a list of squares of the first five natural
+numbers.</p>
+<h3 id="the-extend-method">The <code>extend()</code> Method</h3>
+<p>The <code>extend()</code> method is used to add all elements from
+another iterable (e.g., another list) to the end of the current
+list.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>.extend(iterable)</span></code></pre></div>
+<h4 id="example-1-extending-a-list-with-another-list">📌 Example 1:
+Extending a List with Another List</h4>
+<pre><code class="editor-py">
+fruits = ["apple", "banana"]
+more_fruits = ["orange", "mango"]
+fruits.extend(more_fruits)
+print(fruits)  # Output: ['apple', 'banana', 'orange', 'mango']
+</code></pre>
+<p>All elements from the <code>more_fruits</code> list are added
+individually to the end of the <code>fruits</code> list.</p>
+<p>Unlike <code>append()</code>, which would add the entire
+<code>more_fruits</code> list as a single element, <code>extend()</code>
+unpacks the iterable.</p>
+<h4 id="example-2-using-a-string">📌 Example 2: Using a String</h4>
+<pre><code class="editor-py">
+letters = ["a", "b"]
+letters.extend("cd")
+print(letters)  # Output: ['a', 'b', 'c', 'd']
+</code></pre>
+<p>The string <code>"cd"</code> is treated as an iterable, and each
+character is added to the list separately.</p>
+<h3 id="the-insert-method">The <code>insert()</code> Method</h3>
+<p>The <code>insert()</code> method allows you to insert an element at a
+specific position in the list, specified by an index.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span>.insert(index, element)</span></code></pre></div>
+<h4 id="example-1-inserting-at-the-beginning">📌 Example 1: Inserting at
+the Beginning</h4>
+<pre><code class="editor-py">
+fruits = ["apple", "banana"]
+fruits.insert(0, "kiwi")
+print(fruits)  # Output: ['kiwi', 'apple', 'banana']
+</code></pre>
+<p>The element <code>"kiwi"</code> is inserted at index <code>0</code>,
+shifting the other elements to the right.</p>
+<h4 id="example-2-inserting-in-the-middle">📌 Example 2: Inserting in
+the Middle</h4>
+<pre><code class="editor-py">
+numbers = [1, 2, 4]
+numbers.insert(2, 3)
+print(numbers)  # Output: [1, 2, 3, 4]
+</code></pre>
+<p>The number <code>3</code> is inserted at index <code>2</code>,
+between <code>2</code> and <code>4</code>.</p>
+<h4 id="example-3-inserting-beyond-the-lists-length">📌 Example 3:
+Inserting Beyond the List’s Length</h4>
+<pre><code class="editor-py">
+fruits = ["apple", "banana"]
+fruits.insert(5, "orange")
+print(fruits)  # Output: ['apple', 'banana', 'orange']
+</code></pre>
+<p>If the index exceeds the list’s length, the element is appended to
+the end, similar to <code>append()</code>.</p>
+<h3 id="the-operator">The <code>+</code> Operator</h3>
+<p>Lists can be combined using the <code>+</code> operator, a process
+called list concatenation. This creates a new list by combining the
+elements of the two lists.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>new_list <span class="op">=</span> list1 <span class="op">+</span> list2</span></code></pre></div>
+<h4 id="example-1-merging-two-lists">📌 Example 1: Merging Two
+Lists</h4>
+<pre><code class="editor-py">
+fruits = ["apple", "banana"]
+more_fruits = ["orange", "mango"]
+all_fruits = fruits + more_fruits
+print(all_fruits)  # Output: ['apple', 'banana', 'orange', 'mango']
+</code></pre>
+<p>A new list, <code>all_fruits</code>, is created, while the original
+lists remain unchanged.</p>
+<h4 id="example-2-adding-a-single-element">📌 Example 2: Adding a Single
+Element</h4>
+<pre><code class="editor-py">
+numbers = [1, 2]
+numbers = numbers + [3]
+numbers += [4]
+print(numbers)  # Output: [1, 2, 3, 4]
+</code></pre>
+<p>To add a single element, it must be wrapped in a list, like
+<code>[3]</code>, since the <code>+</code> operator only works with
+lists.</p>
+<p>The <code>+=</code> operator is similar to <code>extend()</code> and
+modifies the list in place. The expression <code>numbers += [4]</code>
+is shorthand for <code>numbers = numbers + [4]</code> or
+<code>numbers.extend([4])</code>.</p>
+<h3 id="the-operator-1">The <code>*</code> Operator</h3>
+<p>The <code>*</code> operator allows you to repeat an element or a list
+multiple times.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span> <span class="op">=</span> [element] <span class="op">*</span> count</span></code></pre></div>
+<h4 id="example-1-repeating-an-element">📌 Example 1: Repeating an
+Element</h4>
+<pre><code class="editor-py">
+zeros = [0] * 5
+print(zeros)  # Output: [0, 0, 0, 0, 0]
+</code></pre>
+<p>The number <code>0</code> is repeated 5 times in a new list.</p>
+<h4 id="example-2-repeating-a-list">📌 Example 2: Repeating a List</h4>
+<pre><code class="editor-py">
+pairs = [[1, 2]] * 3
+print(pairs)  # Output: [[1, 2], [1, 2], [1, 2]]
+</code></pre>
+<p>The nested list <code>[1, 2]</code> is repeated 3 times. Be cautious:
+this creates references to the same object.</p>
+<h2
+id="advanced-techniques-using-collections.deque-for-adding-elements">Advanced
+Techniques: Using <code>collections.deque</code> for Adding
+Elements</h2>
+<p>When working with lists in Python, there are situations where
+standard methods like <code>insert()</code> become inefficient. For
+example, if you frequently need to add elements to the beginning of a
+list, <code>list.insert(0, item)</code> is slow because it requires
+shifting all existing elements to the right. For such cases, Python
+provides the <code>collections</code> module and its <code>deque</code>
+class (short for “double-ended queue”), which is optimized for fast
+additions at both ends.</p>
+<h3 id="why-use-deque">Why Use <code>deque</code>?</h3>
+<p>A standard Python list is implemented as a dynamic array, making
+appending to the end an O(1) operation. However, inserting at the
+beginning (<code>insert(0, item)</code>) has O(n) complexity, where
+<code>n</code> is the list’s length, due to the need to shift all
+elements. In contrast, <code>deque</code> uses a doubly-linked list
+under the hood, enabling O(1) additions at both the beginning and
+end.</p>
+<h3 id="key-deque-methods-for-adding">Key <code>deque</code> Methods for
+Adding</h3>
+<ul>
+<li><code>append(x)</code>: Adds element <code>x</code> to the end of
+the queue.</li>
+<li><code>appendleft(x)</code>: Adds element <code>x</code> to the
+beginning of the queue.</li>
+</ul>
+<h3 id="example-1-adding-to-the-beginning-with-deque">📌 Example 1:
+Adding to the Beginning with <code>deque</code></h3>
+<pre><code class="editor-py">
+from collections import deque
+
+# Create a deque with initial elements
+dq = deque([2, 3, 4])
+dq.appendleft(1)
+print(list(dq))  # Output: [1, 2, 3, 4]
+</code></pre>
+<p>The <code>appendleft()</code> method adds the number <code>1</code>
+to the beginning of the queue. We convert the <code>deque</code> to a
+list with <code>list()</code> for output, as <code>deque</code> is a
+distinct data type.</p>
+<h3 id="example-2-comparing-with-list.insert">📌 Example 2: Comparing
+with <code>list.insert()</code></h3>
+<pre><code class="editor-py">
+from collections import deque
+import time
+
+# Standard list
+numbers = [2, 3, 4]
+start_time = time.time()
+for _ in range(20000):
+    numbers.insert(0, 1)
+print("Time for list.insert():", time.time() - start_time)
+
+# Using deque
+dq = deque([2, 3, 4])
+start_time = time.time()
+for _ in range(20000):
+    dq.appendleft(1)
+print("Time for deque.appendleft():", time.time() - start_time)
+# Output:
+# Time for list.insert()     : 1.0296828746795654
+# Time for deque.appendleft(): 0.004000425338745117
+</code></pre>
+<p>This code demonstrates the performance difference. With a large
+number of operations, <code>deque.appendleft()</code> runs significantly
+faster than <code>list.insert(0, item)</code>. Try running this code
+yourself — you’ll see that <code>deque</code>’s execution time will be
+10-100 times faster (exact times depend on your hardware and Python
+version).</p>
+<h3 id="example-3-adding-to-both-ends">📌 Example 3: Adding to Both
+Ends</h3>
+<pre><code class="editor-py">
+from collections import deque
+
+dq = deque(["b", "c"])
+dq.append("d")       # Add to the end
+dq.appendleft("a")   # Add to the beginning
+print(list(dq))      # Output: ['a', 'b', 'c', 'd']
+</code></pre>
+<p>The <code>deque</code> class allows flexible operations on both ends.
+Here, we first added <code>"d"</code> to the end with
+<code>append()</code> and then <code>"a"</code> to the beginning with
+<code>appendleft()</code>.</p>
+<h3 id="when-to-use-deque">When to Use <code>deque</code>?</h3>
+<ul>
+<li>When you frequently need to add elements to the beginning of a list
+(e.g., in queue or stack implementations).</li>
+<li>When working with two-ended operations (adding/removing from both
+ends).</li>
+<li>When performance is critical with large datasets.</li>
+</ul>
+<h3 id="limitations-of-deque">Limitations of <code>deque</code></h3>
+<p>The <code>deque</code> class doesn’t support inserting elements at
+arbitrary positions—only at the beginning or end. For simple tasks where
+you only append to the end, a regular list with <code>append()</code>
+might be simpler and more convenient.</p>
+<p>To convert a <code>deque</code> back to a list for compatibility with
+other code, use <code>list(dq)</code>. However, note that this creates a
+new object, and subsequent changes to the <code>deque</code> won’t
+affect the converted list.</p>
+<h2 id="helpful-tips">Helpful Tips</h2>
+<table>
+<caption>Ways to Add Elements to a List</caption>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>append(item)</code></td>
+<td>Adds a single element to the end of the list</td>
+</tr>
+<tr>
+<td><code>extend(iterable)</code></td>
+<td>Adds elements from an iterable to the end of the list</td>
+</tr>
+<tr>
+<td><code>insert(index, item)</code></td>
+<td>Inserts an element at the specified index</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>Combines two lists, creating a new one</td>
+</tr>
+<tr>
+<td><code>+=</code></td>
+<td>Adds elements from another list to the current one</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Repeats elements or duplicates a list</td>
+</tr>
+<tr>
+<td><code>deque.appendleft()</code></td>
+<td>Quickly adds an element to the beginning of the list</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><strong>Choosing a Method:</strong>
+<ul>
+<li>Use <code>append()</code> to add a single element to the end.</li>
+<li>Use <code>extend()</code> to add multiple elements from another
+collection.</li>
+<li>Use <code>insert()</code> for precise insertion at an index.</li>
+<li>Use the <code>+</code> operator to combine lists.</li>
+</ul></li>
+<li><strong>Performance:</strong>
+<ul>
+<li>Adding to the end of a list (<code>append()</code>,
+<code>extend()</code>) is faster than inserting at the beginning or
+middle (<code>insert()</code>), as the latter requires shifting
+elements.</li>
+</ul></li>
+<li><strong>Data Types:</strong>
+<ul>
+<li>Lists can hold elements of different types, but sticking to one type
+improves code readability.</li>
+</ul></li>
+</ol>
+<h2 id="practice-examples">Practice Examples</h2>
+<h3 id="example-1-creating-a-shopping-list">📌 Example 1: Creating a
+Shopping List</h3>
+<pre><code class="editor-py">
+shopping_list = []
+shopping_list.append("bread")
+shopping_list.append("milk")
+shopping_list.insert(1, "cheese")
+print(shopping_list)  # Output: ['bread', 'cheese', 'milk']
+</code></pre>
+<h3 id="example-2-expanding-a-list-with-user-input">📌 Example 2:
+Expanding a List with User Input</h3>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> []</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    num <span class="op">=</span> <span class="bu">int</span>(<span class="bu">input</span>(<span class="st">&quot;Enter a number: &quot;</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    numbers.append(num)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(numbers)  <span class="co"># Example output: [5, 10, 15]</span></span></code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+<p>Working with lists in Python is a fundamental skill that unlocks a
+wide range of programming possibilities. The <code>append()</code>,
+<code>extend()</code>, and <code>insert()</code> methods, along with the
+<code>+</code> and <code>*</code> operators, provide flexible ways to
+manage list contents. Try each of these in your own programs to better
+understand their nuances.</p>
+<p>Happy coding with Python!</p>
+<h3 id="how-do-i-add-a-single-element-to-the-end-of-a-list">How Do I Add
+a Single Element to the End of a List?</h3>
+<p>Use the <code>append()</code> method:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fruits <span class="op">=</span> [<span class="st">&#39;apple&#39;</span>, <span class="st">&#39;banana&#39;</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fruits.append(<span class="st">&#39;orange&#39;</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(fruits)  <span class="co"># Output: [&#39;apple&#39;, &#39;banana&#39;, &#39;orange&#39;]</span></span></code></pre></div>
+<h3 id="how-do-i-add-multiple-elements-to-the-end-of-a-list">How Do I
+Add Multiple Elements to the End of a List?</h3>
+<p>Use the <code>extend()</code> method or the <code>+=</code>
+operator:</p>
+<pre><code class="editor-py">
+numbers = [1, 2]
+numbers.extend([3, 4, 5]) 
+numbers += [3, 4, 5]  
+print(numbers)  # Output: [1, 2, 3, 4, 5, 3, 4, 5]
+</code></pre>
+<h3 id="how-do-i-create-a-list-with-repeated-elements">How Do I Create a
+List with Repeated Elements?</h3>
+<p>Use the multiplication operator <code>*</code>:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>zeros <span class="op">=</span> [<span class="dv">0</span>] <span class="op">*</span> <span class="dv">5</span>  <span class="co"># Creates the list [0, 0, 0, 0, 0]</span></span></code></pre></div>
+</body>
+</html>

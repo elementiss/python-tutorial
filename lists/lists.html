@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title> </title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  <!--
+
+  /* RESET
+  =============================================================================*/
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+      abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+      strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, 
+      legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+      embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, 
+      section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* BODY
+  =============================================================================*/
+
+  body {
+    font-family: Arimo, Nunito Sans, arial, clean, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;  /* межстрочное */
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 38em; /* ширина текста */
+    margin: 0 auto;
+  }
+
+  body>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  body>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* BLOCKS
+  =============================================================================*/
+
+  p, blockquote, ul, ol, dl, table, pre {
+    margin: 0.4em 0; /* между абзацами (кроме первого и последнего) */
+  }
+
+  /* HEADERS
+  =============================================================================*/
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+    padding: 0;
+    font-family: Opinion Pro, Neucha;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
+  }
+
+  h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    /*color: #000;*/
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    /*color: #000;*/
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1.1em;
+  }
+
+  h6 {
+    /*color: #777;*/
+    font-size: 1.0em;
+  }
+
+  body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+    margin-top: 10px;
+  }
+
+  /* LINKS
+  =============================================================================*/
+
+  a {
+    color: #4183C4;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* LISTS
+  =============================================================================*/
+
+  ul, ol {
+    padding-left: 30px;
+  }
+
+  ul li > :first-child, 
+  ol li > :first-child, 
+  ul li ul:first-of-type, 
+  ol li ol:first-of-type, 
+  ul li ol:first-of-type, 
+  ol li ul:first-of-type {
+    margin-top: 0px;
+  }
+
+  ul ul, ul ol, ol ol, ol ul {
+    margin-bottom: 0;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px;
+  }
+
+  dl dt:first-child {
+    padding: 0;
+  }
+
+  dl dt>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dt>:last-child {
+    margin-bottom: 0px;
+  }
+
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+  }
+
+  dl dd>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dd>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* CODE
+  =============================================================================*/
+
+  pre, code, tt {
+    font-size: 1rem;
+    font-family: Iosevka, Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code, tt {
+    margin: 0 0px;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+  /*   background-color: #f8f8f8; это `code` */
+    background-color: #EFFFEF;
+    border-radius: 3px;
+  }
+
+  pre>code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: none;
+    background: transparent; 
+  }
+
+  .sourceCode{
+    background-color: #F6FFF7; /* светло-зелен для блоков кода */
+    font-size: 100%;
+  }
+    div.sourceCode{
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 7%);
+    }
+
+  pre {
+  /*   background-color: #f8f8f8; это ``` */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 8px;
+    border-radius: 3px;
+  }
+
+  pre code, pre tt {
+    background-color: transparent; 
+    border: none;
+  }
+
+  kbd {
+      -moz-border-bottom-colors: none;
+      -moz-border-left-colors: none;
+      -moz-border-right-colors: none;
+      -moz-border-top-colors: none;
+      background-color: #DDDDDD;
+      background-image: linear-gradient(#F1F1F1, #DDDDDD);
+      background-repeat: repeat-x;
+      border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+      border-image: none;
+      border-radius: 2px 2px 2px 2px;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Iosevka, Helvetica, Arial, sans-serif;
+      line-height: 10px;
+      padding: 1px 4px;
+      box-shadow: 0 1px 0 rgba(63,63,63,0.25);
+  }
+
+  /* QUOTES
+  =============================================================================*/
+
+  blockquote {
+    border-left: 4px solid #4493f8; /* blue */
+    padding: 0 15px;
+  }
+
+  blockquote>:first-child {
+    margin-top: 0px;
+  }
+
+  blockquote>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* HORIZONTAL RULES
+  =============================================================================*/
+
+  hr {
+    clear: both;
+    margin: 15px 0;
+    height: 0px;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    border-bottom: 2px dotted #777;
+    padding: 0;
+  }
+
+  /* TABLES
+  =============================================================================*/
+
+    table {                                     
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+       display: inline-block;
+       width: auto;
+    }
+
+  table th {
+    font-weight: bold;
+  }
+
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px 13px;
+    font-size: 1rem;
+  }
+
+  table tr {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+  }
+
+  /* IMAGES
+  =============================================================================*/
+
+  img {
+    max-width: 100%
+  }
+
+    .footnote-back, .footnote-ref {
+      color: #4493f8 !important; /* blue */
+    }
+    .footnote-ref, .footnote-ref::after {
+      font-size: 0.95em;
+      font-weight: 700;
+      vertical-align: super; 
+    }
+    .footnote-ref::after {
+      content:")";
+    }
+    .footnotes-end-of-document  {
+      font-size: 0.85em;  
+    }
+
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 1.5em;
+      margin: 0 0.8em 0.2em -1.8em;
+      vertical-align: middle;
+    }
+
+    .note, .tip, .warning, .important { 
+      border-left-style: solid;
+      border-left-width: 3px;
+      padding-left: 7px;
+    }
+    div.title {
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    div.title > p::before{
+       content: '#';
+       width: 1em; 
+       height: 1em; 
+       display: inline-block; 
+    }
+
+
+
+    .note > .title {
+       color: #4493f8; /* blue */
+    }   
+    .tip > .title {
+       color: #3fb950; /* green */
+    }
+    .warning > .title {
+       color: #d29922 /* olive */;
+    }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
+    .note  {
+       border-color: #4493f8; /* blue */
+    }
+    .tip  {
+       border-color: #3fb950; /* green */ 
+    }
+    .warning {
+       border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
+    }
+
+
+  #TOC {
+     font-family: Opinion Pro;
+     font-weight: bold;
+     font-size: 0.9em;
+     padding-left: 1em;
+     padding: .2em 0 .2em 1.0em;
+     background: #f7f7f7;
+     border: dashed 1px rgb(128,128,128); /* grey */
+     box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+  }
+
+    figure {
+      margin: 0.3em 0 0.9em;
+      background-color: #eee;
+  /*  text-align: center; */
+      box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+      border: dashed 1px rgb(128,128,128); /* grey */
+    }
+
+    figcaption {
+      font-family: Iosevka, Bitter;
+      font-style: italic;
+      font-size: 95%;
+      background-color: #eee;
+      color: #000;
+      padding: 0em 1em .2em;
+      margin: 0;
+    }
+
+    figure:hover{
+      background: #fff;
+    }
+
+    figure:hover figcaption {
+      background: #fff;
+    }
+
+
+  -->
+  </style>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/yonce.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/panel.min.js" integrity="sha512-kS6L87i8KUuHFk6QTxAyZSp1xza7zuaDg1Mt9rjQXjRQyraT0oqEeVbC6No/pxNvE1dMAZYBQ5r/8GZQUowhnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.js" integrity="sha512-8Rk4wB3MfgQfuOw95XW/vAU8PSTHWI5HddVRXfg+Ykk8CzsiOZkDpxVSrnYq2u/IqO499ooZ61fFHppuzB2ghA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.css" integrity="sha512-T8xB3MmwpA77VK9lUH3UkdUTnkmpqOxHF8OceOKaHrvpcXMSNX0xtpa9FoLTDAVO1JnB2UiMdVeI2V0HTHjTWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <style>
+          .container {
+              width: 100%;
+              max-width: 800px;
+              margin: 20px auto;
+              font-family: Arial, sans-serif;
+          }
+          
+          .code-block {
+              position: relative;
+              background: white;
+              background: #2c2c2c; /* цвет рамки вокруг кода #263238 material */ 
+              border: 1px solid #ddd; 
+              border-radius: 4px;
+              padding: 10px;  /* толщина рамки вокруг кода */
+              margin-bottom: 0px;
+          }
+          
+          .code-textarea {
+              width: 98%;
+              height: 400px;
+              margin-top: 35px;
+              font-family: Iosevka, monospace;
+              padding: 10px;
+              border: 1px solid #ccc; 
+              border-radius: 4px; 
+              resize: vertical;
+          }
+          
+          .run-button {
+              position: absolute;
+              bottom: 25px;
+              right: 30px;
+              padding: 6px 10px 2px;
+              background: #000;   /* для светлой темы */
+              color: #fff;
+              background: #fff;   /* для темной темы */
+              color: #000;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+          
+          .run-button:hover {
+              opacity: 1.0;
+          }
+  	.run-button:disabled {
+              animation: pulse 1.0s infinite;
+          }                     
+
+  @keyframes pulse {
+      0% {
+          transform: scale(1);
+          opacity: 1;
+      }
+      50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+      }
+      100% {
+          transform: scale(1);
+          opacity: 1;
+      }
+  }
+                 
+          .hide-button {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              padding: 8px 10px;
+              background: white;
+              color: black;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+
+          .hide-button:hover {
+              opacity: 1.0;
+          }
+
+          .output-block {
+              display: none; 
+              background: #fafafa;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              padding: 20px;
+              position: relative;
+          }
+          
+          .code-label,
+          .output-label {
+              position: absolute;
+              color: #999;
+              font-size: 0.8em;
+              border: 1px #DDD solid;
+              background: #F5F5F5;
+              padding: 2px 4px;
+              border-radius: 4px;
+              font-weight: bold;
+              z-index: 10;
+          }
+          .output-label {
+              top: 10px;
+              left: 10px;
+          }
+          .code-label{
+              top: 10px;
+              right: 25px;
+          }
+          
+          .output {
+              margin-top: 25px;
+              font-family: Iosevka, monospace;
+              white-space: pre-wrap;
+          }                       
+
+         .cm-s-default {
+              height: 100px;
+         }
+         .CodeMirror {
+              font-family: Iosevka, monospace; 
+              font-size: 0.95em;
+         }
+      </style>
+
+
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js" id="pyodide" defer></script>
+
+      <script>
+          let editors = [];
+          let pyodideReadyPromise;
+          
+          document.getElementById("pyodide").onload = function() {
+              async function initPyodide() {
+                  const pyodide = await loadPyodide();
+                  await pyodide.loadPackage("micropip");
+                  const micropip = pyodide.pyimport("micropip");
+                  //await micropip.install('scipy')
+                  //let scipy = await pyodide.loadPackage('scipy')
+                  // see https://pyodide.org/en/stable/usage/loading-packages.html
+                  return pyodide;
+              }
+              pyodideReadyPromise = initPyodide();
+
+              // Get all Python code blocks
+              const codeBlocks = document.querySelectorAll("pre code.editor-py");
+              
+              codeBlocks.forEach((el, index) => {
+                  const preEl = el.parentNode;
+                  const blockId = index + 1;
+                  const str = el.innerText.trim();
+                  const lines = str.split('\n').length;                
+                  const height = el.getAttribute('height') || (lines * 25 + 4) + 'px'; 
+                  const div = document.createElement("div");
+                  div.innerHTML = `
+                      <div class="container">
+                          <div class="code-block">
+                              <!-- <span class="code-label">Try to edit and run code example</span> -->
+                              <button class="run-button" onclick="runPython(${blockId})" id="button${blockId}">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M8 5v14l11-7z"> </path> 
+                                  </svg>
+                              </button>
+                              <textarea id="code${blockId}" class="code-textarea">${str}</textarea>
+                          </div>
+                          <div id="output-block${blockId}" class="output-block">
+                              <span class="output-label">Output:</span>
+                              <div id="output${blockId}" class="output"></div>
+
+                              <button class="hide-button" onclick="hideOutput(${blockId})">
+  				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="undefined"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+  			    </button>
+                          </div>
+                      </div>
+                  `;
+                  
+                  preEl.parentNode.insertBefore(div, preEl);
+                  preEl.parentNode.removeChild(preEl);
+                  
+                  // Initialize CodeMirror for this instance
+                  setTimeout(() => {
+                      const textarea = document.getElementById(`code${blockId}`);
+                      if (textarea) {
+                          editors[blockId] = CodeMirror.fromTextArea(textarea, {
+                              mode: "python",
+                            //  lineNumbers: true,
+                              theme: "default",
+                              theme: "material",
+                              theme: "mbo", 
+                              theme: "neat",
+                              theme: "yonce",
+                              extraKeys: {
+          			"F7": function(cm) {
+  			          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          			},
+          			"Esc": function(cm) {
+            			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+          			}
+        			    } 
+                          });
+                          editors[blockId].setSize(null, height);
+                      }
+                  }, 0);
+              });
+          };
+
+          async function hideOutput(blockId) {
+              const outputBlock = document.getElementById(`output-block${blockId}`);
+              outputBlock.style.display = 'none';
+          }
+
+          async function runPython(blockId) {
+              let pyodide = await pyodideReadyPromise;
+              try {
+                  const outputDiv = document.getElementById(`output${blockId}`);
+                  const outputBlock = document.getElementById(`output-block${blockId}`);
+                  const runButton = document.getElementById(`button${blockId}`);
+                  
+                  outputBlock.style.display = 'block';
+
+                  let output = "";
+                  pyodide.globals.set("print", (...args) => {
+                     output += args.join(" ") + "\n";
+                  });
+
+                  runButton.disabled = true;
+                  
+                  await pyodide.runPythonAsync(editors[blockId].getValue());
+                  
+                  runButton.disabled = false;
+                  outputDiv.innerText = output;
+              } catch(err) {
+                  document.getElementById(`button${blockId}`).disabled = false;
+                  document.getElementById(`output${blockId}`).innerText = "Error: " + err;
+              }
+          }
+      </script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"> </h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#python---lists" id="toc-python---lists">Python - Lists</a>
+<ul>
+<li><a href="#what-is-a-list-in-python"
+id="toc-what-is-a-list-in-python">What is a list in Python?</a></li>
+<li><a href="#why-use-lists" id="toc-why-use-lists">Why Use
+Lists?</a></li>
+<li><a href="#how-are-lists-structured-internally"
+id="toc-how-are-lists-structured-internally">How are lists structured
+internally?</a></li>
+<li><a href="#creating-lists" id="toc-creating-lists">Creating lists</a>
+<ul>
+<li><a href="#creating-a-list-with-repeated-elements"
+id="toc-creating-a-list-with-repeated-elements">Creating a List with
+Repeated Elements</a></li>
+<li><a href="#creating-a-list-from-a-string"
+id="toc-creating-a-list-from-a-string">Creating a list from a
+string</a></li>
+</ul></li>
+<li><a href="#list-length" id="toc-list-length">List Length</a></li>
+<li><a href="#how-to-check-a-lists-type"
+id="toc-how-to-check-a-lists-type">How to check a list’s type</a></li>
+<li><a href="#comparison-of-lists"
+id="toc-comparison-of-lists">Comparison of lists</a>
+<ul>
+<li><a href="#using-sets-for-comparison"
+id="toc-using-sets-for-comparison">Using sets for comparison</a></li>
+<li><a href="#checking-for-the-presence-of-elements"
+id="toc-checking-for-the-presence-of-elements">Checking for the presence
+of elements</a></li>
+</ul></li>
+<li><a href="#maximum-and-minimum-elements-in-a-list"
+id="toc-maximum-and-minimum-elements-in-a-list">Maximum and Minimum
+Elements in a List</a>
+<ul>
+<li><a href="#using-a-key-function" id="toc-using-a-key-function">Using
+a Key Function</a></li>
+<li><a href="#multiple-lists-as-arguments"
+id="toc-multiple-lists-as-arguments">Multiple lists as
+arguments</a></li>
+</ul></li>
+<li><a href="#sum-of-list-elements" id="toc-sum-of-list-elements">Sum of
+List Elements</a></li>
+<li><a href="#converting-a-list-to-a-string"
+id="toc-converting-a-list-to-a-string">Converting a list to a
+string</a></li>
+<li><a href="#how-to-check-if-a-list-is-empty"
+id="toc-how-to-check-if-a-list-is-empty">How to Check if a List is
+Empty</a></li>
+<li><a href="#counting-elements-using-the-count-method"
+id="toc-counting-elements-using-the-count-method">Counting elements
+using the <code>count()</code> method</a></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+<li><a href="#frequently-asked-questions-about-lists-in-python"
+id="toc-frequently-asked-questions-about-lists-in-python">Frequently
+Asked Questions about Lists in Python</a>
+<ul>
+<li><a href="#what-is-a-list-in-python-1"
+id="toc-what-is-a-list-in-python-1">What is a list in Python?</a></li>
+<li><a href="#how-does-a-list-differ-from-a-string"
+id="toc-how-does-a-list-differ-from-a-string">How does a list differ
+from a string?</a></li>
+<li><a href="#why-are-lists-called-dynamic-arrays"
+id="toc-why-are-lists-called-dynamic-arrays">Why are lists called
+dynamic arrays?</a></li>
+<li><a href="#can-a-tuple-be-an-element-of-a-list"
+id="toc-can-a-tuple-be-an-element-of-a-list">Can a tuple be an element
+of a list?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="python---lists">Python - Lists</h1>
+<p>Lists in Python are one of the most versatile and frequently used
+data structures. They allow you to store an ordered collection of items,
+which can be of any type: numbers, strings, other lists, or even
+objects. In this section, we’ll explore what lists are, how they work
+under the hood, how to use them at a basic level, and provide examples
+with explanations.</p>
+<h2 id="what-is-a-list-in-python">What is a list in Python?</h2>
+<p>A list is a mutable sequence of elements that preserves the order in
+which they were added. This means you can add, remove, or change the
+elements of a list after it has been created. Lists are represented by
+square brackets [], with elements separated by commas.</p>
+<p>Key characteristics of lists:</p>
+<ul>
+<li><strong>Ordered</strong>: Elements are stored in the order they were
+added.</li>
+<li><strong>Mutable</strong>: You can change the contents of a
+list.</li>
+<li><strong>Type Flexibility</strong>: Elements can be of different data
+types (e.g., numbers and strings in the same list).</li>
+<li><strong>Indexing</strong>: Each element has an index, starting from
+0.</li>
+<li>Lists allow duplicates, meaning identical values can appear multiple
+times.</li>
+</ul>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+my_list = [1, "hello", 3.14, True]
+print(my_list)
+</code></pre>
+<p>Here, we create a list <code>my_list</code> containing an integer
+(1), a string (“hello”), a float (3.14), and a boolean (True). When
+printed, it displays: [1, ‘hello’, 3.14, True].</p>
+<h2 id="why-use-lists">Why Use Lists?</h2>
+<p>Lists are useful when you need to:</p>
+<ul>
+<li>Store a collection of data in a specific order.</li>
+<li>Quickly modify a collection (add or remove elements).</li>
+<li>Work with data of mixed types.</li>
+</ul>
+<p>For example, lists are often used to store computation results, to-do
+lists, data from files, or user input.</p>
+<h2 id="how-are-lists-structured-internally">How are lists structured
+internally?</h2>
+<p>Internally, Python implements lists as dynamic arrays.</p>
+<ol type="1">
+<li><p><strong>Memory Allocation</strong>: Python allocates extra memory
+beyond the current number of elements to speed up adding new ones. When
+space runs out, Python automatically increases the array size (typically
+by 1.5 to 2 times).</p></li>
+<li><p><strong>References to Objects</strong>: Lists don’t store data
+directly but hold references (pointers) to objects in memory. This
+allows them to contain elements of different types, as Python simply
+tracks where each element is located.</p></li>
+<li><p><strong>Indexing</strong>: Each element has its own number
+(index),enabling fast access.</p></li>
+</ol>
+<p>This structure makes lists highly efficient for operations like
+appending to the end or accessing elements by index, but less efficient
+for tasks like inserting at the beginning, which requires shifting all
+elements.</p>
+<h2 id="creating-lists">Creating lists</h2>
+<p>You can create lists in several ways:</p>
+<ol type="1">
+<li><strong>Direct assignment</strong>: Using square brackets.</li>
+<li><strong>Empty list</strong>: <code>[]</code> or
+<code>list()</code>.</li>
+<li><strong>From other data</strong>: for example, you can convert a
+string to a list or a tuple to a list.</li>
+</ol>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+# Direct assignment
+fruits = ["apple", "banana", "cherry"]
+
+# Empty list
+empty_list = []
+
+# Converting a string to a list
+text = "abc"
+letters = list(text)  # ['a', 'b', 'c']
+
+print(fruits)
+print(empty_list)
+print(letters)
+
+# Conversion of a tuple to a list
+thislist = list(("apple", "banana", "cherry"))
+# note the double round-brackets
+print(thislist)
+
+# Using range
+my_list = list(range(5))
+print(my_list)        # [0, 1, 2, 3, 4]
+</code></pre>
+<p>In the first case, we define a list with three string elements right
+away. In the second case, we create an empty list. In the third case, we
+use the <code>list()</code> function to convert the string “abc” into a
+list of characters.</p>
+<h3 id="creating-a-list-with-repeated-elements">Creating a List with
+Repeated Elements</h3>
+<p>You can create a list with repeated (identical) elements using the
+multiplication operator.</p>
+<pre><code class="editor-py">
+a = [2] * 5   # [2, 2, 2, 2, 2]
+b = [0] * 3   # [0, 0, 0]
+
+print(a)
+print(b)
+</code></pre>
+<p>In Python, the multiplication operator can repeat a list’s contents a
+specified number of times. This is handy for quickly initializing a
+list.</p>
+<blockquote>
+<p>Keep in mind that when using this method with mutable objects (like
+nested lists), all elements will reference the same object in memory,
+which can lead to unexpected behavior when modified.</p>
+</blockquote>
+<h3 id="creating-a-list-from-a-string">Creating a list from a
+string</h3>
+<p>The <code>split()</code> method in Python is a simple, convenient way
+to convert a string into a list by dividing it into parts based on a
+specified delimiter. This is particularly useful for text processing,
+such as handling files or strings containing words, numbers, or other
+elements.</p>
+<p>The <code>split()</code> method is called on a string and returns a
+list of substrings. By default, it splits the string on whitespace
+characters (spaces, tabs, newlines), but you can specify any other
+delimiter.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>string.split(separator<span class="op">=</span><span class="va">None</span>, maxsplit<span class="op">=-</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Here:</p>
+<ul>
+<li><code>separator</code>: The character or string to split by. If
+omitted, it defaults to splitting on whitespace characters.</li>
+<li><code>maxsplit</code>: Maximum number of splits. If omitted or set
+to -1, there’s no limit.</li>
+</ul>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+text = "Hello, how are you?"
+words = text.split()
+print(words)  # ['Hello,', 'how', 'are', 'you?']
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The string <code>text</code> is split into words based on
+spaces.</li>
+<li>Punctuation marks remain part of the words, as <code>split()</code>
+does not remove them.</li>
+</ul>
+<p>You can specify any character or substring as a separator by passing
+it to <code>split()</code>.</p>
+<p>📌 Example: Splitting by comma</p>
+<pre><code class="editor-py">
+text = "apple,banana,pear,kiwi"
+fruits = text.split(",")
+print(fruits)  # ['apple', 'banana', 'pear', 'kiwi']
+</code></pre>
+<p>📌 Example: Splitting by period</p>
+<pre><code class="editor-py">
+text = "192.168.1.1"
+ip_parts = text.split(".")
+print(ip_parts)  # ['192', '168', '1', '1']
+</code></pre>
+<p>Here, the delimiter is a period (.), and the string is transformed
+into a list of IP address components.</p>
+<p>When dealing with extra spaces, <code>split()</code> automatically
+ignores them.</p>
+<pre><code class="editor-py">
+text = "  word1   word2  "
+print(text.split())  # ['word1', 'word2']
+</code></pre>
+<p>For an empty string, the result depends on the delimiter: it returns
+either a list with one empty string or an empty list.</p>
+<pre><code class="editor-py">
+text = ""
+print(text.split())     # []
+print(text.split(","))  # ['']
+</code></pre>
+<p>The <code>maxsplit</code> parameter allows you to specify how many
+times the string should be split. The remainder of the string remains as
+one element.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+text = "one two three four"
+words = text.split(" ", maxsplit=2)
+print(words)  # ['one', 'two', 'three four']
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>maxsplit=2</code> means only 2 splits are performed.</li>
+<li>The first two spaces are used for splitting, and the rest of the
+string remains one element.</li>
+</ul>
+<h4 id="handling-multiple-delimiters">Handling Multiple Delimiters</h4>
+<p>If a string has multiple different delimiters, <code>split()</code>
+can’t handle it directly—you’ll need to use the <code>re</code> module
+(regular expressions) or preprocess the string by replacing
+delimiters.</p>
+<p>📌 Example using replacement:</p>
+<pre><code class="editor-py">
+text = "apple;banana,pear:kiwi"
+text = text.replace(";", ",").replace(":", ",")
+fruits = text.split(",")
+print(fruits)  # ['apple', 'banana', 'pear', 'kiwi']
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The <code>replace()</code> method replaces all delimiters (;, :)
+with a comma (,).</li>
+<li>Then <code>split(",")</code> splits the string by commas.</li>
+</ul>
+<h4 id="converting-to-numbers">Converting to Numbers</h4>
+<p>After <code>split()</code>, elements remain strings. To convert
+strings to numbers, use <code>map()</code> or a list comprehension.</p>
+<pre><code class="editor-py">
+text = "1 2 3 4"
+numbers = list(map(int, text.split()))
+print(numbers)  # [1, 2, 3, 4]
+</code></pre>
+<p>The <code>split()</code> method is a powerful, flexible tool for
+creating lists from strings, while remaining easy to use.</p>
+<h2 id="list-length">List Length</h2>
+<p>To determine how many elements a list contains, use the
+<code>len()</code> function.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+numbers = [10, 20, 30, 40]
+print(len(numbers))  # 4
+</code></pre>
+<p>The <code>len()</code> function returns the number of elements in a
+list.</p>
+<h2 id="how-to-check-a-lists-type">How to check a list’s type</h2>
+<p>The <code>type()</code> function is used to determine the data type
+of a variable.</p>
+<pre><code class="editor-py">
+mylist = ["apple", "banana", "cherry"]
+print(type(mylist))
+</code></pre>
+<p>This code outputs <code>&lt;class 'list'&gt;</code>, confirming that
+<code>mylist</code> is indeed a list object.</p>
+<h2 id="comparison-of-lists">Comparison of lists</h2>
+<p>In Python, lists can be compared using comparison operators:
+<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>,
+<code>&lt;=</code>, <code>&gt;=</code>.</p>
+<ul>
+<li><code>==</code> and <code>!=</code>: Check if the contents (values
+and order) of two lists are equal or unequal.</li>
+<li><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>,
+<code>&gt;=</code>: Perform lexicographical comparisons, comparing
+elements one by one, like words in a dictionary.</li>
+</ul>
+<p>Comparison happens element by element, from left to right, until a
+difference is found or one list ends.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+list1 = [1, 2, 3, 9]
+list2 = [1, 2, 4, 9]
+
+print(list1 != list2)  # True, the lists differ (3 ≠ 4)
+</code></pre>
+<p>The comparison stops at the third element (3 ≠ 4), so the result is
+<code>True</code>.</p>
+<p>How element-wise comparison works:</p>
+<ul>
+<li>It starts with the first elements of both lists.</li>
+<li>If they’re equal, it moves to the next elements (second, third,
+etc.).</li>
+<li>If one list is shorter but matches up to its end, the shorter list
+is considered “less than” the longer one.</li>
+<li>If the lists contain incomparable elements (e.g., numbers and
+strings), a <code>TypeError</code> occurs.</li>
+<li>If elements differ, the list with the smaller element is considered
+“less,” and comparison stops.</li>
+</ul>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+list1 = [1, 2, 3]
+list2 = [1, 2, 4]
+list3 = [1, 2]
+
+print(list1 < list2)  # True, because 3 < 4
+print(list1 > list3)  # True, because list3 is shorter
+</code></pre>
+<p>👣 Explanation:</p>
+<p>In the first case, the comparison reaches the third element: 3 &lt;
+4, so <code>list1</code> &lt; <code>list2</code>.</p>
+<p>In the second case, <code>list3</code> is shorter but matches
+<code>list1</code> up to its end; the longer list is considered
+“greater.”</p>
+<h3 id="using-sets-for-comparison">Using sets for comparison</h3>
+<p>If order doesn’t matter, you can convert lists to sets for
+comparison.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+list1 = [1, 2, 3]
+list2 = [3, 1, 2]
+
+set1 = set(list1)
+set2 = set(list2)
+
+print(set1 == set2)  # True, sets are equal, order does not matter.
+</code></pre>
+<p>Sets disregard order and duplicates, so <code>set1</code> and
+<code>set2</code> are equal since they contain the same elements.</p>
+<h3 id="checking-for-the-presence-of-elements">Checking for the presence
+of elements</h3>
+<p>Sometimes you need to check if elements from one list exist in
+another.</p>
+<p>For this, it is convenient to use the <code>in</code> operator or
+convert lists to sets using <code>set</code>.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+list1 = [1, 2, 3, 4]
+list2 = [2, 4]
+
+print(2 in list1)  # True, 2 is in list1
+print(all(x in list1 for x in list2))
+# True, all elements of list2 are in list1
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><p>The <code>in</code> operator checks if a single element is
+present in a list.</p></li>
+<li><p>The <code>all()</code> function with a generator checks if all
+elements of <code>list2</code> are in <code>list1</code>.</p></li>
+</ul>
+<p>Solution with converting a list to a set:</p>
+<pre><code class="editor-py">
+list1 = [3, 2, 1]
+list2 = [1, 2, 3, 4, 5]
+print(set(list1).issubset(set(list2)))  # Output: True
+</code></pre>
+<h2 id="maximum-and-minimum-elements-in-a-list">Maximum and Minimum
+Elements in a List</h2>
+<p>In Python, the built-in <code>max()</code> and <code>min()</code>
+functions find the largest and smallest values in a list, respectively.
+When it comes to lists, these functions can be applied to find the
+largest or smallest element in the list.</p>
+<p>Both functions work with any comparable data types (e.g., numbers or
+strings).</p>
+<p>If the list is empty, they will raise a <code>ValueError</code>
+exception.</p>
+<p>📌 Example 1: Working with numbers</p>
+<pre><code class="editor-py">
+mylist = [5, 12, 3, 8, 9]
+print(min(mylist))  # Outputs: 3
+print(max(mylist))  # Outputs: 12
+</code></pre>
+<p>Strings are compared lexicographically (in alphabetical order):</p>
+<p>📌 Example 2: Working with Strings</p>
+<pre><code class="editor-py">
+words = ["apple", "banana", "pear"]
+print(max(words))  # Output: pear (last in alphabetical order)
+print(min(words))  # Output: apple (first by alphabet)
+</code></pre>
+<p>These functions use the <code>&lt;</code> operator for
+comparisons.</p>
+<p>Thus, all elements must be comparable and of the same type, or a
+<code>TypeError</code> occurs.</p>
+<p>📌 Example 3: Mixed Types</p>
+<pre><code class="editor-py">
+mixed = [1, "string"]
+print(max(mixed))  # Error: TypeError
+</code></pre>
+<p>For an empty list, you can provide a default value using the
+<code>default</code> parameter:</p>
+<p>📌 Example 4: Empty List</p>
+<pre><code class="editor-py">
+empty = []
+print(max(empty, default=0))  # Output: 0
+print(min(empty, default=-1))  # Output: -1
+</code></pre>
+<h3 id="using-a-key-function">Using a Key Function</h3>
+<p>You can use the <code>key</code> parameter to customize the
+comparison rule:</p>
+<p>📌 Example 5</p>
+<pre><code class="editor-py">
+words = ["cat", "behemoth", "bird"]
+print(max(words, key=len))  # Output: "behemoth" (the longest word)
+print(min(words, key=len))  # Output: "cat" (the shortest word)
+</code></pre>
+<p>Here, comparison is based on string length, not lexicographical
+order.</p>
+<h3 id="multiple-lists-as-arguments">Multiple lists as arguments</h3>
+<p>When you pass multiple lists as separate arguments to
+<code>max()</code> or <code>min()</code>, Python compares the lists
+themselves, not their individual elements. The comparison of lists in
+Python occurs element by element, from left to right, similar to
+lexicographical order (just like string comparison).</p>
+<p>In this case, the function returns one of the input lists
+unchanged.</p>
+<p>Read about how lists are compared in the section “Comparison of
+Lists.”</p>
+<p>📌 Example 6</p>
+<pre><code class="editor-py">
+a = [11, 8, 12, 0]
+b = [11, 7, 123, 9]
+print(min(a, b))   # [11, 7, 123, 9]
+</code></pre>
+<p>The first elements are equal (11), so it compares the second elements
+(8 vs. 7). Since 7 &lt; 8, the second list is returned as the
+minimum.</p>
+<p>📌 Example 7: Passing multiple lists</p>
+<pre><code class="editor-py">
+list1 = [1, 2, 3]
+list2 = [1, 2, 4]
+list3 = [1, 1, 5]
+
+print(max(list1, list2, list3))  # Output: [1, 2, 4]
+print(min(list1, list2, list3))  # Output: [1, 1, 5]
+</code></pre>
+<ul>
+<li><code>max()</code> returns [1, 2, 4] because, when comparing [1, 2,
+3] and [1, 2, 4], the third element 4 &gt; 3, and [1, 1, 5] is less due
+to its second element (1 &lt; 2).</li>
+<li><code>min()</code> returns [1, 1, 5], the “smallest” list by
+element-wise comparison.</li>
+</ul>
+<p>You can use <code>key</code> to change the comparison logic:</p>
+<p>📌 Example 8: Using the <code>key</code> parameter</p>
+<pre><code class="editor-py">
+list1 = [1, 2, 3]
+list2 = [4, 5]
+list3 = [1, 1, 1, 1]
+
+print(max(list1, list2, list3, key=len))  # Output: [1, 1, 1, 1] (length 4)
+print(min(list1, list2, list3, key=len))  # Output: [4, 5] (length 2)
+</code></pre>
+<p>Here, comparison is based on list length, not contents.</p>
+<p>To find the maximum or minimum element across all elements of
+multiple lists, combine them first (e.g., using <code>*</code>,
+<code>+</code>, or <code>itertools.chain</code>):</p>
+<p>📌 Example 9: Combining Lists</p>
+<pre><code class="editor-py">
+from itertools import chain
+
+list1 = [1, 2, 3]
+list2 = [4, 5, 6]
+combined = list(chain(list1, list2))
+
+print(max(combined))  # Outputs: 6
+print(min(combined))  # Outputs: 1
+</code></pre>
+<p>Or alternatively:</p>
+<pre><code class="editor-py">
+print(max([*list1, *list2]))  # Output: 6
+print(min([*list1, *list2]))  # Output: 1
+print(max(list1 + list2))  # Output: 6
+print(min(list1 + list2))  # Output: 1
+</code></pre>
+<p>Thus, to find the max/min across all elements, combine the lists
+beforehand.</p>
+<p>For more details, refer to the section dedicated to merging
+lists.</p>
+<p>Finding the maximum element is a specific case of retrieving the
+top-N elements from a list; see the “Sorting Lists” section for more
+details.</p>
+<h2 id="sum-of-list-elements">Sum of List Elements</h2>
+<p>The <code>sum()</code> function is a built-in Python function that
+calculates the sum of elements in an iterable.</p>
+<p>✳️ Syntax:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>(iterable, start<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div>
+<p>Here:</p>
+<ul>
+<li><code>iterable</code>: A sequence (list, tuple) whose elements will
+be summed.</li>
+<li><code>start</code>: The initial value to add to the sum (defaults to
+0).</li>
+</ul>
+<pre><code class="editor-py">
+# Simple sum of a list of numbers
+numbers = [1, 2, 3, 4, 5]
+print(sum(numbers))  # Output: 15
+
+# Use of the start parameter 
+print(sum(numbers, 10))  # Output: 25 (10 + 15)
+</code></pre>
+<p>Features and limitations</p>
+<ul>
+<li>It works only with numeric values.</li>
+<li>For complex calculations with high precision, the
+<code>fsum()</code> function from the <code>math</code> module can be
+used</li>
+</ul>
+<h2 id="converting-a-list-to-a-string">Converting a list to a
+string</h2>
+<p>Sometimes you need to convert a list into a string, for example, to
+display data conveniently or write it to a file.</p>
+<p><strong>Method 1.</strong> Using <code>str()</code> for quick
+conversion</p>
+<p>If you need a simple string representation, you can use the built-in
+function <code>str()</code>:</p>
+<pre><code class="editor-py">
+words = ["Python", "is", "cool"]
+print(str(words))  # ['Python', 'is', 'cool']
+</code></pre>
+<p><strong>Method 2.</strong> The <code>.join()</code> method</p>
+<p>The <code>.join()</code> method combines all list elements into a
+single string with a specified separator.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+# List of strings
+words = ["Python", "is", "cool"]
+sentence = " ".join(words)
+print(sentence)  # Output: Python is cool
+
+# List with numbers
+numbers = [1, 2, 3]
+numbers_str = ", ".join(str(num) for num in numbers)
+print(numbers_str)  # Output: 1, 2, 3
+
+# No separator
+chars = ["a", "b", "c"]
+result = "".join(chars)
+print(result)  # Output: abc
+</code></pre>
+<p>👣 Key points:</p>
+<ul>
+<li>The <code>.join()</code> method is called on the separator string
+and takes the list as an argument.</li>
+<li>All elements of the list must be strings. If there are numbers or
+other types in the list, they must first be converted to strings using
+<code>str()</code>.</li>
+<li>In the first case, we use a space ” ” as a separator to connect
+words into a sentence.</li>
+<li>In the second case, numbers are converted to strings using a
+generator and then joined with a comma and a space “,”.</li>
+<li>In the third case, an empty string “” as a separator combines
+elements without gaps.</li>
+</ul>
+<p>If the list contains non-string elements without prior conversion,
+Python raises a <code>TypeError</code>.</p>
+<p><strong>Method 3.</strong> The <code>pprint</code> module</p>
+<p>For a cleaner, more readable display of complex lists (especially
+nested ones), the <code>pprint</code> (Pretty Print) module formats data
+with proper indentation and line breaks.</p>
+<p>Its <code>pprint()</code> function formats complex data structures
+with indentation and line breaks.</p>
+<p>📌 Example:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Typical output of a nested list</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>nested_list <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]]</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nested_list)  <span class="co"># Output: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Using pprint</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>pprint(nested_list, width<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Outputs:</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># [[1, 2, 3],</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#  [4, 5, 6],</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#  [7, 8, 9]]</span></span></code></pre></div>
+<p>You can also configure the <code>pprint</code> settings, such as the
+line width or the level of nesting.</p>
+<p>The <code>width</code> parameter limits line length, affecting
+formatting.</p>
+<p><strong>Note</strong>: <code>pprint()</code> doesn’t produce a string
+for further processing—it’s for display only. Use <code>pformat()</code>
+if you need a string result.</p>
+<h2 id="how-to-check-if-a-list-is-empty">How to Check if a List is
+Empty</h2>
+<p>Sometimes you need to know whether a list contains elements or if it
+is empty.</p>
+<p><strong>Method 1.</strong> Using a Conditional Statement</p>
+<p>An empty list in Python is considered “falsy” (False) in a boolean
+context, while a non-empty list is “truthy” (True).</p>
+<pre><code class="editor-py">
+empty_list = []
+non_empty_list = [1, 2, 3]
+
+if not empty_list:
+    print("The list is empty.")
+else:
+    print("The list is not empty.")  # Output: The list is empty.
+
+if non_empty_list:
+    print("The list is not empty.")  # Output: The list is not empty.
+else:
+    print("The list is empty.")
+</code></pre>
+<p>Python treats an empty list <code>[]</code> as <code>False</code> and
+a non-empty one as <code>True</code>, making this approach concise.</p>
+<p><strong>Method 2.</strong> Using <code>len()</code></p>
+<p>Comparing the list’s length to zero explicitly shows whether it’s
+empty.</p>
+<pre><code class="editor-py">
+empty_list = []
+non_empty_list = [1, 2, 3]
+
+if len(empty_list) == 0:
+   print("The list is empty.")  # Output: The list is empty.
+
+if len(non_empty_list) > 0:
+   print("The list is not empty.")  # Output: The list is not empty.
+</code></pre>
+<p><strong>Method 3.</strong> Explicit Comparison with
+<code>[]</code></p>
+<pre><code class="editor-py">
+empty_list = []
+non_empty_list = [1, 2, 3]
+
+if empty_list == []:
+    print("The list is empty.")  # Output: The list is empty.
+else:
+    print("The list is not empty.")
+
+if non_empty_list == []:
+    print("The list is empty.")
+else:
+    print("The list is not empty.")  # Output: The list is not empty.
+</code></pre>
+<p>This works because Python compares list contents.</p>
+<p>It’s useful for making code very explicit, especially for beginners
+unfamiliar with the falsy/truthy behavior of empty lists.</p>
+<p>In practice, the first method is preferred for its simplicity and
+readability.</p>
+<h2 id="counting-elements-using-the-count-method">Counting elements
+using the <code>count()</code> method</h2>
+<p>The <code>count()</code> method counts how many times a specific
+element appears in a list. It’s handy for finding the frequency of a
+value without writing loops.</p>
+<p><code>list.count(value)</code> returns an integer showing how many
+times <code>value</code> appears in the list.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+my_list = [1, 2, 3, 2, 4, 2]
+count_twos = my_list.count(2)
+print(count_twos)  # Output: 3
+
+fruits = ["apple", "banana", "apple", "pear"]
+apple_count = fruits.count("apple")
+print(apple_count)  # Output: 2
+
+nested = [[1, 2], [3, 4], [1, 2]]
+list_count = nested.count([1, 2])
+print(list_count)  # Output: 2
+
+print(my_list.count(5))  # Output: 0
+</code></pre>
+<p>If the element isn’t in the list, <code>count()</code> returns 0.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Lists in Python are a powerful, flexible tool. They’re easy to create
+and use, yet have a sophisticated internal structure that ensures
+efficiency.</p>
+<h2 id="frequently-asked-questions-about-lists-in-python">Frequently
+Asked Questions about Lists in Python</h2>
+<h3 id="what-is-a-list-in-python-1">What is a list in Python?</h3>
+<p>A list is an ordered mutable collection of elements that can contain
+data of different types (numbers, strings, other lists, etc.). It is
+created using square brackets, for example:
+<code>my_list = [1, "two", 3]</code>.</p>
+<h3 id="how-does-a-list-differ-from-a-string">How does a list differ
+from a string?</h3>
+<p>A list is mutable (its elements can be modified), whereas a string is
+immutable (its characters cannot be changed directly). For example,
+<code>my_list[0] = 5</code> works for a list, but
+<code>my_string[0] = "a"</code> raises an error for a string.</p>
+<h3 id="why-are-lists-called-dynamic-arrays">Why are lists called
+dynamic arrays?</h3>
+<p>Internally, lists in Python are implemented as dynamic arrays,
+meaning they resize automatically when elements are added. This makes
+them convenient, though operations like inserting at the beginning can
+be slow due to element shifting.</p>
+<h3 id="can-a-tuple-be-an-element-of-a-list">Can a tuple be an element
+of a list?</h3>
+<p>Yes, a tuple can be an element of a list, just like other types such
+as lists, dictionaries, sets, etc.</p>
+</body>
+</html>

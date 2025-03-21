@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title> </title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style>
+  <!--
+
+  /* RESET
+  =============================================================================*/
+
+  html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, 
+      abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, 
+      strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, 
+      legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, 
+      embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, 
+      section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /* BODY
+  =============================================================================*/
+
+  body {
+    font-family: Arimo, Nunito Sans, arial, clean, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;  /* межстрочное */
+    color: #333;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 38em; /* ширина текста */
+    margin: 0 auto;
+  }
+
+  body>*:first-child {
+    margin-top: 0 !important;
+  }
+
+  body>*:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* BLOCKS
+  =============================================================================*/
+
+  p, blockquote, ul, ol, dl, table, pre {
+    margin: 0.4em 0; /* между абзацами (кроме первого и последнего) */
+  }
+
+  /* HEADERS
+  =============================================================================*/
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 20px 0 10px;
+    padding: 0;
+    font-family: Opinion Pro, Neucha;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
+  }
+
+  h1 tt, h1 code, h2 tt, h2 code, h3 tt, h3 code, h4 tt, h4 code, h5 tt, h5 code, h6 tt, h6 code {
+    font-size: 1em;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    /*color: #000;*/
+  }
+
+  h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #ccc;
+    /*color: #000;*/
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  h4 {
+    font-size: 1.1em;
+  }
+
+  h5 {
+    font-size: 1.1em;
+  }
+
+  h6 {
+    /*color: #777;*/
+    font-size: 1.0em;
+  }
+
+  body>h2:first-child, body>h1:first-child, body>h1:first-child+h2, body>h3:first-child, body>h4:first-child, body>h5:first-child, body>h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  h1+p, h2+p, h3+p, h4+p, h5+p, h6+p {
+    margin-top: 10px;
+  }
+
+  /* LINKS
+  =============================================================================*/
+
+  a {
+    color: #4183C4;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* LISTS
+  =============================================================================*/
+
+  ul, ol {
+    padding-left: 30px;
+  }
+
+  ul li > :first-child, 
+  ol li > :first-child, 
+  ul li ul:first-of-type, 
+  ol li ol:first-of-type, 
+  ul li ol:first-of-type, 
+  ol li ul:first-of-type {
+    margin-top: 0px;
+  }
+
+  ul ul, ul ol, ol ol, ol ul {
+    margin-bottom: 0;
+  }
+
+  dl {
+    padding: 0;
+  }
+
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px;
+  }
+
+  dl dt:first-child {
+    padding: 0;
+  }
+
+  dl dt>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dt>:last-child {
+    margin-bottom: 0px;
+  }
+
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px;
+  }
+
+  dl dd>:first-child {
+    margin-top: 0px;
+  }
+
+  dl dd>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* CODE
+  =============================================================================*/
+
+  pre, code, tt {
+    font-size: 1rem;
+    font-family: Iosevka, Consolas, "Liberation Mono", Courier, monospace;
+  }
+
+  code, tt {
+    margin: 0 0px;
+    padding: 1px 3px;
+    white-space: nowrap;
+    border: 1px solid #eaeaea;
+  /*   background-color: #f8f8f8; это `code` */
+    background-color: #EFFFEF;
+    border-radius: 3px;
+  }
+
+  pre>code {
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    border: none;
+    background: transparent; 
+  }
+
+  .sourceCode{
+    background-color: #F6FFF7; /* светло-зелен для блоков кода */
+    font-size: 100%;
+  }
+    div.sourceCode{
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 7%);
+    }
+
+  pre {
+  /*   background-color: #f8f8f8; это ``` */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    line-height: 19px;
+    overflow: auto;
+    padding: 6px 8px;
+    border-radius: 3px;
+  }
+
+  pre code, pre tt {
+    background-color: transparent; 
+    border: none;
+  }
+
+  kbd {
+      -moz-border-bottom-colors: none;
+      -moz-border-left-colors: none;
+      -moz-border-right-colors: none;
+      -moz-border-top-colors: none;
+      background-color: #DDDDDD;
+      background-image: linear-gradient(#F1F1F1, #DDDDDD);
+      background-repeat: repeat-x;
+      border-color: #DDDDDD #CCCCCC #CCCCCC #DDDDDD;
+      border-image: none;
+      border-radius: 2px 2px 2px 2px;
+      border-style: solid;
+      border-width: 1px;
+      font-family: Iosevka, Helvetica, Arial, sans-serif;
+      line-height: 10px;
+      padding: 1px 4px;
+      box-shadow: 0 1px 0 rgba(63,63,63,0.25);
+  }
+
+  /* QUOTES
+  =============================================================================*/
+
+  blockquote {
+    border-left: 4px solid #4493f8; /* blue */
+    padding: 0 15px;
+  }
+
+  blockquote>:first-child {
+    margin-top: 0px;
+  }
+
+  blockquote>:last-child {
+    margin-bottom: 0px;
+  }
+
+  /* HORIZONTAL RULES
+  =============================================================================*/
+
+  hr {
+    clear: both;
+    margin: 15px 0;
+    height: 0px;
+    overflow: hidden;
+    border: none;
+    background: transparent;
+    border-bottom: 2px dotted #777;
+    padding: 0;
+  }
+
+  /* TABLES
+  =============================================================================*/
+
+    table {                                     
+       box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+       display: inline-block;
+       width: auto;
+    }
+
+  table th {
+    font-weight: bold;
+  }
+
+  table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px 13px;
+    font-size: 1rem;
+  }
+
+  table tr {
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f8f8f8;
+  }
+
+  /* IMAGES
+  =============================================================================*/
+
+  img {
+    max-width: 100%
+  }
+
+    .footnote-back, .footnote-ref {
+      color: #4493f8 !important; /* blue */
+    }
+    .footnote-ref, .footnote-ref::after {
+      font-size: 0.95em;
+      font-weight: 700;
+      vertical-align: super; 
+    }
+    .footnote-ref::after {
+      content:")";
+    }
+    .footnotes-end-of-document  {
+      font-size: 0.85em;  
+    }
+
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 1.5em;
+      margin: 0 0.8em 0.2em -1.8em;
+      vertical-align: middle;
+    }
+
+    .note, .tip, .warning, .important { 
+      border-left-style: solid;
+      border-left-width: 3px;
+      padding-left: 7px;
+    }
+    div.title {
+      font-size: 0.85em;
+      font-weight: bold;
+    }
+    div.title > p::before{
+       content: '#';
+       width: 1em; 
+       height: 1em; 
+       display: inline-block; 
+    }
+
+
+
+    .note > .title {
+       color: #4493f8; /* blue */
+    }   
+    .tip > .title {
+       color: #3fb950; /* green */
+    }
+    .warning > .title {
+       color: #d29922 /* olive */;
+    }
+    .important > .title {
+       color: #8352e1 /* fiolet */;
+    }
+    .note  {
+       border-color: #4493f8; /* blue */
+    }
+    .tip  {
+       border-color: #3fb950; /* green */ 
+    }
+    .warning {
+       border-color: #d29922 /* olive */; 
+    }
+    .important {     
+       border-color: #8352e1 /* fiolet */; 
+    }
+
+
+  #TOC {
+     font-family: Opinion Pro;
+     font-weight: bold;
+     font-size: 0.9em;
+     padding-left: 1em;
+     padding: .2em 0 .2em 1.0em;
+     background: #f7f7f7;
+     border: dashed 1px rgb(128,128,128); /* grey */
+     box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+  }
+
+    figure {
+      margin: 0.3em 0 0.9em;
+      background-color: #eee;
+  /*  text-align: center; */
+      box-shadow: 0px 0px 0.8em rgb(0 0 0 / 25%);
+      border: dashed 1px rgb(128,128,128); /* grey */
+    }
+
+    figcaption {
+      font-family: Iosevka, Bitter;
+      font-style: italic;
+      font-size: 95%;
+      background-color: #eee;
+      color: #000;
+      padding: 0em 1em .2em;
+      margin: 0;
+    }
+
+    figure:hover{
+      background: #fff;
+    }
+
+    figure:hover figcaption {
+      background: #fff;
+    }
+
+
+  -->
+  </style>
+
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/python/python.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/theme/yonce.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/panel.min.js" integrity="sha512-kS6L87i8KUuHFk6QTxAyZSp1xza7zuaDg1Mt9rjQXjRQyraT0oqEeVbC6No/pxNvE1dMAZYBQ5r/8GZQUowhnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.js" integrity="sha512-8Rk4wB3MfgQfuOw95XW/vAU8PSTHWI5HddVRXfg+Ykk8CzsiOZkDpxVSrnYq2u/IqO499ooZ61fFHppuzB2ghA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/addon/display/fullscreen.min.css" integrity="sha512-T8xB3MmwpA77VK9lUH3UkdUTnkmpqOxHF8OceOKaHrvpcXMSNX0xtpa9FoLTDAVO1JnB2UiMdVeI2V0HTHjTWA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <style>
+          .container {
+              width: 100%;
+              max-width: 800px;
+              margin: 20px auto;
+              font-family: Arial, sans-serif;
+          }
+          
+          .code-block {
+              position: relative;
+              background: white;
+              background: #2c2c2c; /* цвет рамки вокруг кода #263238 material */ 
+              border: 1px solid #ddd; 
+              border-radius: 4px;
+              padding: 10px;  /* толщина рамки вокруг кода */
+              margin-bottom: 0px;
+          }
+          
+          .code-textarea {
+              width: 98%;
+              height: 400px;
+              margin-top: 35px;
+              font-family: Iosevka, monospace;
+              padding: 10px;
+              border: 1px solid #ccc; 
+              border-radius: 4px; 
+              resize: vertical;
+          }
+          
+          .run-button {
+              position: absolute;
+              bottom: 25px;
+              right: 30px;
+              padding: 6px 10px 2px;
+              background: #000;   /* для светлой темы */
+              color: #fff;
+              background: #fff;   /* для темной темы */
+              color: #000;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+          
+          .run-button:hover {
+              opacity: 1.0;
+          }
+  	.run-button:disabled {
+              animation: pulse 1.0s infinite;
+          }                     
+
+  @keyframes pulse {
+      0% {
+          transform: scale(1);
+          opacity: 1;
+      }
+      50% {
+          transform: scale(1.05);
+          opacity: 0.7;
+      }
+      100% {
+          transform: scale(1);
+          opacity: 1;
+      }
+  }
+                 
+          .hide-button {
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              padding: 8px 10px;
+              background: white;
+              color: black;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              opacity: 0.4;
+              z-index: 10;
+          }
+
+          .hide-button:hover {
+              opacity: 1.0;
+          }
+
+          .output-block {
+              display: none; 
+              background: #fafafa;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              padding: 20px;
+              position: relative;
+          }
+          
+          .code-label,
+          .output-label {
+              position: absolute;
+              color: #999;
+              font-size: 0.8em;
+              border: 1px #DDD solid;
+              background: #F5F5F5;
+              padding: 2px 4px;
+              border-radius: 4px;
+              font-weight: bold;
+              z-index: 10;
+          }
+          .output-label {
+              top: 10px;
+              left: 10px;
+          }
+          .code-label{
+              top: 10px;
+              right: 25px;
+          }
+          
+          .output {
+              margin-top: 25px;
+              font-family: Iosevka, monospace;
+              white-space: pre-wrap;
+          }                       
+
+         .cm-s-default {
+              height: 100px;
+         }
+         .CodeMirror {
+              font-family: Iosevka, monospace; 
+              font-size: 0.95em;
+         }
+      </style>
+
+
+      <script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js" id="pyodide" defer></script>
+
+      <script>
+          let editors = [];
+          let pyodideReadyPromise;
+          
+          document.getElementById("pyodide").onload = function() {
+              async function initPyodide() {
+                  const pyodide = await loadPyodide();
+                  await pyodide.loadPackage("micropip");
+                  const micropip = pyodide.pyimport("micropip");
+                  //await micropip.install('scipy')
+                  //let scipy = await pyodide.loadPackage('scipy')
+                  // see https://pyodide.org/en/stable/usage/loading-packages.html
+                  return pyodide;
+              }
+              pyodideReadyPromise = initPyodide();
+
+              // Get all Python code blocks
+              const codeBlocks = document.querySelectorAll("pre code.editor-py");
+              
+              codeBlocks.forEach((el, index) => {
+                  const preEl = el.parentNode;
+                  const blockId = index + 1;
+                  const str = el.innerText.trim();
+                  const lines = str.split('\n').length;                
+                  const height = el.getAttribute('height') || (lines * 25 + 4) + 'px'; 
+                  const div = document.createElement("div");
+                  div.innerHTML = `
+                      <div class="container">
+                          <div class="code-block">
+                              <!-- <span class="code-label">Try to edit and run code example</span> -->
+                              <button class="run-button" onclick="runPython(${blockId})" id="button${blockId}">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                      <path d="M8 5v14l11-7z"> </path> 
+                                  </svg>
+                              </button>
+                              <textarea id="code${blockId}" class="code-textarea">${str}</textarea>
+                          </div>
+                          <div id="output-block${blockId}" class="output-block">
+                              <span class="output-label">Output:</span>
+                              <div id="output${blockId}" class="output"></div>
+
+                              <button class="hide-button" onclick="hideOutput(${blockId})">
+  				<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="undefined"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+  			    </button>
+                          </div>
+                      </div>
+                  `;
+                  
+                  preEl.parentNode.insertBefore(div, preEl);
+                  preEl.parentNode.removeChild(preEl);
+                  
+                  // Initialize CodeMirror for this instance
+                  setTimeout(() => {
+                      const textarea = document.getElementById(`code${blockId}`);
+                      if (textarea) {
+                          editors[blockId] = CodeMirror.fromTextArea(textarea, {
+                              mode: "python",
+                            //  lineNumbers: true,
+                              theme: "default",
+                              theme: "material",
+                              theme: "mbo", 
+                              theme: "neat",
+                              theme: "yonce",
+                              extraKeys: {
+          			"F7": function(cm) {
+  			          cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+          			},
+          			"Esc": function(cm) {
+            			  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+          			}
+        			    } 
+                          });
+                          editors[blockId].setSize(null, height);
+                      }
+                  }, 0);
+              });
+          };
+
+          async function hideOutput(blockId) {
+              const outputBlock = document.getElementById(`output-block${blockId}`);
+              outputBlock.style.display = 'none';
+          }
+
+          async function runPython(blockId) {
+              let pyodide = await pyodideReadyPromise;
+              try {
+                  const outputDiv = document.getElementById(`output${blockId}`);
+                  const outputBlock = document.getElementById(`output-block${blockId}`);
+                  const runButton = document.getElementById(`button${blockId}`);
+                  
+                  outputBlock.style.display = 'block';
+
+                  let output = "";
+                  pyodide.globals.set("print", (...args) => {
+                     output += args.join(" ") + "\n";
+                  });
+
+                  runButton.disabled = true;
+                  
+                  await pyodide.runPythonAsync(editors[blockId].getValue());
+                  
+                  runButton.disabled = false;
+                  outputDiv.innerText = output;
+              } catch(err) {
+                  document.getElementById(`button${blockId}`).disabled = false;
+                  document.getElementById(`output${blockId}`).innerText = "Error: " + err;
+              }
+          }
+      </script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title"> </h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#python---looping-through-lists"
+id="toc-python---looping-through-lists">Python - Looping Through
+Lists</a>
+<ul>
+<li><a href="#the-for-loop-with-lists"
+id="toc-the-for-loop-with-lists">The <code>for</code> Loop with
+Lists</a>
+<ul>
+<li><a href="#direct-element-iteration"
+id="toc-direct-element-iteration">Direct Element Iteration</a></li>
+<li><a href="#iteration-with-indices-using-range-and-len"
+id="toc-iteration-with-indices-using-range-and-len">Iteration with
+Indices Using <code>range()</code> and <code>len()</code></a></li>
+<li><a href="#using-enumerate" id="toc-using-enumerate">Using
+<code>enumerate()</code></a></li>
+</ul></li>
+<li><a href="#the-while-loop-with-lists"
+id="toc-the-while-loop-with-lists">The <code>while</code> Loop with
+Lists</a>
+<ul>
+<li><a href="#when-to-use-while" id="toc-when-to-use-while">When to Use
+<code>while</code>?</a></li>
+</ul></li>
+<li><a href="#useful-loop-operators"
+id="toc-useful-loop-operators">Useful Loop Operators</a></li>
+<li><a href="#common-mistakes-when-working-with-loops-and-lists"
+id="toc-common-mistakes-when-working-with-loops-and-lists">Common
+Mistakes When Working with Loops and Lists</a></li>
+<li><a href="#practical-examples" id="toc-practical-examples">Practical
+Examples</a>
+<ul>
+<li><a href="#summing-list-elements" id="toc-summing-list-elements">1.
+Summing List Elements</a></li>
+<li><a href="#filtering-a-list" id="toc-filtering-a-list">2. Filtering a
+List</a></li>
+<li><a href="#modifying-elements" id="toc-modifying-elements">3.
+Modifying Elements</a></li>
+</ul></li>
+<li><a href="#how-to-iterate-over-a-list-in-reverse"
+id="toc-how-to-iterate-over-a-list-in-reverse">How to Iterate Over a
+List in Reverse</a></li>
+<li><a href="#tips" id="toc-tips">Tips</a></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+<li><a href="#frequently-asked-questions-about-list-iteration"
+id="toc-frequently-asked-questions-about-list-iteration">Frequently
+Asked Questions About List Iteration</a>
+<ul>
+<li><a
+href="#what-happens-if-i-add-or-remove-elements-while-iterating-over-a-list"
+id="toc-what-happens-if-i-add-or-remove-elements-while-iterating-over-a-list">What
+Happens If I Add or Remove Elements While Iterating Over a
+List?</a></li>
+<li><a href="#how-do-i-stop-a-loop-early"
+id="toc-how-do-i-stop-a-loop-early">How Do I Stop a Loop Early?</a></li>
+<li><a href="#what-is-enumerate-and-why-use-it"
+id="toc-what-is-enumerate-and-why-use-it">What Is
+<code>enumerate()</code> and Why Use It?</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="python---looping-through-lists">Python - Looping Through
+Lists</h1>
+<p>One of the key concepts that both beginners and advanced developers
+encounter is working with loops to process lists. Let’s dive into how to
+use loops, explore examples, common mistakes, and helpful tips in
+detail.</p>
+<hr />
+<p><strong>Loops</strong> are constructs that allow you to perform
+repetitive actions. When working with lists, loops help you process each
+element—whether it’s printing them, modifying data, or performing
+calculations.</p>
+<p>In Python, two types of loops are most commonly used with lists:</p>
+<ul>
+<li><code>for</code> — iterating over elements.</li>
+<li><code>while</code> — looping with a condition.</li>
+</ul>
+<h2 id="the-for-loop-with-lists">The <code>for</code> Loop with
+Lists</h2>
+<p>The <code>for</code> loop is the most convenient and widely used
+method for processing lists in Python. It allows you to iterate directly
+over elements or use their indices.</p>
+<h3 id="direct-element-iteration">Direct Element Iteration</h3>
+<p>If you simply want to go through all the elements in a list, use this
+syntax:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+
+for fruit in fruits:
+    print(fruit)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>apple
+banana
+pear</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><strong><code>fruit</code></strong> is a temporary variable that
+takes on the value of each list element in turn.</li>
+<li><strong><code>in fruits</code></strong> specifies that we’re
+iterating over the <code>fruits</code> list.</li>
+</ul>
+<p>This approach is perfect when you don’t need the element’s index,
+just the data itself.</p>
+<h3 id="iteration-with-indices-using-range-and-len">Iteration with
+Indices Using <code>range()</code> and <code>len()</code></h3>
+<p>If you need to know an element’s position (index) in the list, you
+can combine <code>range()</code> with <code>len()</code>:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+
+for i in range(len(fruits)):
+    print(f"Item {i}: {fruits[i]}")
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Item 0: apple
+Item 1: banana
+Item 2: pear</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>len(fruits)</code> returns the length of the list (3 in this
+case).</li>
+<li><code>range(3)</code> generates a sequence of numbers from 0 to
+2.</li>
+<li><code>fruits[i]</code> accesses an element by its index.</li>
+</ul>
+<h3 id="using-enumerate">Using <code>enumerate()</code></h3>
+<p>A more “Pythonic” (natural for Python) way to get both the index and
+element at the same time is the <code>enumerate()</code> function:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+
+for index, fruit in enumerate(fruits):
+    print(f"Item {index}: {fruit}")
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>Item 0: apple
+Item 1: banana
+Item 2: pear</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>enumerate(fruits)</code> returns pairs of (index,
+element).</li>
+<li>You can set a starting index, e.g.,
+<code>enumerate(fruits, start=1)</code>.</li>
+</ul>
+<p>This method is preferred because it’s more readable and concise.</p>
+<h2 id="the-while-loop-with-lists">The <code>while</code> Loop with
+Lists</h2>
+<p>The <code>while</code> loop is less common for lists but useful when
+you need manual control over iteration or when the list’s length changes
+during processing.</p>
+<p>📌 Example:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+i = 0
+
+while i < len(fruits):
+    print(fruits[i])
+    i += 1
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>apple
+banana
+pear</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>i</code> is a counter that increases by 1
+(<code>i += 1</code>) after each iteration.</li>
+<li>The condition <code>i &lt; len(fruits)</code> ensures we don’t go
+beyond the list’s bounds.</li>
+</ul>
+<h3 id="when-to-use-while">When to Use <code>while</code>?</h3>
+<ul>
+<li>When you want to remove elements from the list during
+iteration.</li>
+<li>When you need to skip elements based on complex conditions.</li>
+</ul>
+<p>📌 Example with Removal:</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4, 5]
+i = 0
+
+while i < len(numbers):
+    if numbers[i] % 2 == 0:  # Remove even numbers
+        numbers.pop(i)
+    else:
+        i += 1
+
+print(numbers)  # [1, 3, 5]
+</code></pre>
+<h2 id="useful-loop-operators">Useful Loop Operators</h2>
+<p>Python provides several operators to simplify working with loops:</p>
+<ol type="1">
+<li><strong><code>break</code></strong> — exits the loop.</li>
+<li><strong><code>continue</code></strong> — skips the current iteration
+and moves to the next one.</li>
+<li><strong><code>else</code></strong> — runs if the loop completes
+without being interrupted.</li>
+</ol>
+<p>📌 Example with <code>break</code>:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for fruit in fruits:
+    if fruit == "banana":
+        break
+    print(fruit)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>apple</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The <code>for</code> loop iterates over the <code>fruits</code> list
+one by one: first “apple,” then “banana,” then “pear.”</li>
+<li>Condition: Checks if the current element equals “banana.”</li>
+<li><strong>The <code>break</code> operator</strong>: As soon as the
+condition is met (at “banana”), the loop stops immediately, and further
+iterations (e.g., “pear”) are skipped.</li>
+<li>Why only “apple” is printed? The <code>print(fruit)</code> statement
+comes before <code>break</code>, so “apple” gets printed, but the loop
+stops before printing “banana.”</li>
+</ul>
+<p><strong>When to use?</strong> <code>break</code> is handy when you
+need to stop the loop as soon as a specific condition is met.</p>
+<p>📌 Example with <code>continue</code>:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for fruit in fruits:
+    if fruit == "banana":
+        continue
+    print(fruit)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>apple
+pear</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The <code>for</code> loop iterates over the <code>fruits</code> list
+one by one.</li>
+<li>Condition: Checks if the current element is “banana.”</li>
+<li><strong>The <code>continue</code> operator</strong>: When the
+condition is true (at “banana”), <code>continue</code> skips the rest of
+the current iteration and moves to the next element (“pear”), bypassing
+the <code>print(fruit)</code> statement for “banana.”</li>
+<li>Why isn’t “banana” printed? Because <code>continue</code> triggers
+before <code>print</code>, skipping that iteration.</li>
+<li>Why are “apple” and “pear” printed? For those elements, the
+condition isn’t met, so <code>continue</code> doesn’t trigger, and
+<code>print(fruit)</code> executes normally.</li>
+</ul>
+<p><strong>When to use?</strong> <code>continue</code> is useful when
+you want to skip specific elements but keep the loop running.</p>
+<p>📌 Example with <code>else</code>:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for fruit in fruits:
+    if fruit == "orange":
+        print("Found an orange!")
+        break
+else:
+    print("No orange found.")
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>No orange found.</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li>The <code>for</code> loop iterates over the <code>fruits</code>
+list, checking each element against “orange.”</li>
+<li>Condition: Looks for “orange” in the list.</li>
+<li><strong>The <code>break</code> operator</strong>: If “orange” were
+found, the loop would stop, and the <code>else</code> block would be
+skipped.</li>
+<li><strong>The <code>else</code> block</strong>: In Python, the
+<code>else</code> block in loops runs only if the loop completes
+naturally—i.e., it iterates fully without being interrupted by
+<code>break</code>.</li>
+<li>Why “No orange found”? Since “orange” isn’t in the list, the
+condition never triggers, <code>break</code> doesn’t run, and the
+<code>else</code> block executes after the loop finishes.</li>
+</ul>
+<p><strong>When to use?</strong> <code>else</code> is great for checking
+whether a loop was interrupted or completed fully, such as when
+searching for an item.</p>
+<p><strong>Summary:</strong></p>
+<ul>
+<li><code>break</code> — stops the loop when a goal is reached.</li>
+<li><code>continue</code> — skips individual iterations without stopping
+the loop.</li>
+<li><code>else</code> — runs an action if the loop finishes without
+interruptions.</li>
+</ul>
+<p>Try tweaking the conditions or lists in these examples to get a
+better feel for how they work!</p>
+<h2 id="common-mistakes-when-working-with-loops-and-lists">Common
+Mistakes When Working with Loops and Lists</h2>
+<ol type="1">
+<li><p><strong>Modifying a List During a <code>for</code> Loop:</strong>
+Adding or removing elements from a list during a <code>for</code> loop
+can lead to errors or skipped elements. Use a <code>while</code> loop or
+create a list copy instead:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for fruit in fruits[:]:  # Copy of the list
+ if fruit == "banana":
+     fruits.remove(fruit)
+print(fruits)  # ["apple", "pear"]
+</code></pre></li>
+<li><p><strong>Going Out of Bounds in a <code>while</code>
+Loop:</strong> Forgetting to increment the counter <code>i</code> can
+cause an infinite loop or an <code>IndexError</code>.</p></li>
+<li><p><strong>Inefficient Index Handling:</strong> Instead of manually
+calculating indices, use <code>enumerate()</code> for cleaner
+code.</p></li>
+</ol>
+<h2 id="practical-examples">Practical Examples</h2>
+<h3 id="summing-list-elements">1. Summing List Elements</h3>
+<p>This classic example shows how to use a <code>for</code> loop to
+process list elements and accumulate a result (here, a sum). The
+<code>total</code> variable acts as an “accumulator” that grows with
+each iteration.</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4, 5]
+total = 0
+for num in numbers:
+    total += num
+print(f"Sum: {total}")  # Sum: 15
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>numbers = [1, 2, 3, 4, 5]</code>: Creates a list
+<code>numbers</code> with five integers: 1, 2, 3, 4, and 5—our data to
+work with.</li>
+<li><code>total = 0</code>: Initializes the <code>total</code> variable
+to 0 as a starting point for the sum.</li>
+<li><code>for num in numbers:</code>: The <code>for</code> loop iterates
+over each element in <code>numbers</code> one by one.</li>
+<li><code>num</code>: A temporary variable that takes the value of each
+element in turn: first 1, then 2, up to 5.</li>
+<li><code>total += num</code>: Adds the current element’s value to
+<code>total</code> on each iteration (<code>+=</code> is shorthand for
+<code>total = total + num</code>).</li>
+<li>After the last iteration, <code>total</code> equals 15—the sum of
+all elements.</li>
+</ul>
+<p>Python also offers the built-in <code>sum(numbers)</code> function
+for a shorter solution:</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4, 5]
+print(f"Sum: {sum(numbers)}")  # Sum: 15
+</code></pre>
+<p>However, the loop version is great for learning the logic and for
+cases where you need additional actions within iterations.</p>
+<p>Try replacing <code>+=</code> with <code>*=</code> to calculate the
+product instead:</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4, 5]
+total = 1  # Start with 1, not 0
+for num in numbers:
+    total *= num
+print(f"Product: {total}")  # Product: 120
+</code></pre>
+<p>This example is a fantastic starting point for experimenting with
+loops and lists!</p>
+<h3 id="filtering-a-list">2. Filtering a List</h3>
+<p>This code demonstrates how to use a <code>for</code> loop to filter
+data from one list and build a new list based on a condition.</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4, 5]
+even_numbers = []
+for num in numbers:
+    if num % 2 == 0:
+        even_numbers.append(num)
+print(even_numbers)  # [2, 4]
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>numbers = [1, 2, 3, 4, 5]</code>: Creates the source list
+<code>numbers</code> with five integers—our data to filter.</li>
+<li><code>even_numbers = []</code>: Initializes an empty list
+<code>even_numbers</code> to store even numbers found during the
+loop.</li>
+<li><code>for num in numbers:</code>: Iterates over each element in
+<code>numbers</code> one by one.</li>
+<li><code>num</code>: Temporary variable holding the current element’s
+value.</li>
+<li><code>if num % 2 == 0</code>: Checks if the current element
+<code>num</code> is even.
+<ul>
+<li>The <code>%</code> operator (modulus) returns the remainder of
+dividing <code>num</code> by 2.</li>
+<li>If the remainder is 0 (<code>num % 2 == 0</code>), the number is
+even (e.g., 2, 4).</li>
+<li>If it’s 1, the number is odd (e.g., 1, 3, 5).</li>
+</ul></li>
+<li><code>even_numbers.append(num)</code>: If the condition holds (the
+number is even), adds <code>num</code> to <code>even_numbers</code>
+using the <code>.append()</code> method.</li>
+</ul>
+<p>Python also supports list comprehensions for a shorter approach, but
+the loop with <code>.append()</code> is clearer for beginners and allows
+more complex logic inside.</p>
+<h3 id="modifying-elements">3. Modifying Elements</h3>
+<p>This code shows how to use a <code>for</code> loop with indices to
+modify list elements in place, altering the original list
+<code>fruits</code> rather than creating a new one.</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for i in range(len(fruits)):
+    fruits[i] = fruits[i].upper()
+print(fruits)  # ['APPLE', 'BANANA', 'PEAR']
+</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>fruits = ["apple", "banana", "pear"]</code>: Creates a list
+<code>fruits</code> with three strings—our data to modify.</li>
+<li><code>for i in range(len(fruits)):</code>: Iterates over the indices
+of the <code>fruits</code> list.</li>
+<li><code>len(fruits)</code> returns 3 (the list has three items).</li>
+<li><code>range(3)</code> generates the sequence 0, 1, 2—indices for
+“apple” (0), “banana” (1), and “pear” (2).</li>
+<li><code>i</code>: Temporary variable taking each index value: 0, then
+1, then 2.</li>
+<li><code>fruits[i] = fruits[i].upper()</code>: Replaces the element at
+index <code>i</code> with its uppercase version.</li>
+<li><code>.upper()</code>: A string method that converts all characters
+to uppercase (e.g., <code>"apple".upper()</code> becomes “APPLE”).</li>
+</ul>
+<h2 id="how-to-iterate-over-a-list-in-reverse">How to Iterate Over a
+List in Reverse</h2>
+<p><strong>Method 1.</strong> Using <code>reversed()</code></p>
+<p>The <code>reversed()</code> function returns an iterator that goes
+through the list from end to start.</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for fruit in reversed(fruits):
+    print(fruit)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>pear
+banana
+apple</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>reversed(fruits)</code> creates an iterator starting from the
+last element (“pear”) and moving to the first (“apple”).</li>
+<li>The <code>for</code> loop iterates over the elements in the order
+provided by the iterator.</li>
+<li>The original <code>fruits</code> list remains unchanged.</li>
+</ul>
+<p><strong>Method 2.</strong> Using <code>range()</code> with a Negative
+Step</p>
+<p>You can use <code>range()</code> with a step of -1 to iterate over
+indices from last to first.</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for i in range(len(fruits) - 1, -1, -1):
+    print(fruits[i])
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>pear
+banana
+apple</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>len(fruits)</code> is 3, so
+<code>len(fruits) - 1 = 2</code>—the index of the last element
+(“pear”).</li>
+<li><code>range(2, -1, -1)</code> generates the sequence 2, 1, 0:
+<ul>
+<li>First argument (2): Starting index.</li>
+<li>Second argument (-1): Stopping index (exclusive).</li>
+<li>Third argument (-1): Step, moving backward.</li>
+</ul></li>
+<li><code>fruits[i]</code> accesses the element at each index:
+<code>fruits[2] = "pear"</code>, <code>fruits[1] = "banana"</code>,
+<code>fruits[0] = "apple"</code>.</li>
+</ul>
+<p><strong>Method 3.</strong> Using <code>while</code> with a Decreasing
+Counter</p>
+<p>A <code>while</code> loop lets you manually control the index, moving
+from end to start.</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+i = len(fruits) - 1
+while i >= 0:
+    print(fruits[i])
+    i -= 1
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>pear
+banana
+apple</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>i = len(fruits) - 1</code> sets the starting index to the last
+element (2 for “pear”).</li>
+<li><code>while i &gt;= 0</code>: Continues as long as the index is 0 or
+greater.</li>
+<li><code>fruits[i]</code> prints the element at the current index.</li>
+<li><code>i -= 1</code> decreases the index by 1 each iteration:
+<code>2 → 1 → 0</code>.</li>
+</ul>
+<p><strong>When to use:</strong> When you need flexibility, such as for
+removing elements or complex conditions.</p>
+<p><strong>Method 4.</strong> Using a Slice <code>[::-1]</code></p>
+<p>A list slice with a step of -1 creates a reversed list to iterate
+over.</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for fruit in fruits[::-1]:
+    print(fruit)
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre><code>pear
+banana
+apple</code></pre>
+<p>👣 Explanation:</p>
+<ul>
+<li><code>fruits[::-1]</code> is a slice where:
+<ul>
+<li>Empty start (:): From the beginning.</li>
+<li>Empty end (:): To the end.</li>
+<li>Step -1: Move backward.</li>
+</ul></li>
+<li>Creates a new list <code>["pear", "banana", "apple"]</code> that the
+<code>for</code> loop iterates over.</li>
+</ul>
+<p>If you want to modify elements in reverse order, here’s an
+example:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for i in range(len(fruits) - 1, -1, -1):
+    fruits[i] = fruits[i].upper()
+print(fruits)  # ['APPLE', 'BANANA', 'PEAR']
+</code></pre>
+<h2 id="tips">Tips</h2>
+<ol type="1">
+<li><strong>For Beginners:</strong>
+<ul>
+<li>Start with the simple <code>for item in list</code> loop.</li>
+<li>Don’t forget the colon at the end of the <code>for</code> loop
+line.</li>
+<li>Feel free to experiment with examples.</li>
+<li>Use <code>print()</code> for debugging and understanding what’s
+happening.</li>
+</ul></li>
+<li><strong>For Intermediate Learners:</strong>
+<ul>
+<li>Master <code>enumerate()</code> for cleaner code.</li>
+<li>Learn list comprehensions as an alternative to loops.</li>
+<li>Use built-in functions like <code>sum()</code>, <code>map()</code>,
+or <code>filter()</code> for optimization.</li>
+</ul></li>
+<li><strong>General Advice:</strong>
+<ul>
+<li>Document your code with comments.</li>
+<li>Test edge cases (empty lists, single-element lists).</li>
+<li>Leverage built-in functions and methods like <code>sum()</code>,
+<code>len()</code>, <code>max()</code>, and <code>min()</code> to
+simplify and optimize your code.</li>
+</ul></li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>Working with lists using loops is a fundamental skill that paves the
+way for tackling more complex programming challenges. The
+<code>for</code> loop is ideal for straightforward iterations,
+<code>while</code> offers flexibility and control, and tools like
+<code>enumerate()</code> and list comprehensions make your code more
+elegant and efficient. Practice, experiment, and soon you’ll handle any
+list in Python with confidence!</p>
+<h2 id="frequently-asked-questions-about-list-iteration">Frequently
+Asked Questions About List Iteration</h2>
+<h3
+id="what-happens-if-i-add-or-remove-elements-while-iterating-over-a-list">What
+Happens If I Add or Remove Elements While Iterating Over a List?</h3>
+<p>Removing elements during direct iteration
+(<code>for item in list</code>) shifts indices, which can cause Python
+to skip elements or raise an error.</p>
+<p><strong>Solution:</strong> Use a <code>while</code> loop or iterate
+over a copy of the list:</p>
+<pre><code class="editor-py">
+numbers = [1, 2, 3, 4]
+for num in numbers[:]:  # Copy of the list
+    if num % 2 == 0:
+        numbers.remove(num)
+print(numbers)  # [1, 3]
+</code></pre>
+<h3 id="how-do-i-stop-a-loop-early">How Do I Stop a Loop Early?</h3>
+<p>The <code>break</code> operator exits the loop immediately:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for fruit in fruits:
+    if fruit == "banana":
+        break
+    print(fruit)  # Output: apple
+</code></pre>
+<h3 id="what-is-enumerate-and-why-use-it">What Is
+<code>enumerate()</code> and Why Use It?</h3>
+<p>The <code>enumerate()</code> function lets you iterate over a list
+with both indices and elements, offering cleaner code than
+<code>range(len())</code>:</p>
+<pre><code class="editor-py">
+fruits = ["apple", "banana", "pear"]
+for index, fruit in enumerate(fruits):
+    print(f"Item {index}: {fruit}")
+</code></pre>
+<p>It’s handy when you need both the index and value at the same
+time.</p>
+</body>
+</html>
