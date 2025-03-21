@@ -1,5 +1,10 @@
 # Python Tutorial
 
+## Lists
+- [Python Lists](lists/lists.html)
+- [Adding Items to Listы](lists/list-add.html)
+
+## Dictionaries
 - [Python Dictionaries](dictionaries/dictionary.html)
 - [Adding Items to Dictionaries](dictionaries/dictionary-add.html)
 - [Access Dictionary Items](dictionaries/dictionary-access.html)
